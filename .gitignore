@@ -1,0 +1,13 @@
+#temp
+*.tar
+*.gz
+*.zip
+
+#Python
+venv/
+
+# Docker
+*.log
+volumes/
+config_files_and_scripts/volumes
+config_files_and_scripts/db_data/
