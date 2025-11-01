@@ -22,16 +22,23 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-<div id="_desktop_cart">
-  <div class="blockcart cart-preview {if $cart.products_count > 0}active{else}inactive{/if}" data-refresh-url="{$refresh_url}">
-    <div class="header">
+{block name='product_flags'}
+    <ul class="product-flags js-product-flags">
+        {foreach from=$product.flags item=flag}
 
-        <a class="koszyk" rel="nofollow" href="{$cart_url}">
+            <li class="product-flag {$flag.type} "
+            {if $flag.label=="Nowy"}
+                {if $product.has_discount}
+                style="top: 70px;"
+                {/if}
+            {/if}
+             >
+            {if $flag.label=="Nowy"}
+            <div class="novelty-arrow" ></div>
+            {/if}
+            
+            {$flag.label}</li>
+        {/foreach}
+    </ul>
+{/block}
 
-        <span class="cart-products-count">{$cart.products_count}</span>
-      
-        </a>
-
-    </div>
-  </div>
-</div>

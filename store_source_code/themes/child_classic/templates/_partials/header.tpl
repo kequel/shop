@@ -56,7 +56,6 @@
   </style>
    <!-- <a  style="padding: 0 10px;    border: 1px solid white;    margin-right: 15px" href="https://docs.google.com/forms/d/e/1FAIpQLSd9NVP8Z1EXH75CtdZA4wP6qpuGZQIsVhEHb1H0QHlVltebzg/viewform?vc=0&c=0&w=1&flr=0" target="_blank">Darmowa wycena dla Ciebie </a> -->
   <span class="platforma_b2b"><a href="https://biznes.mopserwis.pl/?_gl=1*4zbu73*_gcl_au*NjQwMjY5NjM4LjE3NjEyMTEwOTI.*_ga*NDE4NTE4MTMuMTc2MTIxMTA3Mg..*_ga_ML1KDEQRE5*czE3NjE0OTEyNzckbzQkZzEkdDE3NjE0OTM5ODIkajU5JGwwJGgxMTI5Mzk0MDM1JGROazdCX3IzZHgzWEwxdDBrMEdPNzBzLVctbWVTVnNpaXNB" target="_blank">Platforma b2b / Klienci Biznesowi</a></span>
-  <span class="fa fa-google" style="color: white;">
   </span>
   
   <a class="OpinieGoogleHeader" style="margin-right: 17px; margin-left:4px;" href="https://www.google.com/shopping/customerreviews/merchantreviews?q=mopserwis.pl" target="_blank">

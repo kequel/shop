@@ -222,7 +222,7 @@ header .hidden-sm-down p {
  
   width: 22%;
   height: 100vh;
-  background: white;
+      background: transparent;
 
   position: absolute;
   left: 0;
@@ -235,7 +235,8 @@ header .hidden-sm-down p {
 }
 .page-home{
     float: right;
-    width: 78%;
+    width: 80%;
+    margin-top: -20px;
     
 }
 .dropdown-item{
@@ -265,13 +266,9 @@ header .hidden-sm-down p {
     
 }
 .dropdown-item .fa {
-    /* Ustawienie domyślnego koloru dla ikon */
     color: inherit !important; 
-    /* Odstęp po prawej stronie ikony */
     margin-right: 5px; 
-    /* Ważne dla Font Awesome - ustawienie wagi na Solid */
     font-weight: 900; 
-    /* Opcjonalnie: ustawienie rozmiaru ikony, jeśli jest za mała/duża */
     font-size: 12px; 
 }
 .dropdown-item:hover .fa {
@@ -294,7 +291,7 @@ strong {
     position: absolute;
   right: 0;
   top: 50%;
-  transform: translateY(-50%); /* wyśrodkowanie w pionie */
+  transform: translateY(-50%); 
 }
 .dropdown-submenu {
     font-size: 13px !important;
@@ -310,17 +307,10 @@ strong {
     
 
 }
-/* Kontener podmenu (rozwijany) */
+
 .popover.sub-menu {
-    
-    /* Absolutne pozycjonowanie pozwala wysunąć go obok. */
-    position: absolute;
-    /* Usuń domyślne style popover/dropdown, jeśli przeszkadzają */
     top: 0 !important; 
     left: 220px !important;
-    visibility: visible !important;
-    
-    /* Dodaj cienie, tło i inne style wizualne */
     background: #ffffff !important;
    z-index: 101;
     margin: 0 !important;
@@ -332,9 +322,7 @@ strong {
 }
 
 .popover.sub-menu .dropdown-item {
-    /* Przywróć styl display: block dla podkategorii, jeśli chcesz pionowe listy */
     display: block; 
-    /* Usuń lub dostosuj padding-left, jeśli było wcięcie */
     padding: 10px 15px !important; 
     margin: 0 !important;
     border: none;
@@ -356,7 +344,6 @@ strong {
     margin: 0 !important;
 }
 
-/* Ważne: Rodzic (LI) musi mieć position: relative */
 .top-menu > li {
     position: relative;
 }
@@ -380,8 +367,9 @@ strong {
     padding-top: 85px;
     padding-bottom: 28px;
     text-align: center;
-    width: 250px;
+    width: 240px;
     float: right;
+    margin-right: 0px;
 
 }
 
@@ -458,4 +446,339 @@ label{
 }
 .block_newsletter{
     margin-top: 50px;
+}
+
+.footer-boxes1 {
+    float: left !important;
+    width: 23% !important;
+    min-width: none !important;
+}
+.footer-boxes {
+    float: left !important;
+    width: 18% !important;
+    min-width: none !important;
+}
+.footer-boxes1 h6 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #0050a7 !important;
+    font-weight: 600;
+}
+.footer-boxes1 p {
+font-size: 14px !important;
+    color: black !important;
+}
+.footer-boxes1 a {
+    font-size: 14px;
+    color: #000 !important;
+}
+.footer-boxes1 a:hover {
+    color: #2e6fc2 !important;
+    text-decoration: underline;
+
+}
+.footer-boxes1 span{
+    font-size: 14px;
+    color: #000 !important;
+}
+.footer-boxes h6 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #0050a7 !important;
+    font-weight: 600;
+}
+.footer-boxes p {
+font-size: 14px !important;
+    color: black !important;
+}
+.footer-boxes a {
+    font-size: 14px;
+    color: #000 !important;
+}
+.footer-boxes a:hover {
+    color: #2e6fc2 !important;
+    text-decoration: underline;
+
+}
+.footer-boxes span{
+    font-size: 14px;
+    color: #000 !important;
+}
+.container2{
+    margin-left: 70px;
+}
+.copyrights{
+    clear: both;
+    background-color: #003169;
+    text-align: center;
+    padding: 27px 0;
+    color: white !important;
+}
+.copyrights a{
+    color: white !important;
+}
+.copyrights span{
+    color: white !important;
+}
+.footer-boxes1 i{
+    width: 35px;
+}
+.category{
+    width: 220px !important;
+}
+.top-menu[data-depth="0"]{
+    width: 220px !important;
+}
+.hidden-sm-down {
+    padding-left: 30px;
+}
+figure{
+    width: 953px;
+    height: 395px;
+    
+}
+
+.slider-bg {
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 395px;
+    background-size: contain;
+}
+.carousel-item{
+    width: 953px !important;
+    height: 395px !important;
+}
+.carousel-inner{
+    width: 953px !important;
+    height: 395px !important;
+    background-size: contain;
+}
+
+.carousel .carousel-control.left, .carousel .carousel-control.right {
+    background: none;
+   
+}
+.carousel .carousel-control.left{
+    margin-bottom: 60px;
+     margin-left: -2px;
+
+}
+.carousel .carousel-control.right{
+    margin-right: -20px;
+}
+.fa-angle-left, #fa_angle_right1{
+    background: rgba(242, 242, 242, .6);
+    padding: 12px 12px ;
+    transition: all 300ms ease;
+    
+}
+.fa-angle-left:hover, #fa_angle_right1:hover{
+    background: rgba(242, 242, 242, .9);;
+    color: #0054b7 !important;
+}
+
+#h2_produkty{
+    background-color: #003169 !important;
+    color: #fff !important;
+    padding: 10px 34px;
+    text-align: left !important;
+    width:fit-content;
+    font-size: 28px;
+         margin: 0;
+}
+
+#h2_produkty_link{
+    background-color: #003169 !important;
+    color: #fff !important;
+    padding: 5px 34px;
+    text-align: left !important;
+    width:fit-content;
+    font-size: 28px;
+         margin: 0;
+         transition: all 300ms ease;
+}
+#h2_produkty_link:hover{
+    color: #0275d8 !important;
+}
+
+.products {
+    margin-top: 30px;
+    padding-left: 20px;
+    margin-bottom: 70px;
+}
+
+.product-miniature {
+    border: 1px solid silver;
+    width: 222px;
+    height: 325px;
+}
+
+.product-miniature .product-title a{
+    margin-top: 0.7rem;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 14px;
+    margin-bottom: 0;
+    color: #3d3d3d !important;
+    line-height: 1.4;
+    display: block;
+    height: 60px;
+    clear: both;
+    overflow: hidden;
+    font-weight: bold !important;
+        transition: all 300ms ease;
+}
+.product-miniature .product-title a:hover{
+color: #003169 !important;
+text-decoration: underline;
+}
+.thumbnail-top{
+    width: 200px;
+    height: 160px;
+    margin-left: 10px;
+}
+
+.price {
+    color: black !important;
+    margin-bottom: -5px;
+    font-size: 22px;
+    font-weight: 600;
+}
+.dodaj_do_koszyka{
+    height: 40px;
+}
+.qty1{
+    height: 40px;
+    float: left;
+    width: 30px;
+
+}
+.add1{
+    height: 40px;
+    float: left;
+    width: 100px;
+}
+
+#dodaj1{
+    background-color: #003169 !important;
+    color: #fff !important;
+    padding: 3.5px;
+    width: 125px !important;
+    padding-left: 0px;
+    text-transform: uppercase;
+    font-size: 13px !important;
+    transition: all 300ms ease;
+    text-align: center;
+
+}
+#dodaj1:hover{
+    background-color: #0050a7 !important;
+    text-decoration: none !important;
+}
+.fa-cart-plus{
+    color:#fff !important;
+    margin-right: 10px;
+}
+input{
+    line-height: inherit;
+    border-radius: 0 !important;
+    border-width: 1px;
+    float:left;
+        border: 1px solid #e2e2e2;
+}
+
+button{
+    margin: 0;
+    line-height: inherit;
+    border: none;
+    float:left;
+}
+
+#z_vatem{
+    color: black !important;
+    font-size: 15px;
+    position: relative;
+    font-weight: 300;
+    margin-top: -8px;
+}
+
+.dostepnosc {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    margin: 2px;
+}
+.dostepny {
+    background-color: green;
+}
+.product-flag{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    padding: 8px 12px 9px;
+    background-color: #2e6fc2 !important;
+    color:#fff !important;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    margin-bottom: 20px;
+}
+.discount{
+    margin-top: 20px ;
+    left: auto;
+    font-size: 20px !important;
+    background-color: #12c212 !important;
+    width: auto;
+    color: white;
+    padding: 0 3px !important;
+    right: 5px;
+    font-weight: 600 !important;
+
+}
+
+.novelty-arrow {
+    position: absolute;
+    top: 0;
+    left: -24px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 16px 24px 16px 0;
+    border-color: transparent #2e6fc2 transparent transparent;
+}
+.product-miniature .thumbnail-container {
+    position: relative;
+    height: 2;
+    margin-bottom: 0 !important;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* Kontener obrazka powinien ukrywać nadmiar */
+.thumbnail-container {
+  overflow: hidden;
+  position: relative;
+  border: none !important;
+}
+
+/* Efekt zoom dla obrazka */
+.thumbnail-container img {
+  transition: transform 0.3s ease; /* płynne przejście */
+  border: none !important;
+}
+
+/* Zoom przy najechaniu na obrazek lub tytuł produktu */
+.thumbnail-container:hover img,
+.product-title:hover ~ .thumbnail-container img {
+  transform: scale(1.05); /* delikatne powiększenie o 5% */
+  border: none !important;
+}
+
+/* Jeśli chcesz, żeby zoom działał również przy najechaniu na tytuł */
+.product-title:hover {
+  cursor: pointer;
+  border: none !important;
 }

@@ -99,9 +99,64 @@
       </section>
 
       <footer id="footer" class="js-footer">
-        {block name="footer"}
-          {include file="_partials/footer.tpl"}
-        {/block}
+        <div class="footer-top-bar">
+    <div class="container2">
+        <div class="footer-boxes1">
+            <h6>MOP SERWIS</h6>
+            <p>
+                NIP: 581-192-37-64<br>
+                KRS: 0000324556<br>
+                REGON: 220761326<br>
+                ING Bank Śląski<br>
+                98 1050 1764 1000 0090 8115 9049
+            </p>
+        </div>
+
+        <div class="footer-boxes1">
+            <h6>Dane teleadresowe</h6>
+            <ul>
+                <li><i class="fa fa-map-marker"></i><span>ul. Ogrodowa 14, 82-500 Kwidzyn</span></li>
+                <li><i class="fa fa-phone"></i><span><a href="tel:55 646 31 52">55 646 31 52</a></span></li>
+                <li><i class="fa fa-envelope"></i><a href="mailto:esklep@mopserwis.pl">esklep@mopserwis.pl</a></li>
+                <li><i class="fa-brands fa-facebook-f"></i><a href="https://www.facebook.com/Mopserwis/" target="_blank">facebook.com</a></li>
+                <li><i class="fa-brands fa-linkedin"></i><a href="https://www.linkedin.com/company/35653510" target="_blank">linkedin.com</a></li>
+                <li><i class="fa-brands fa-instagram"></i><a href="https://www.instagram.com/mopserwis/" target="_blank">instagram.com</a></li>
+                <li><i class="fa-brands fa-google"></i><a href="https://www.google.com/shopping/customerreviews/merchantreviews?q=mopserwis.pl" target="_blank">Opinie w Google</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-boxes">
+            <h6>Informacje</h6>
+            <ul>
+                <li><a href="http://localhost:8080/content/4-about-us">Dlaczego Mop Serwis</a></li>
+                <li><a href="http://localhost:8080/content/3-terms-and-conditions-of-use">Regulamin zakupów</a></li>
+                <li><a href="http://localhost:8080/content/2-legal-notice">Polityka prywatności</a></li>
+                <li><a href="http://localhost:8080/contact-us">Kontakt</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-boxes">
+            <h6>Twoje zamówienie</h6>
+            <ul>
+                <li><a href="http://localhost:8080/content/6-zwroty">Zwroty towarów</a></li>
+                <li><a href="http://localhost:8080/content/7-reklamacje">Reklamacje</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-boxes">
+            <h6>Zamówienia</h6>
+            <ul>
+                <li><a href="http://localhost:8080/content/5-secure-payment">Płatności</a></li>
+                <li><a href="http://localhost:8080/content/1-delivery">Koszty dostawy</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="copyrights">
+  
+        <a href="https://mopserwis.pl/">© 2025 MOP SERWIS</a> <span>| All Rights Reserved</span>
+    
+</div>
       </footer>
 
     </main>
