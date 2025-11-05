@@ -1,0 +1,861 @@
+[
+  {
+    "name": "PROMOCJE",
+    "url": "https://mopserwis.pl/3-promocje",
+    "subcategories": []
+  },
+  {
+    "name": "Wyprzedaże",
+    "url": "https://mopserwis.pl/239-wyprzedaze",
+    "subcategories": []
+  },
+  {
+    "name": "DOZOWNIKI i WYPOSAŻENIE",
+    "url": "https://mopserwis.pl/4-dozowniki-i-wyposazenie",
+    "subcategories": [
+      {
+        "name": "Linie dozowników",
+        "url": "https://mopserwis.pl/299-linie-dozownikow"
+      },
+      {
+        "name": "Tork Linia Biała",
+        "url": "https://mopserwis.pl/300-tork-linia-biala"
+      },
+      {
+        "name": "Tork Linia Czarna",
+        "url": "https://mopserwis.pl/302-tork-linia-czarna"
+      },
+      {
+        "name": "Tork Linia Stal Nierdzewna",
+        "url": "https://mopserwis.pl/304-tork-linia-stal-nierdzewna"
+      },
+      {
+        "name": "Katrin Linia Biała",
+        "url": "https://mopserwis.pl/301-katrin-linia-biala"
+      },
+      {
+        "name": "Katrin Linia Czarna",
+        "url": "https://mopserwis.pl/303-katrin-linia-czarna"
+      },
+      {
+        "name": "Papernet Linia Biała",
+        "url": "https://mopserwis.pl/412-papernet-linia-biala"
+      },
+      {
+        "name": "Papernet Linia Czarna",
+        "url": "https://mopserwis.pl/413-papernet-linia-czarna"
+      },
+      {
+        "name": "Dozowniki mydła / piany",
+        "url": "https://mopserwis.pl/22-dozowniki-mydla-piany"
+      },
+      {
+        "name": "Mydło w płynie/sprayu",
+        "url": "https://mopserwis.pl/414-mydlo-w-plyniesprayu"
+      },
+      {
+        "name": "Dolewane",
+        "url": "https://mopserwis.pl/416-dolewane"
+      },
+      {
+        "name": "Pozostałe",
+        "url": "https://mopserwis.pl/417-pozostale"
+      },
+      {
+        "name": "Mydło w pianie",
+        "url": "https://mopserwis.pl/415-mydlo-w-pianie"
+      },
+      {
+        "name": "Dozowniki na papier toaletowy",
+        "url": "https://mopserwis.pl/306-dozowniki-na-papier-toaletowy"
+      },
+      {
+        "name": "Duże rolki Jumbo",
+        "url": "https://mopserwis.pl/308-duze-rolki-jumbo"
+      },
+      {
+        "name": "Listki/składka T3",
+        "url": "https://mopserwis.pl/312-listkiskladka-t3"
+      },
+      {
+        "name": "Małe rolki",
+        "url": "https://mopserwis.pl/307-male-rolki"
+      },
+      {
+        "name": "Katrin System T5",
+        "url": "https://mopserwis.pl/310-katrin-system-t5"
+      },
+      {
+        "name": "Tork Mid-Size T6 / OptiServe T7",
+        "url": "https://mopserwis.pl/309-tork-mid-size-t6-optiserve-t7"
+      },
+      {
+        "name": "Smartone T8/T9",
+        "url": "https://mopserwis.pl/311-smartone-t8t9"
+      },
+      {
+        "name": "Pozostałe",
+        "url": "https://mopserwis.pl/419-pozostale"
+      },
+      {
+        "name": "Dozowniki na ręczniki składane",
+        "url": "https://mopserwis.pl/317-dozowniki-na-reczniki-skladane"
+      },
+      {
+        "name": "Wielopanelowe - MULTIFOLD",
+        "url": "https://mopserwis.pl/324-wielopanelowe-multifold"
+      },
+      {
+        "name": "Standardowe ZZ",
+        "url": "https://mopserwis.pl/323-standardowe-zz"
+      },
+      {
+        "name": "PeakServe H5",
+        "url": "https://mopserwis.pl/368-peakserve-h5"
+      },
+      {
+        "name": "Dozowniki na ręczniki systemowe  MATIC",
+        "url": "https://mopserwis.pl/313-dozowniki-na-reczniki-systemowe-matic"
+      },
+      {
+        "name": "Tork Matic",
+        "url": "https://mopserwis.pl/420-tork-matic"
+      },
+      {
+        "name": "Katrin System",
+        "url": "https://mopserwis.pl/421-katrin-system"
+      },
+      {
+        "name": "Papernet Autocut",
+        "url": "https://mopserwis.pl/422-papernet-autocut"
+      },
+      {
+        "name": "Dozowniki na ręczniki centralnego dozowania",
+        "url": "https://mopserwis.pl/12-dozowniki-na-reczniki-centralnego-dozowania"
+      },
+      {
+        "name": "Małe rolki S",
+        "url": "https://mopserwis.pl/423-male-rolki-s"
+      },
+      {
+        "name": "Duże rolki M",
+        "url": "https://mopserwis.pl/424-duze-rolki-m"
+      },
+      {
+        "name": "System REFLEX",
+        "url": "https://mopserwis.pl/425-system-reflex"
+      },
+      {
+        "name": "Dozowniki serwetek",
+        "url": "https://mopserwis.pl/33-dozowniki-serwetek"
+      },
+      {
+        "name": "Serwetki N1",
+        "url": "https://mopserwis.pl/428-serwetki-n1"
+      },
+      {
+        "name": "Serwetki N2",
+        "url": "https://mopserwis.pl/429-serwetki-n2"
+      },
+      {
+        "name": "Serwetki N4",
+        "url": "https://mopserwis.pl/430-serwetki-n4"
+      },
+      {
+        "name": "Serwetki N10",
+        "url": "https://mopserwis.pl/431-serwetki-n10"
+      },
+      {
+        "name": "Serwetki N14",
+        "url": "https://mopserwis.pl/432-serwetki-n14"
+      },
+      {
+        "name": "Uchwyty/Stojaki do czyściw",
+        "url": "https://mopserwis.pl/318-uchwytystojaki-do-czysciw"
+      },
+      {
+        "name": "Uchwyty ścienne",
+        "url": "https://mopserwis.pl/433-uchwyty-scienne"
+      },
+      {
+        "name": "Stojaki podłogowe",
+        "url": "https://mopserwis.pl/434-stojaki-podlogowe"
+      },
+      {
+        "name": "Dozowniki do czyściw",
+        "url": "https://mopserwis.pl/441-dozowniki-do-czysciw"
+      },
+      {
+        "name": "Pozostałe",
+        "url": "https://mopserwis.pl/435-pozostale"
+      },
+      {
+        "name": "Dozowniki i uzupełnienia",
+        "url": "https://mopserwis.pl/27-dozowniki-i-uzupelnienia"
+      },
+      {
+        "name": "Dozowniki do nakładek sedesowych",
+        "url": "https://mopserwis.pl/436-dozowniki-do-nakladek-sedesowych"
+      },
+      {
+        "name": "Dozowniki na woreczki sanitarne",
+        "url": "https://mopserwis.pl/437-dozowniki-na-woreczki-sanitarne"
+      },
+      {
+        "name": "Uchwyty na podkłady medyczne",
+        "url": "https://mopserwis.pl/438-uchwyty-na-podklady-medyczne"
+      },
+      {
+        "name": "Dozowniki chusteczek higienicznych",
+        "url": "https://mopserwis.pl/443-dozowniki-chusteczek-higienicznych"
+      },
+      {
+        "name": "Wkłady",
+        "url": "https://mopserwis.pl/439-wklady"
+      },
+      {
+        "name": "Pozostałe",
+        "url": "https://mopserwis.pl/30-pozostale"
+      }
+    ]
+  },
+  {
+    "name": "KOSZE I WORKI NA ODPADY",
+    "url": "https://mopserwis.pl/114-kosze-i-worki-na-odpady",
+    "subcategories": [
+      {
+        "name": "Kosze",
+        "url": "https://mopserwis.pl/115-kosze"
+      },
+      {
+        "name": "Worki na odpady",
+        "url": "https://mopserwis.pl/338-worki-na-odpady"
+      }
+    ]
+  },
+  {
+    "name": "MYDŁA PASTY KREMY",
+    "url": "https://mopserwis.pl/87-mydla-pasty-kremy",
+    "subcategories": [
+      {
+        "name": "Mydło wkłady Tork",
+        "url": "https://mopserwis.pl/88-mydlo-wklady-tork"
+      },
+      {
+        "name": "S1 Tork Wkłady",
+        "url": "https://mopserwis.pl/376-s1-tork-wklady"
+      },
+      {
+        "name": "S4 Tork Wkłady",
+        "url": "https://mopserwis.pl/378-s4-tork-wklady"
+      },
+      {
+        "name": "S2 Tork Wkłady",
+        "url": "https://mopserwis.pl/377-s2-tork-wklady"
+      },
+      {
+        "name": "S5 Tork Wkłady",
+        "url": "https://mopserwis.pl/616-s5-tork-wklady"
+      },
+      {
+        "name": "Mydło wkłady Katrin",
+        "url": "https://mopserwis.pl/92-mydlo-wklady-katrin"
+      },
+      {
+        "name": "Mydło wkłady Papernet",
+        "url": "https://mopserwis.pl/393-mydlo-wklady-papernet"
+      },
+      {
+        "name": "Dezynfekcja rąk",
+        "url": "https://mopserwis.pl/95-dezynfekcja-rak"
+      },
+      {
+        "name": "Mydła pozostałe",
+        "url": "https://mopserwis.pl/98-mydla-pozostale"
+      },
+      {
+        "name": "Pasty i kremy bhp",
+        "url": "https://mopserwis.pl/107-pasty-i-kremy-bhp"
+      }
+    ]
+  },
+  {
+    "name": "PAPIERY TOALETOWE",
+    "url": "https://mopserwis.pl/37-papiery-toaletowe",
+    "subcategories": [
+      {
+        "name": "Duże rolki Jumbo",
+        "url": "https://mopserwis.pl/38-duze-rolki-jumbo"
+      },
+      {
+        "name": "Składka/ listki T3",
+        "url": "https://mopserwis.pl/39-skladka-listki-t3"
+      },
+      {
+        "name": "Małe rolki",
+        "url": "https://mopserwis.pl/40-male-rolki"
+      },
+      {
+        "name": "Katrin System",
+        "url": "https://mopserwis.pl/41-katrin-system"
+      },
+      {
+        "name": "Tork Mid-Size T6 / OptiServe T7",
+        "url": "https://mopserwis.pl/42-tork-mid-size-t6-optiserve-t7"
+      },
+      {
+        "name": "Smartone T8 T9",
+        "url": "https://mopserwis.pl/43-smartone-t8-t94"
+      }
+    ]
+  },
+  {
+    "name": "RĘCZNIKI SKŁADANE",
+    "url": "https://mopserwis.pl/53-reczniki-skladane",
+    "subcategories": [
+      {
+        "name": "MULTIFOLD",
+        "url": "https://mopserwis.pl/55-multifold"
+      },
+      {
+        "name": "Ręczniki składane ZZ / V",
+        "url": "https://mopserwis.pl/54-reczniki-skladane-zz-v"
+      },
+      {
+        "name": "H5 PeakServe",
+        "url": "https://mopserwis.pl/369-h5-peakserve"
+      }
+    ]
+  },
+  {
+    "name": "RĘCZNIKI SYSTEM",
+    "url": "https://mopserwis.pl/45-reczniki-system",
+    "subcategories": [
+      {
+        "name": "Tork Matic H1/W6",
+        "url": "https://mopserwis.pl/50-tork-matic-h1w6"
+      },
+      {
+        "name": "Katrin System",
+        "url": "https://mopserwis.pl/51-katrin-system"
+      },
+      {
+        "name": "Papernet Auto Cut",
+        "url": "https://mopserwis.pl/343-papernet-auto-cut"
+      },
+      {
+        "name": "REFLEX",
+        "url": "https://mopserwis.pl/52-reflex"
+      },
+      {
+        "name": "Pozostałe systemowe",
+        "url": "https://mopserwis.pl/442-pozostale-systemowe"
+      }
+    ]
+  },
+  {
+    "name": "RĘCZNIKI ROLE",
+    "url": "https://mopserwis.pl/44-reczniki-role",
+    "subcategories": [
+      {
+        "name": "Ręczniki S",
+        "url": "https://mopserwis.pl/47-reczniki-s"
+      },
+      {
+        "name": "Ręczniki M",
+        "url": "https://mopserwis.pl/48-reczniki-m"
+      },
+      {
+        "name": "Ręczniki Kuchenne Uniwersalne",
+        "url": "https://mopserwis.pl/46-reczniki-kuchenne-uniwersalne"
+      },
+      {
+        "name": "Podkłady medyczne",
+        "url": "https://mopserwis.pl/72-podklady-medyczne"
+      },
+      {
+        "name": "Pozostałe",
+        "url": "https://mopserwis.pl/56-pozostale"
+      }
+    ]
+  },
+  {
+    "name": "CZYŚCIWA / RĘCZNIKI XL",
+    "url": "https://mopserwis.pl/60-czysciwa-reczniki-xl",
+    "subcategories": []
+  },
+  {
+    "name": "CZYŚCIWA WŁÓKNINOWE",
+    "url": "https://mopserwis.pl/394-czysciwa-wlokninowe",
+    "subcategories": [
+      {
+        "name": "Czyściwa Role",
+        "url": "https://mopserwis.pl/366-czysciwa-role"
+      },
+      {
+        "name": "Czyściwa w Listkach",
+        "url": "https://mopserwis.pl/365-czysciwa-w-listkach"
+      },
+      {
+        "name": "Wielozadaniowe",
+        "url": "https://mopserwis.pl/61-wielozadaniowe"
+      },
+      {
+        "name": "Przemysłowe",
+        "url": "https://mopserwis.pl/62-przemyslowe"
+      },
+      {
+        "name": "Super wytrzymałe",
+        "url": "https://mopserwis.pl/64-super-wytrzymale"
+      },
+      {
+        "name": "Niska pylność / Polerowanie",
+        "url": "https://mopserwis.pl/65-niska-pylnosc-polerowanie"
+      },
+      {
+        "name": "Unitex - czyściwa / ściereczki",
+        "url": "https://mopserwis.pl/69-unitex-czysciwa-sciereczki"
+      }
+    ]
+  },
+  {
+    "name": "SERWETKI DYSPENSEROWE",
+    "url": "https://mopserwis.pl/78-serwetki-dyspenserowe",
+    "subcategories": [
+      {
+        "name": "System serwetek N1",
+        "url": "https://mopserwis.pl/79-system-serwetek-n1"
+      },
+      {
+        "name": "System serwetek N2",
+        "url": "https://mopserwis.pl/80-system-serwetek-n2"
+      },
+      {
+        "name": "System serwetek N4",
+        "url": "https://mopserwis.pl/81-system-serwetek-n4"
+      },
+      {
+        "name": "System serwetek N10",
+        "url": "https://mopserwis.pl/82-system-serwetek-n10"
+      },
+      {
+        "name": "System serwetek N14",
+        "url": "https://mopserwis.pl/380-system-serwetek-n14"
+      }
+    ]
+  },
+  {
+    "name": "SERWETKI / NAKRYCIE STOŁU",
+    "url": "https://mopserwis.pl/76-serwetki-nakrycie-stolu",
+    "subcategories": [
+      {
+        "name": "Tork LinStyle® Serwetki Obiadowe",
+        "url": "https://mopserwis.pl/608-tork-linstyle-serwetki-obiadowe"
+      },
+      {
+        "name": "Tork Textured Serwetki Obiadowe",
+        "url": "https://mopserwis.pl/609-tork-textured-serwetki-obiadowe"
+      },
+      {
+        "name": "Serwetki Dekoracyjne",
+        "url": "https://mopserwis.pl/84-serwetki-dekoracyjne"
+      },
+      {
+        "name": "Serwetki Obiadowe",
+        "url": "https://mopserwis.pl/610-serwetki-obiadowe"
+      },
+      {
+        "name": "Serwetki Koktajlowe",
+        "url": "https://mopserwis.pl/612-serwetki-koktajlowe"
+      },
+      {
+        "name": "Serwetki Lunchowe",
+        "url": "https://mopserwis.pl/611-serwetki-lunchowe"
+      },
+      {
+        "name": "Pochetki, rozetki",
+        "url": "https://mopserwis.pl/85-pochetki-rozetki"
+      },
+      {
+        "name": "Artykuły gospodarcze",
+        "url": "https://mopserwis.pl/86-artykuly-gospodarcze"
+      }
+    ]
+  },
+  {
+    "name": "CHUSTECZKI HIGIENICZNE",
+    "url": "https://mopserwis.pl/607-chusteczki-higieniczne",
+    "subcategories": []
+  },
+  {
+    "name": "AKCESORIA DO SPRZĄTANIA",
+    "url": "https://mopserwis.pl/191-akcesoria-do-sprzatania",
+    "subcategories": [
+      {
+        "name": "VILEDA",
+        "url": "https://mopserwis.pl/333-vileda"
+      },
+      {
+        "name": "Mopy i stelaże",
+        "url": "https://mopserwis.pl/192-mopy-i-stelaze"
+      },
+      {
+        "name": "Mycie szyb i okien",
+        "url": "https://mopserwis.pl/199-mycie-szyb-i-okien"
+      },
+      {
+        "name": "Zbieraki i akcesoria",
+        "url": "https://mopserwis.pl/204-zbieraki-i-akcesoria"
+      },
+      {
+        "name": "Ściereczki",
+        "url": "https://mopserwis.pl/205-sciereczki"
+      },
+      {
+        "name": "Miotły / szczotki",
+        "url": "https://mopserwis.pl/210-miotly-szczotki"
+      }
+    ]
+  },
+  {
+    "name": "ODŚWIEŻACZE",
+    "url": "https://mopserwis.pl/102-odswiezacze",
+    "subcategories": [
+      {
+        "name": "Odświeżacze Spray",
+        "url": "https://mopserwis.pl/345-odswiezacze-spray"
+      },
+      {
+        "name": "Odświeżacze Stojące",
+        "url": "https://mopserwis.pl/507-odswiezacze-stojace"
+      },
+      {
+        "name": "Odświeżacze Systemowe",
+        "url": "https://mopserwis.pl/604-odswiezacze-systemowe"
+      },
+      {
+        "name": "Freshtek",
+        "url": "https://mopserwis.pl/508-freshtek"
+      },
+      {
+        "name": "Zawieszki Toaletowe i Wkładki do pisuarów",
+        "url": "https://mopserwis.pl/490-zawieszki-toaletowe-i-wkladki-do-pisuarow"
+      },
+      {
+        "name": "Pozostałe",
+        "url": "https://mopserwis.pl/509-pozostale"
+      }
+    ]
+  },
+  {
+    "name": "ŚRODKI CZYSTOŚCI",
+    "url": "https://mopserwis.pl/133-srodki-czystosci",
+    "subcategories": [
+      {
+        "name": "Podłogi Mycie i Pielęgnacja",
+        "url": "https://mopserwis.pl/138-podlogi-mycie-i-pielegnacja"
+      },
+      {
+        "name": "Mycie hal i hipermarketów",
+        "url": "https://mopserwis.pl/143-mycie-hal-i-hipermarketow"
+      },
+      {
+        "name": "Drewno/panele",
+        "url": "https://mopserwis.pl/141-drewno-panele"
+      },
+      {
+        "name": "Doczyszczanie i Gruntowne",
+        "url": "https://mopserwis.pl/139-doczyszczanie-i-gruntowne"
+      },
+      {
+        "name": "Mycie szyb i okien",
+        "url": "https://mopserwis.pl/164-mycie-szyb-i-okien"
+      },
+      {
+        "name": "Meble, biurka, komputery, sprzęty",
+        "url": "https://mopserwis.pl/166-meble-biurka-komputery-sprzety"
+      },
+      {
+        "name": "Konserwacja i Dekonserwacja Posadzek",
+        "url": "https://mopserwis.pl/142-konserwacja-i-dekonserwacja-posadzek"
+      },
+      {
+        "name": "Stal Nierdzewna",
+        "url": "https://mopserwis.pl/144-stal-nierdzewna"
+      },
+      {
+        "name": "Pranie wykładzin i dywanów",
+        "url": "https://mopserwis.pl/170-pranie-wykladzin-i-dywanow"
+      },
+      {
+        "name": "Pranie tekstyliów",
+        "url": "https://mopserwis.pl/174-pranie-tekstyliow"
+      },
+      {
+        "name": "Specialistyczne i Pozostałe",
+        "url": "https://mopserwis.pl/165-specialistyczne-i-pozostale"
+      },
+      {
+        "name": "Dozowanie i akcesoria",
+        "url": "https://mopserwis.pl/186-dozowanie-i-akcesoria"
+      }
+    ]
+  },
+  {
+    "name": "CHEMIA SANITARIATY",
+    "url": "https://mopserwis.pl/444-chemia-sanitariaty",
+    "subcategories": [
+      {
+        "name": "Dezynfekcja",
+        "url": "https://mopserwis.pl/488-dezynfekcja"
+      },
+      {
+        "name": "Doczyszczanie",
+        "url": "https://mopserwis.pl/487-doczyszczanie"
+      },
+      {
+        "name": "Mycie i pielęgnacja",
+        "url": "https://mopserwis.pl/486-mycie-i-pielegnacja"
+      }
+    ]
+  },
+  {
+    "name": "CHEMIA KUCHNIA",
+    "url": "https://mopserwis.pl/148-chemia-kuchnia",
+    "subcategories": [
+      {
+        "name": "Ręczne mycie naczyń",
+        "url": "https://mopserwis.pl/149-reczne-mycie-naczyn"
+      },
+      {
+        "name": "Maszynowe mycie naczyń",
+        "url": "https://mopserwis.pl/150-maszynowe-mycie-naczyn"
+      },
+      {
+        "name": "Mleczka i proszki",
+        "url": "https://mopserwis.pl/156-mleczka-i-proszki"
+      },
+      {
+        "name": "Grill, piekarnik",
+        "url": "https://mopserwis.pl/157-grill-piekarnik"
+      },
+      {
+        "name": "Odtłuszczanie",
+        "url": "https://mopserwis.pl/158-odtluszczanie"
+      },
+      {
+        "name": "Odkamienianie",
+        "url": "https://mopserwis.pl/348-odkamienianie"
+      },
+      {
+        "name": "Udrażnianie",
+        "url": "https://mopserwis.pl/160-udraznianie"
+      },
+      {
+        "name": "Stal nierdzewna",
+        "url": "https://mopserwis.pl/167-stal-nierdzewna"
+      }
+    ]
+  },
+  {
+    "name": "DEZYNFEKCJA",
+    "url": "https://mopserwis.pl/319-dezynfekcja",
+    "subcategories": [
+      {
+        "name": "Dezynfekcja powierzchni",
+        "url": "https://mopserwis.pl/320-dezynfekcja-powierzchni"
+      },
+      {
+        "name": "Szybka dezynfekcja",
+        "url": "https://mopserwis.pl/321-szybka-dezynfekcja"
+      },
+      {
+        "name": "Dezynfekcja rąk",
+        "url": "https://mopserwis.pl/161-dezynfekcja-rak"
+      }
+    ]
+  },
+  {
+    "name": "CAR LINE",
+    "url": "https://mopserwis.pl/341-car-line",
+    "subcategories": [
+      {
+        "name": "Karoseria",
+        "url": "https://mopserwis.pl/403-karoseria"
+      },
+      {
+        "name": "Mycie ciśnieniowe / aktywna piana",
+        "url": "https://mopserwis.pl/491-mycie-cisnieniowe-aktywna-piana"
+      },
+      {
+        "name": "Mycie ręczne  / szczotkowanie",
+        "url": "https://mopserwis.pl/492-mycie-reczne-szczotkowanie"
+      },
+      {
+        "name": "Trudne zabrudzenia",
+        "url": "https://mopserwis.pl/493-trudne-zabrudzenia"
+      },
+      {
+        "name": "Felgi Opony Kołpaki Plastiki",
+        "url": "https://mopserwis.pl/404-felgi-opony-kolpaki-plastiki"
+      },
+      {
+        "name": "Wnętrze samochodu",
+        "url": "https://mopserwis.pl/405-wnetrze-samochodu"
+      },
+      {
+        "name": "Tekstylia i skóra",
+        "url": "https://mopserwis.pl/407-tekstylia-i-skora"
+      }
+    ]
+  },
+  {
+    "name": "Artykuły BiuroweNOWOŚĆ",
+    "url": "https://mopserwis.pl/654-artykuly-biurowe",
+    "subcategories": []
+  },
+  {
+    "name": "VILEDA",
+    "url": "https://mopserwis.pl/448-vileda",
+    "subcategories": [
+      {
+        "name": "Mopy",
+        "url": "https://mopserwis.pl/495-mopy"
+      },
+      {
+        "name": "Mopy płaskie i wkłady",
+        "url": "https://mopserwis.pl/496-mopy-plaskie-i-wklady"
+      },
+      {
+        "name": "Mopy paskowe i wkłady",
+        "url": "https://mopserwis.pl/497-mopy-paskowe-i-wklady"
+      },
+      {
+        "name": "Mopy obrotowe i wkłady",
+        "url": "https://mopserwis.pl/498-mopy-obrotowe-i-wklady"
+      },
+      {
+        "name": "Mopy parowe",
+        "url": "https://mopserwis.pl/499-mopy-parowe"
+      },
+      {
+        "name": "Ściereczki",
+        "url": "https://mopserwis.pl/500-sciereczki"
+      },
+      {
+        "name": "Zmywaki",
+        "url": "https://mopserwis.pl/501-zmywaki"
+      },
+      {
+        "name": "Rękawiczki",
+        "url": "https://mopserwis.pl/502-rekawiczki"
+      },
+      {
+        "name": "Miotły / szczotki",
+        "url": "https://mopserwis.pl/505-miotly-szczotki"
+      },
+      {
+        "name": "Odkurzacze",
+        "url": "https://mopserwis.pl/506-odkurzacze"
+      }
+    ]
+  },
+  {
+    "name": "RĘKAWICE I BHP",
+    "url": "https://mopserwis.pl/213-rekawice",
+    "subcategories": [
+      {
+        "name": "Rękawice Nitrylowe",
+        "url": "https://mopserwis.pl/217-rekawice-nitrylowe"
+      },
+      {
+        "name": "Rękawice Latexowe",
+        "url": "https://mopserwis.pl/215-rekawice-latexowe"
+      },
+      {
+        "name": "Rękawice Winylowe",
+        "url": "https://mopserwis.pl/216-rekawice-winylowe"
+      },
+      {
+        "name": "Rękawice GoGrip i MotoLong",
+        "url": "https://mopserwis.pl/462-rekawice-gogrip-i-motolong"
+      },
+      {
+        "name": "Ochronne / Gospodarcze / Robocze",
+        "url": "https://mopserwis.pl/214-ochronne-gospodarcze-robocze"
+      }
+    ]
+  },
+  {
+    "name": "SPRZĘT DO SPRZĄTANIA",
+    "url": "https://mopserwis.pl/220-wozki",
+    "subcategories": [
+      {
+        "name": "Odkurzacze Worki Pady",
+        "url": "https://mopserwis.pl/226-odkurzacze-worki-pady"
+      },
+      {
+        "name": "Odkurzacze Worki",
+        "url": "https://mopserwis.pl/336-odkurzacze-worki"
+      },
+      {
+        "name": "Pady",
+        "url": "https://mopserwis.pl/337-pady"
+      },
+      {
+        "name": "Wózki",
+        "url": "https://mopserwis.pl/220-wozki"
+      },
+      {
+        "name": "Pojedyncze i podwójne",
+        "url": "https://mopserwis.pl/222-pojedyncze-i-podwojne"
+      },
+      {
+        "name": "Serwisowe",
+        "url": "https://mopserwis.pl/224-serwisowe"
+      },
+      {
+        "name": "Na odpady",
+        "url": "https://mopserwis.pl/349-na-odpady"
+      },
+      {
+        "name": "Hotelowe",
+        "url": "https://mopserwis.pl/225-hotelowe"
+      }
+    ]
+  },
+  {
+    "name": "Pozostałe",
+    "url": "https://mopserwis.pl/525-pozostale",
+    "subcategories": []
+  },
+  {
+    "name": "WIĘCEJ TANIEJ %",
+    "url": "https://mopserwis.pl/449-wiecej-taniej-palety-kartony",
+    "subcategories": [
+      {
+        "name": "Karton",
+        "url": "https://mopserwis.pl/484-karton"
+      },
+      {
+        "name": "Paleta",
+        "url": "https://mopserwis.pl/485-paleta"
+      }
+    ]
+  },
+  {
+    "name": "KATALOG PRODUKTÓW",
+    "url": "https://mopserwis.pl/387-katalog-produktow",
+    "subcategories": []
+  },
+  {
+    "name": "Wynajmij dozownik TORK",
+    "url": "https://mopserwis.pl/637-wynajem-dozownikow-tork",
+    "subcategories": []
+  },
+  {
+    "name": "Wynajmij dozownik KATRIN",
+    "url": "https://mopserwis.pl/652-wynajmij-dozownik--katrin",
+    "subcategories": []
+  }
+]
