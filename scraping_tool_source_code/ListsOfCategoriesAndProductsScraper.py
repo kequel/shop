@@ -8,7 +8,6 @@ import os
 CATEGORY_SELECTOR = ".ets_mm_megamenu_content"
 DEBUG_SAVE_HTML = False
 
-# now saves results into ../scraping_results next to this script
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 OUTPUT_DIR = os.path.normpath(os.path.join(BASE_DIR, "..", "scraping_results"))
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -59,7 +58,7 @@ def ProductsScraper(html):
         name = name["title"].strip() if name and name.has_attr("title") else (name.get_text(strip=True) if name else None)
 
         # cena netto i brutto
-        price_netto = item.select_one(".price.discount, .price:not(.old-price)")
+        price_netto = item.select_one('[itemprop="price"]')
         price_netto = price_netto.get_text(strip=True).replace("\xa0", " ") if price_netto else None
 
         price_brutto = item.select_one(".old-price-tax")
