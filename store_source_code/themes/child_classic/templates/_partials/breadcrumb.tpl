@@ -22,19 +22,46 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-<nav data-depth="{$breadcrumb.count}" class="breadcrumb hidden-sm-down" id="sciezka">
+<nav data-depth="{$breadcrumb.count}" class="breadcrumb hidden-sm-down" id="sciezka" 
+ {if isset($page.page_name) && $page.page_name == 'category'}
+style="
+margin-left: 245px;
+    margin-top: 0px;
+    background: transparent !important;
+        border-bottom: 1px solid #e0e9f3;
+        padding:0 !important;
+   
+"
+{/if}
+>
   <ol>
+  
     {block name='breadcrumb'}
       {foreach from=$breadcrumb.links item=path name=breadcrumb}
+      {if $path.title != "Strona główna"}
         {block name='breadcrumb_item'}
           <li>
             {if not $smarty.foreach.breadcrumb.last}
-              <a href="{$path.url}"><span>{$path.title}</span></a>
+              <a href="{$path.url}"><span 
+              {if isset($page.page_name) && $page.page_name == 'category'}
+              style="    font-size: 24px;     font-weight: 700;     text-transform: uppercase;"
+              {/if}
+              >{$path.title}</span></a>
+              {if isset($page.page_name) && $page.page_name == 'category'}
+              <i id="strzala_sciezka" class="fa fa-angle-right"></i>
+              {else}
+              <span id="sc">/</span>
+              {/if}
             {else}
-              <span>{$path.title}</span>
+              <span
+              {if isset($page.page_name) && $page.page_name == 'category'}
+              style="    font-size: 24px;     font-weight: 700;     text-transform: uppercase;"
+              {/if}
+              >{$path.title}</span>
             {/if}
           </li>
         {/block}
+      {/if}
       {/foreach}
     {/block}
   </ol>

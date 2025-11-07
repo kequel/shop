@@ -58,6 +58,7 @@
         {/block}
         
         <div id="kategorie">
+        
           {hook h="displayWrapperTop"}
         </div>
         <div class="container">
@@ -98,7 +99,15 @@
         {hook h="displayWrapperBottom"}
       </section>
 
-      <footer id="footer" class="js-footer">
+      <footer id="footer" class="js-footer"
+      {if isset($page.page_name) && $page.page_name == 'category'}
+      style="margin-top:400px !important;"
+      {/if}
+      {if isset($page.page_name) &&  $page.page_name == 'product'}
+      style="margin-top:100px !important;"
+      {/if}
+      
+      >
         <div class="footer-top-bar">
     <div class="container2">
         <div class="footer-boxes1">

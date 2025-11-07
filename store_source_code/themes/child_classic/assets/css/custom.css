@@ -215,7 +215,7 @@ header .hidden-sm-down p {
     text-align: center !important;
 }
 #header .header-top {
-    padding: 4px;
+    padding: 14px !important;
 }
 
 #kategorie{
@@ -791,7 +791,7 @@ button{
     margin-bottom: 0;
     list-style: none;
     border-radius: 0;
-    width: 900px;
+    width: 950px;
     height: 38px;
 }
 #main1{
@@ -808,6 +808,7 @@ button{
     padding: 27px 0 7px;
     float: none;
     text-transform: uppercase;
+        width: 950px;
 }
 
 .back-link {
@@ -1245,6 +1246,86 @@ text-decoration: underline;
     margin-right: 10px; 
 }
 
+.aside-box.aside-contact-box {
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 40px 12px 50px;
+}
+.aside-box.aside-contact-box h6 {
+    color: #003169 !important;
+    margin-bottom: 0;
+    font-size: 1rem;
+        font-weight: 500;
+}
+.aside-box.aside-contact-box p {
+    color: #003169;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+.aside-box.aside-contact-box .btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0;
+    background-color: #003169 !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    width: 135px;
+    transition: all 300ms ease;
+}
+.aside-box.aside-contact-box .btn:hover{
+  background-color: #0054b7 !important;
+}
+
+#footer {
+
+}
+#kategorie .hidden-sm-down {
+    padding-left: 37px;
+    width: 270px;
+}
+#sc{
+    margin: 0.3125rem;
+    color: #7a7a7a !important;
+}
+#wrapper .breadcrumb li::after {
+    margin: 0.3125rem;
+    color: #7a7a7a;
+    content: none;
+}
+#strzala_sciezka{
+    position: relative !important;
+    transform: none !important;
+    font-size: 20px !important;
+}
+.sort-by{
+        float: right;
+    color: #003169;
+    font-size: 17px !important;
+}
+#wybierz_sort{
+    height: 29px !important;
+
+    color: #003169;
+    font-size: 17px !important;
+    font-weight: 600;
+    display: flex; 
+    justify-content: left; 
+    align-items: center; 
+    width: 130px;
 
 
+}
+.pagination {
 
+    font-size: 1rem;
+}

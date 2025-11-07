@@ -22,11 +22,18 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-
+      {if isset($page.page_name) && ($page.page_name == 'category' || $page.page_name == 'product')}
+    <div class="aside-box aside-contact-box">
+    <img src="http://localhost:8080/themes/child_classic/assets/aside-contact-img.png" alt="Kontakt z nami">
+    <h6>Potrzebujesz pomocy?</h6>
+    <p>Skontaktuj się z nami!</p>
+    <a href="https://mopserwis.pl/kontakt" class="button btn">Kontakt</a>
+</div>
+    {/if}
 <div class="block_newsletter col-lg-8 col-md-12 col-sm-12" id="blockEmailSubscription_{$hookName}">
 
   <div class="row" id="news_col">
-
+  
     <h1 id="newsletter">NEWSLETTER</h1>
     <p id="zapisz">Zapisz się do naszego Newsletter'a</p>
     <div class="col-md-7 col-xs-12">
@@ -81,8 +88,13 @@
                 {hook h='displayGDPRConsent' id_module=$id_module}
               {/if}
           </div>
+
+          </div>
+
         </div>
       </form>
     </div>
   </div>
+
+
 </div>
