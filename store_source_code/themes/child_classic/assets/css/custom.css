@@ -783,7 +783,7 @@ button{
   cursor: pointer;
   border: none !important;
 }
-#sciezka{
+#wrapper #sciezka{
     margin-left: 245px;
     margin-top: 0px;
     background: #f9f9f9 !important;
@@ -1328,4 +1328,135 @@ text-decoration: underline;
 .pagination {
 
     font-size: 1rem;
+}
+#wrapper2 .container{
+    width: 75% !important;
+    margin-left: 22%;
+}
+
+#lewy_kosz {
+    /* float: left; */
+    width: 100%;
+}
+#prawy_kosz {
+    /* float: left; */
+    width: 100%;
+}
+.cart-grid-body .card-block {
+   padding: 0;
+}
+#kosz_prod{
+    border-bottom: 1px solid #e0e9f3;
+}
+
+.zakladajac_konto {
+    padding: 7px 60px;
+    width: 49%;
+    display: inline-block;
+}
+.zakladajac_konto *{
+    font-size: 16px;
+}
+.zaloz_konto li, .zaloz_konto_right li {
+    background-image: url(https://mopserwis.pl/img/ok.gif);
+    background-position: top left;
+    padding-left: 30px;
+    background-position-y: 10px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+.zarejestruj_sie {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    padding-top: 65px;
+    top: 0;
+    vertical-align: top;
+}
+.zarejestruj_sie a{
+        width: auto;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    display: inline-block;
+    padding: 8px 41px;
+    background-color: #003169 !important;
+    color: #fff !important;
+    font-family: 'Titillium Web', sans-serif;
+    font-display: swap;
+    font-size: 19px;
+    font-weight: 400;
+}
+#podsumowanie{
+    width: 50%;
+    float: left;
+}
+.cart-voucher{
+    width: 50%;
+    float: left;
+}
+
+.block-promo .promo-input {
+    border: #e2e2e2 1px solid;
+    height: 40px;
+    max-width: 200px;
+    text-indent: 10px;
+    float: left;
+    margin-left: 5px;
+}
+.block-promo .promo-input+button {
+    text-transform: uppercase;
+    padding: 10px 20px !important;
+    min-width: auto;
+    height: 40px;
+    float: left;
+    margin-bottom: 0;
+    border: none !important;
+    background-color: #003169 !important;
+    color: #fff !important;
+    font-size: 19px;
+    margin-top: 0px;
+    margin-left: 10px;
+    padding-bottom: 15px !important;
+}
+#pods2 .label{
+    font-size: 18px;
+    font-weight: 400;
+}
+#pods2 .value{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#final #finalb{
+    width: auto;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    display: inline-block;
+    padding: 8px 41px;
+    background-color: #003169;
+    color: #fff;
+    font-family: 'Titillium Web', sans-serif;
+    font-display: swap;
+    font-size: 19px;
+    font-weight: 400;
+    float: right;
+    width: 273px;
+}
+
+#wrapper2 #sciezka{
+    background-color: transparent !important;
+}
+body#checkout #footer {
+    padding: 0px !important; 
+    color: #7a7a7a;
+    background: #fff;
+}
+#wrapper .cart-voucher {
+    width: 100% !important;
 }
