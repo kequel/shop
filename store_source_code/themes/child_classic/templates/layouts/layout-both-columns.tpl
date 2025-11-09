@@ -71,9 +71,12 @@
         </div>
         {/if}
         <div class="container">
+        {if isset($page.page_name) && ($page.page_name =='authentication' || $page.page_name =='cart' || $page.page_name =='checkout') }
+        {else}
           {block name='breadcrumb'}
             {include file='_partials/breadcrumb.tpl'}
           {/block}
+          {/if}
 
           {block name="left_column"}
             <div id="left-column" class="col-xs-12 col-sm-4 col-md-3">
@@ -109,10 +112,10 @@
       </section>
 
       <footer id="footer" class="js-footer"
-      {if isset($page.page_name) && $page.page_name == 'category'}
+      {if isset($page.page_name) && ($page.page_name == 'category'|| $page.page_name == 'cart' )}
       style="margin-top:400px !important;"
       {/if}
-      {if isset($page.page_name) &&  $page.page_name == 'product'}
+      {if isset($page.page_name) &&  ($page.page_name == 'product'|| $page.page_name == 'my-account')}
       style="margin-top:100px !important;"
       {/if}
       

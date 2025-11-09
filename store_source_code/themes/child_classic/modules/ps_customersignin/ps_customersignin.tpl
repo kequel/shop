@@ -23,8 +23,12 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 <div id="_desktop_user_info">
-  <div class="user-info">
+  <div class="user-info"
     {if $logged}
+    style="position: absolute;
+    right: 20px;
+    top: -10px;
+    width: 200px;">
 
       <a
         class="logout hidden-sm-down"
@@ -44,6 +48,7 @@
         <span class="hidden-sm-down">{$customerName}</span>
       </a>
     {else}
+    >
       <a
         href="{$urls.pages.my_account}"
         title="{l s='Log in to your customer account' d='Shop.Theme.Customeraccount'}"
