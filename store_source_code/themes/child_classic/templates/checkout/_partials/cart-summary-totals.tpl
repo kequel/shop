@@ -38,7 +38,7 @@
       </div>
     {else}
       <div class="cart-summary-line cart-total">
-        <span class="label" style="
+        <span class="label" style="    {if isset($page.page_name) && $page.page_name == 'cart'} padding-left: 210px; {/if}
     ">{$cart.totals.total.label}&nbsp;{if $configuration.taxes_enabled}{$cart.labels.tax_short}{/if}</span>
         <span class="value">{$cart.totals.total.value}</span>
       </div>

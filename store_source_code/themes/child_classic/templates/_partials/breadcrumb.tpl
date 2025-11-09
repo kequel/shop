@@ -23,7 +23,7 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 <nav data-depth="{$breadcrumb.count}" class="breadcrumb hidden-sm-down" id="sciezka" 
- {if isset($page.page_name) && $page.page_name == 'category'}
+ {if isset($page.page_name) && $page.page_name == 'category' }
 style="
 margin-left: 245px;
     margin-top: 0px;

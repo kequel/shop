@@ -22,7 +22,7 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-      {if isset($page.page_name) && ($page.page_name == 'category' || $page.page_name == 'product')}
+      {if isset($page.page_name) && ($page.page_name == 'category' || $page.page_name == 'product'|| $page.page_name == 'cart')}
     <div class="aside-box aside-contact-box">
     <img src="http://localhost:8080/themes/child_classic/assets/aside-contact-img.png" alt="Kontakt z nami">
     <h6>Potrzebujesz pomocy?</h6>

@@ -3,7 +3,14 @@
 {block "form_field"}
   {* Renderujemy tylko pola, które mają pozostać, ORAZ obowiązkowe zgody, które są potrzebne, by PrestaShop działał. *}
   {if $field.name === 'firstname' || $field.name === 'lastname' || $field.name === 'email' || $field.name === 'newsletter' || $field.name === 'customer_privacy' || $field.name === 'psgdpr'}
-    {$smarty.block.parent}
+     {if $field.name === 'newsletter' || $field.name === 'customer_privacy' || $field.name === 'psgdpr'}
+<div id="checkiii">
+{/if}
+        {$smarty.block.parent}
+        {if $field.name === 'newsletter' || $field.name === 'customer_privacy' || $field.name === 'psgdpr'}
+</div>
+{/if}
+
   {/if}
 {/block}
 
