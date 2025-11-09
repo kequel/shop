@@ -23,7 +23,7 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 {block name='product_miniature_item'}
-<div class="js-product product{if !empty($productClasses)} {$productClasses}{/if}">
+<div style="width: 25%; margin-top:10px; padding:0px"class="js-product product{if !empty($productClasses)} {$productClasses}{/if}">
   <article class="product-miniature js-product-miniature" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
     <div class="thumbnail-container">
       <div class="thumbnail-top">
@@ -103,7 +103,8 @@
               
             </div>
           {/if}
-
+          
+          
           <div id="dodaj_do_koszyka">
               <form action="http://localhost:8080/cart" method="post" id="add-to-cart-or-refresh">
               <input type="hidden" name="token" value="ec77e8c82bb21ce2ddf48940f7ecbd54">
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	
 		
-        <a id="dodaj1" style="width:145px !important; float:right; display:inline-table; line-height: 19px;" class="button add-to-cart" href="#" data-button-action="add-to-cart" data-url="https://mopserwis.pl/koszyk?add=1&amp;id_product=2255&amp;id_product_attribute=0"><i class="fa fa-cart-plus"></i> Do koszyka</a>
+        <a id="dodaj1" class="button add-to-cart" href="#" data-button-action="add-to-cart" data-url="https://mopserwis.pl/koszyk?add=1&amp;id_product=2255&amp;id_product_attribute=0"><i class="fa fa-cart-plus"></i> Do koszyka</a>
     </form>
         </div>
         {/block}

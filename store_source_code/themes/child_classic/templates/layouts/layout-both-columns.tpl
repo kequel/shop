@@ -51,15 +51,25 @@
         {/block}
       </header>
 
+      {if isset($page.page_name) && ($page.page_name == 'category' || $page.page_name == 'index'|| $page.page_name == 'product' ||$page.page_name == 'checkout'  )}
+      
       <section id="wrapper">
+      {else}
+      <section id="wrapper2">
+      {/if}
+
        
         {block name='notifications'}
           {include file='_partials/notifications.tpl'}
         {/block}
         
+         {if isset($page.page_name) && $page.page_name != 'checkout' }
+      
         <div id="kategorie">
+        
           {hook h="displayWrapperTop"}
         </div>
+        {/if}
         <div class="container">
           {block name='breadcrumb'}
             {include file='_partials/breadcrumb.tpl'}
@@ -98,7 +108,15 @@
         {hook h="displayWrapperBottom"}
       </section>
 
-      <footer id="footer" class="js-footer">
+      <footer id="footer" class="js-footer"
+      {if isset($page.page_name) && $page.page_name == 'category'}
+      style="margin-top:400px !important;"
+      {/if}
+      {if isset($page.page_name) &&  $page.page_name == 'product'}
+      style="margin-top:100px !important;"
+      {/if}
+      
+      >
         <div class="footer-top-bar">
     <div class="container2">
         <div class="footer-boxes1">
