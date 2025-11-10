@@ -33,7 +33,9 @@
   <div class="form-group row {if !empty($field.errors)}has-error{/if}">
     <label class="col-md-3 form-control-label{if $field.required} required{/if}" for="field-{$field.name}">
       {if $field.type !== 'checkbox'}
-       {if isset($page.page_name) && $page.page_name != 'authentication'}
+       {if isset($page.page_name) && $page.page_name == 'authentication' && !isset($smarty.get.create_account) }
+       {else}
+       
         {$field.label}
         {/if}
       {/if}
@@ -90,6 +92,7 @@
 
       {elseif $field.type === 'checkbox'}
 
+
         {block name='form_field_item_checkbox'}
           <span class="custom-checkbox">
             <label>
@@ -99,6 +102,7 @@
             </label>
           </span>
         {/block}
+       
 
       {elseif $field.type === 'date'}
 
@@ -136,7 +140,7 @@
       {elseif $field.type === 'password'}
 
         {block name='form_field_item_password'}
-        {if isset($page.page_name) && $page.page_name == 'authentication'}
+        {if isset($page.page_name) && $page.page_name == 'authentication' && !isset($smarty.get.create_account) }
          <div class="input-group js-parent-focus">
             <input
               id="field-{$field.name}"
@@ -196,7 +200,7 @@
       {else}
       
         {block name='form_field_item_other'}
-        {if isset($page.page_name) && $page.page_name == 'authentication'}
+         {if isset($page.page_name) && $page.page_name == 'authentication' && !isset($smarty.get.create_account) }
         <input
         style="color: #003169 !important"
             id="field-{$field.name}"
