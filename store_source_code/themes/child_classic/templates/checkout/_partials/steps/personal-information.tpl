@@ -48,7 +48,7 @@
 
   {else}
     <ul class="nav nav-inline my-2" role="tablist">
-      <li class="nav-item">
+        <li class="nav-item">
         <a
           class="nav-link {if !$show_login_form}active{/if}"
           data-toggle="tab"
@@ -65,11 +65,11 @@
         </a>
       </li>
 
-      <li class="nav-item">
+        <li class="nav-item">
         <span class="nav-separator"> | </span>
       </li>
 
-      <li class="nav-item">
+        <li class="nav-item">
         <a
           class="nav-link {if $show_login_form}active{/if}"
           data-link-action="show-login-form"
@@ -82,8 +82,21 @@
           {l s='Sign in' d='Shop.Theme.Actions'}
         </a>
       </li>
-    </ul>
-
+      
+      <li class="nav-item">
+        <span class="nav-separator"> | </span>
+      </li>
+      
+      <li class="nav-item">
+        <a 
+          class="nav-link"
+          href="{$urls.pages.register}"
+        >
+          {l s='Zarejestruj się' d='Shop.Theme.Customeraccount'}
+        </a>
+      </li>
+      </ul>
+<span id="tyt">Tytuł</span>
     <div class="tab-content">
       <div class="tab-pane {if !$show_login_form}active{/if}" id="checkout-guest-form" role="tabpanel" {if $show_login_form}aria-hidden="true"{/if}>
         {render file='checkout/_partials/customer-form.tpl' ui=$register_form guest_allowed=$guest_allowed}
@@ -92,7 +105,6 @@
         {render file='checkout/_partials/login-form.tpl' ui=$login_form}
       </div>
     </div>
-
 
   {/if}
 {/block}

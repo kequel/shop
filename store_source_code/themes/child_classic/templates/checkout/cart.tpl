@@ -57,7 +57,10 @@
           {block name='cart_overview'}
             {include file='checkout/_partials/cart-detailed.tpl' cart=$cart}
           {/block}
+
+     
         </div>
+         {if !$customer.is_logged}
         <div class="zaloz_konto" style="border: 1px solid #e0e9f3;line-height: 32px; padding: 15px; color: #203461; margin-bottom: 20px;">
 		  <div class="zakladajac_konto">
 			<strong>Zakładając konto w MOP SERWIS zyskujesz:</strong>
@@ -71,6 +74,8 @@
 			  <a href="http://localhost:8080/login?create_account=1" data-link-action="display-register-form" class="button">Zarejestruj się</a>
 		  </div>
 	  </div>
+   {/if}
+    
 
 
 
@@ -103,8 +108,8 @@
         {/block}
 
            {block name='continue_shopping'}
-          <a class="label" href="{$urls.pages.index}">
-            <i class="material-icons">chevron_left</i>{l s='Continue shopping' d='Shop.Theme.Actions'}
+          <a id="kontynuuj" class="label" href="{$urls.pages.index}">
+           {l s='Continue shopping' d='Shop.Theme.Actions'}
           </a>
         {/block}
 
