@@ -33,7 +33,12 @@
 {/if}
   <form id="login-form" action="{block name='login_form_actionurl'}{$action}{/block}" method="post">
 
-    <div id="zalll">
+    <div id="zalll"
+    {if isset($page.page_name) && $page.page_name == 'checkout'}
+    style="float:none"
+    {/if}
+    
+    >
     <h1>Zaloguj się</h1>
     <p>Masz już konto? Wpisz adres e-mail i hasło.</p>
     </div>
