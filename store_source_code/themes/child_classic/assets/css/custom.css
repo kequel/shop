@@ -11,7 +11,7 @@
 
  *
  {
-    color:#003169 !important;
+/* color:#003169; */
     transition: all 300ms ease;
  }
  #header{ background: #003169 !important; }
