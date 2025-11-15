@@ -12,6 +12,7 @@
  *
  {
     color:#003169 !important;
+    transition: all 300ms ease;
  }
  #header{ background: #003169 !important; }
  .header-nav *{
@@ -57,6 +58,312 @@ color:white !important;
 #_desktop_user_info{
     float: right;
 }
+
+.contact-main-title {
+    font-family: 'Titillium Web', sans-serif !important;
+    color: #003169 !important;
+    font-size: 30px !important;
+    font-weight: 400 !important;
+    margin-bottom: 20px !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+/* Ukrycie starego tytułu jeśli istnieje */
+.h3-contact-title {
+    display: none !important;
+}
+
+/* Wrapper strony kontaktowej */
+.contact-page-wrapper {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Formularz kontaktowy */
+.contact-form {
+    margin-bottom: 40px !important;
+    max-width: 100% !important;
+}
+
+.contact-form .form-control {
+    border-radius: 0 !important;
+    border: 1px solid #ccc !important;
+    padding: 6px 10px !important;
+    font-family: 'Titillium Web', sans-serif !important;
+    font-size: 14px !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    height: 34px !important;
+}
+
+.contact-form .form-control:focus {
+    border-color: #2fb5d2 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.contact-form .form-control-label {
+    font-family: 'Titillium Web', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: #333 !important;
+    text-align: left !important;
+    padding-top: 8px !important;
+}
+
+.contact-form textarea.form-control {
+    height: auto !important;
+    min-height: 90px !important;
+}
+
+.form-footer {
+    text-align: right !important;
+    margin-left: 580px;
+    margin-top: 20px !important;
+    clear: both !important;
+}
+
+.btn-wyslij-button {
+    background-color: #003169 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 8px 25px !important;
+    font-family: 'Titillium Web', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    border-radius: 0 !important;
+    transition: all 300ms ease !important;
+    height: 36px !important;
+    line-height: 1 !important;
+}
+
+.btn-wyslij-button:hover {
+    background-color: #0050a7 !important;
+}
+
+/* Checkbox RODO - większy, obok tekstu */
+.custom-checkbox-wrapper {
+    display: flex !important;
+    align-items: flex-start !important;
+    padding: 15px 0 !important;
+}
+
+.rodo-checkbox,
+.custom-checkbox-wrapper input[type="checkbox"] {
+    margin-right: 10px !important;
+    margin-top: 3px !important;
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+}
+
+.custom-checkbox-wrapper label {
+    font-size: 13px !important;
+    color: #666 !important;
+    line-height: 1.6 !important;
+    margin-bottom: 0 !important;
+    flex: 1 !important;
+    cursor: pointer !important;
+}
+
+.custom-checkbox-wrapper label a {
+    color: #0275d8 !important;
+    text-decoration: none !important;
+}
+
+.custom-checkbox-wrapper label a:hover {
+    text-decoration: underline !important;
+}
+
+/* Sekcje z pracownikami */
+.contact-person-list-wrap {
+    margin-top: 35px !important;
+    clear: both !important;
+    width: 100% !important;
+}
+
+.dzial-row {
+    margin-bottom: 25px !important;
+    clear: both !important;
+    width: 100% !important;
+}
+
+.nazwa_dzialu {
+    background-color: #003169 !important;
+    color: #fff !important;
+    padding: 10px 15px !important;
+    font-weight: 700 !important;
+    margin-bottom: 0 !important;
+    text-transform: uppercase !important;
+    font-size: 13px !important;
+    font-family: 'Titillium Web', sans-serif !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* Kontenery pracowników - bez ramek, białe tło */
+.dzial-kontakty {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0 !important;
+    width: 100% !important;
+    background-color: #fff !important;
+    border: none !important;
+}
+
+/* BIURO OBSŁUGI KLIENTA - 3 osoby */
+.dzial-row:nth-child(1) .dzial-kontakty {
+    max-width: 600px !important;
+}
+
+.dzial-row:nth-child(1) .kontakt-dane-osobowe {
+    flex: 0 0 33.33% !important;
+    max-width: 33.33% !important;
+}
+
+/* DYSTRYBUCJA / HURTOWNIE - 1 osoba */
+.dzial-row:nth-child(2) .dzial-kontakty {
+    max-width: 600px !important;
+}
+
+.dzial-row:nth-child(2) .kontakt-dane-osobowe {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+}
+
+/* DZIAŁ DS. OBSŁUGI KLIENTÓW BIZNESOWYCH - 3 osoby */
+.dzial-row:nth-child(3) .dzial-kontakty {
+    max-width: 800px !important;
+}
+
+.dzial-row:nth-child(3) .kontakt-dane-osobowe {
+    flex: 0 0 33.33% !important;
+    max-width: 33.33% !important;
+}
+
+/* Dopasowanie szerokości nagłówków do zawartości */
+.dzial-row:nth-child(1) .nazwa_dzialu {
+    max-width: 600px !important;
+}
+
+.dzial-row:nth-child(2) .nazwa_dzialu {
+    max-width: 600px !important;
+}
+
+.dzial-row:nth-child(3) .nazwa_dzialu {
+    max-width: 800px !important;
+}
+
+.kontakt-dane-osobowe {
+    padding: 18px 15px !important;
+    border-right: none !important;
+    background-color: #fff !important;
+    box-sizing: border-box !important;
+    min-height: 110px !important;
+}
+
+/* Imiona - czarne, niepogrubione */
+.kontakt-dane-osobowe h5 {
+    color: #000 !important;
+    font-weight: 400 !important;
+    margin-bottom: 8px !important;
+    font-size: 15px !important;
+    font-family: 'Titillium Web', sans-serif !important;
+}
+
+/* Stanowisko */
+.kontakt-dane-osobowe .stanowisko {
+    color: #7a7a7a !important;
+    font-size: 12px !important;
+    margin: 3px 0 10px 0 !important;
+    font-style: normal !important;
+}
+
+.kontakt-dane-osobowe p {
+    margin: 5px 0 !important;
+    color: #333 !important;
+    font-size: 14px !important;
+}
+
+.person-phone {
+    margin: 5px 0 !important;
+    display: block !important;
+}
+
+.person-email {
+    display: block !important;
+    margin: 5px 0 !important;
+    text-decoration: none !important;
+}
+
+/* Telefon - czarna ikona, niebieski tekst */
+.person-phone i {
+    color: #000 !important;
+    margin-right: 6px !important;
+    width: 14px !important;
+    display: inline-block !important;
+    text-align: center !important;
+}
+
+.person-phone a {
+    color: #2fb5d2 !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+}
+
+.person-phone a:hover {
+    text-decoration: underline !important;
+}
+
+/* Email - niebieska ikona, niebieski tekst */
+.person-email i {
+    color: #2fb5d2 !important;
+    margin-right: 6px !important;
+    width: 14px !important;
+    display: inline-block !important;
+    text-align: center !important;
+}
+
+.person-email,
+.person-email span {
+    color: #2fb5d2 !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+}
+
+.person-email:hover {
+    text-decoration: underline !important;
+}
+
+/* Usunięcie marginesów */
+body#contact #wrapper {
+    margin-left: 0 !important;
+}
+
+body#contact #content-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+}
+
+body#contact #main {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    padding: 20px 15px !important;
+}
+
+body#contact .page-content {
+    padding: 0 !important;
+}
+
+body#contact .breadcrumb {
+    display: none !important;
+}
+
+
 .header-nav-phone {
     display: inline-block;
     padding-left: 28px; 
@@ -215,7 +522,7 @@ header .hidden-sm-down p {
     text-align: center !important;
 }
 #header .header-top {
-    padding: 4px;
+    padding: 14px !important;
 }
 
 #kategorie{
@@ -663,12 +970,13 @@ text-decoration: underline;
     background-color: #003169 !important;
     color: #fff !important;
     padding: 3.5px;
-    width: 125px !important;
+   
     padding-left: 0px;
     text-transform: uppercase;
     font-size: 13px !important;
     transition: all 300ms ease;
     text-align: center;
+    width:145px !important; float:right; display:inline-table; line-height: 19px;
 
 }
 #dodaj1:hover{
@@ -755,30 +1063,1058 @@ button{
     margin-bottom: 0 !important;
     overflow: hidden;
     background: #fff;
+    padding: 5px !important;
 }
 
-/* Kontener obrazka powinien ukrywać nadmiar */
+
 .thumbnail-container {
   overflow: hidden;
   position: relative;
   border: none !important;
 }
 
-/* Efekt zoom dla obrazka */
 .thumbnail-container img {
-  transition: transform 0.3s ease; /* płynne przejście */
+  transition: transform 0.3s ease; 
   border: none !important;
 }
 
-/* Zoom przy najechaniu na obrazek lub tytuł produktu */
+
 .thumbnail-container:hover img,
 .product-title:hover ~ .thumbnail-container img {
-  transform: scale(1.05); /* delikatne powiększenie o 5% */
+  transform: scale(1.05); 
   border: none !important;
 }
 
-/* Jeśli chcesz, żeby zoom działał również przy najechaniu na tytuł */
+
 .product-title:hover {
   cursor: pointer;
   border: none !important;
+}
+#wrapper #sciezka{
+    margin-left: 245px;
+    margin-top: 0px;
+    background: #f9f9f9 !important;
+    padding: 9px 25px !important;
+    margin-bottom: 0;
+    list-style: none;
+    border-radius: 0;
+    width: 950px;
+    height: 38px;
+}
+#main1{
+    margin-left: 260px;
+}
+.h1_nazwa{
+    background: none;
+    padding: 0;
+    color: #003169;
+    font-size: 24px;
+    line-height: 1.2em;
+    border-bottom: 1px solid #e0e9f3;
+    font-weight: 700;
+    padding: 27px 0 7px;
+    float: none;
+    text-transform: uppercase;
+        width: 950px;
+}
+
+.back-link {
+    display: inline-block;
+    padding: 16px 30px;
+    font-size: 20px;
+    color: #2e6fc2 !important;
+    float: right;
+}
+.back-link:hover {
+    color: #003169 !important;
+    text-decoration: underline; 
+}
+#powiazane{
+    margin-top: 50px !important; 
+}
+#nazwa2{
+    text-transform: none !important;
+    margin-bottom: 10px !important;
+    color: #003169 !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    font-size: 32px;
+}
+#produkt_prawo{
+    width: 40% !important;
+}
+#produkt_lewo{
+    margin-top: 70px;
+    width: 60% !important;
+}
+#product-availability2{
+     background: #5bbd5b !important;
+     border-radius: 50%; 
+     width: 24px !important;
+     height: 24px !important;
+    padding: 5.5px 0px 1px 5.5px;
+    display: inline-table;
+}
+
+.fa-file-pdf{
+padding: 5px 0px 0px 5px;color:inherit !important; font-size:20px !important
+}
+
+#att:hover{
+    background-color: #a0cdfd !important;
+    color:inherit !important;
+}
+#att{
+    max-width: 270px;
+    text-decoration: none; display: block;
+    width: 50px;
+    height: 50px; float:left; 
+    margin: 0px 10px 0px 0px; 
+    padding: 10px 0px 10px 12px;
+    background: #ccdef2 !important;
+    color: #0050a7 !important;
+     transition: all 300ms ease;
+}
+.znizka{
+    margin-right: .625rem !important;
+    position: relative;
+    font-size: 17px !important;
+    
+}
+.znizka:after{
+    content: '';
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    border-bottom: 1px solid red;
+    transform: skewY(-6deg);
+
+}
+.cena_n{
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: bold;
+    color: black !important;
+}
+.net-brut{
+    font-weight: normal;
+    color: black !important;
+}
+.za_szt{
+    margin-top: 15px;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 27px;
+    color: #696969 !important;
+}
+.najnizsza{
+    font-size: 13px;
+    line-height: 1.2em;
+    color: #696969 !important;
+    font-weight: 400;
+}
+#cena_naj{
+    color:#f39d72 !important;
+    font-weight: 700;
+}
+#prod_pow{
+        background-color: #003169;
+    text-transform: uppercase;
+    color: #fff !important;
+    line-height: 1;
+    padding: 10px 34px;
+    display: inline-block;
+        font-size: 1.75rem !important;
+            font-weight: 500;
+}
+
+
+#powiazane .product-miniature {
+    border: 1px solid silver;
+        width: 145px;
+    height: 270px;
+}
+
+#powiazane .product-miniature .product-title a{
+    margin-top: 0.7rem;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 14px;
+    margin-bottom: 0;
+    color: #3d3d3d !important;
+    line-height: 1.4;
+    display: block;
+    height: 60px;
+    clear: both;
+    overflow: hidden;
+    font-weight: bold !important;
+        transition: all 300ms ease;
+}
+#powiazane .product-miniature .product-title a:hover{
+color: #003169 !important;
+text-decoration: underline;
+}
+#powiazane .thumbnail-top{
+        width: 125px;
+    height: 90px;
+    margin-left: 10px;
+    margin-top: -10px;
+}
+
+#powiazane .price {
+    color: black !important;
+    margin-bottom: -5px;
+    font-size: 22px;
+    font-weight: 600;
+}
+#powiazane .dodaj_do_koszyka{
+    height: 40px;
+}
+#powiazane .qty1{
+    height: 40px;
+    float: left;
+    width: 30px;
+
+}
+#powiazane .add1{
+    height: 40px;
+    float: left;
+    width: 100px;
+}
+
+#powiazane #dodaj1{
+    background-color: #003169 !important;
+    color: #fff !important;
+    padding: 3.5px;
+    width: 125px !important;
+    padding-left: 0px;
+    text-transform: uppercase;
+    font-size: 13px !important;
+    transition: all 300ms ease;
+    text-align: center;
+
+}
+#powiazane #dodaj1:hover{
+    background-color: #0050a7 !important;
+    text-decoration: none !important;
+}
+#powiazane .fa-cart-plus{
+    color:#fff !important;
+    margin-right: 10px;
+}
+#powiazane input{
+    line-height: inherit;
+    border-radius: 0 !important;
+    border-width: 1px;
+    float:left;
+        border: 1px solid #e2e2e2;
+}
+
+#powiazane button{
+    margin: 0;
+    line-height: inherit;
+    border: none;
+    float:left;
+}
+
+#powiazane #z_vatem{
+    color: black !important;
+    font-size: 15px;
+    position: relative;
+    font-weight: 300;
+    margin-top: -8px;
+}
+
+#powiazane .dostepnosc {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    margin: 2px;
+}
+#powiazane .dostepny {
+    background-color: green;
+}
+#powiazane .product-flag{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    padding: 8px 12px 9px;
+    background-color: #2e6fc2 !important;
+    color:#fff !important;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    margin-bottom: 20px;
+}
+#powiazane .discount{
+    margin-top: 20px ;
+    left: auto;
+    font-size: 20px !important;
+    background-color: #12c212 !important;
+    width: auto;
+    color: white;
+    padding: 0 3px !important;
+    right: 5px;
+    font-weight: 600 !important;
+
+}
+
+#powiazane .novelty-arrow {
+    position: absolute;
+    top: 0;
+    left: -24px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 16px 24px 16px 0;
+    border-color: transparent #2e6fc2 transparent transparent;
+}
+#powiazane .product-miniature .thumbnail-container {
+    position: relative;
+    height: 2;
+    margin-bottom: 0 !important;
+    overflow: hidden;
+    background: #fff;
+    padding: 5px !important;
+}
+
+
+#powiazane .thumbnail-container {
+  overflow: hidden;
+  position: relative;
+  border: none !important;
+}
+
+#powiazane .thumbnail-container img {
+  transition: transform 0.3s ease; 
+  border: none !important;
+}
+
+
+#powiazane .thumbnail-container:hover img,
+.product-title:hover ~ .thumbnail-container img {
+  transform: scale(1.05); 
+  border: none !important;
+}
+#powiazane #plusminus{
+    margin-left: 33px;
+}
+#powiazane #dodaj1{
+    width: 135px !important
+}
+#powiazane     .col-xl-3 {
+        float: left;
+        width: 150px;
+    }
+.comments-nb{
+        font-size: 2.5rem;
+    color: black !important;
+    padding: 0 !important;
+    margin-top: 50px;
+    padding-bottom: -30px;
+}
+#badz_pierwszy{
+    float: left;
+        background-color: #d9edf7;
+    border:solid 1px #bcdff1;
+    color: #31708f;
+    width: 670px;
+    text-align: left;
+    padding: 0 !important;
+}
+#badz_pierwszy a{
+        text-decoration: none;
+    font-weight: 700;
+    color: #0275d8 !important;
+    font-size: 17px;
+    line-height: 27px;
+    text-align: left;
+     transition: all 300ms ease;
+}
+#badz_pierwszy a:hover{
+    text-decoration: underline;
+    color: #014c8c !important;
+    
+}
+#napisz{
+    color: #fff !important;
+    background-color: #2fb5d2 !important;
+    text-transform: uppercase;
+        display: inline-block;
+    font-weight: 400;
+    border: 1px solid transparent;
+    height: 37px;
+
+    font-size: 1rem;
+    border-radius: 0;
+    margin-bottom: 20px;
+    
+    padding: 5px 16px !important;
+    transition: all 300ms ease;
+
+
+}
+#napisz:hover{
+   color: #fff !important;
+    background-color: #014682 !important;
+    border-color: #01315a !important;
+}
+
+#product-comments-list-header{
+    padding: 0 !important;
+}
+.product-comment-list-item {
+    padding:0 !important;
+    height: 23px;
+}
+#product-cover-carousel .carousel-inner{
+    width: 500px !important;
+}
+#zdj_pr{
+    
+    background-color: transparent !important;
+    vertical-align: middle;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+        margin: 0 auto;
+    max-height: 300px;
+   object-fit: cover;
+   padding: 0 30px;
+ 
+
+}
+#karuzela_xd{
+    
+    width: 470px !important;
+    height: 350px !important;
+    border: 1px solid silver;
+    
+}
+#lewo_prod, #prawo_prod{
+       position: absolute;
+    top: 200px;
+    transform: translateY(-50%);
+    font-size: 33px;
+    padding: 5px;
+    background: #f2f2f2;
+    width: 21px;
+    height: 60px;
+}
+#lewo_prod{
+    left: 2px !important;
+}
+#prawo_prod{
+    right:2px !important;
+}
+#lewo3, #prawo3{
+    position: absolute;
+    background-color: transparent;
+    font-size: 25px;
+    color:#0275d8 !important;
+}
+#prawo3{
+    
+    right:3px;
+    
+}
+#lewo3{
+    left: -10px;
+}
+#lewo3:hover, #prawo3:hover{
+
+    color:#003169 !important;
+}
+
+
+
+.js-qv-mask {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden; 
+}
+
+
+.product-images {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    list-style: none; 
+    width: max-content; 
+}
+
+
+.thumb-container {
+    flex-shrink: 0;
+    margin-right: 10px; 
+}
+
+.aside-box.aside-contact-box {
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 40px 12px 50px;
+}
+.aside-box.aside-contact-box h6 {
+    color: #003169 !important;
+    margin-bottom: 0;
+    font-size: 1rem;
+        font-weight: 500;
+}
+.aside-box.aside-contact-box p {
+    color: #003169;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+.aside-box.aside-contact-box .btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0;
+    background-color: #003169 !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    width: 135px;
+    transition: all 300ms ease;
+}
+.aside-box.aside-contact-box .btn:hover{
+  background-color: #0054b7 !important;
+}
+
+#footer {
+
+}
+#kategorie .hidden-sm-down {
+    padding-left: 37px;
+    width: 270px;
+}
+#sc{
+    margin: 0.3125rem;
+    color: #7a7a7a !important;
+}
+#wrapper .breadcrumb li::after {
+    margin: 0.3125rem;
+    color: #7a7a7a;
+    content: none;
+}
+#strzala_sciezka{
+    position: relative !important;
+    transform: none !important;
+    font-size: 20px !important;
+}
+.sort-by{
+        float: right;
+    color: #003169;
+    font-size: 17px !important;
+}
+#wybierz_sort{
+    height: 29px !important;
+
+    color: #003169;
+    font-size: 17px !important;
+    font-weight: 600;
+    display: flex; 
+    justify-content: left; 
+    align-items: center; 
+    width: 130px;
+
+
+}
+.pagination {
+
+    font-size: 1rem;
+}
+#wrapper2 .container{
+    width: 75% !important;
+    margin-left: 22%;
+}
+
+#lewy_kosz {
+    /* float: left; */
+    width: 100%;
+}
+#prawy_kosz {
+    /* float: left; */
+    width: 100%;
+}
+.cart-grid-body .card-block {
+   padding: 0;
+}
+#kosz_prod{
+    border-bottom: 1px solid #e0e9f3;
+}
+
+.zakladajac_konto {
+    padding: 7px 60px;
+    width: 49%;
+    display: inline-block;
+}
+.zakladajac_konto *{
+    font-size: 16px;
+}
+.zaloz_konto li, .zaloz_konto_right li {
+    background-image: url(https://mopserwis.pl/img/ok.gif);
+    background-position: top left;
+    padding-left: 30px;
+    background-position-y: 10px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+.zarejestruj_sie {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    padding-top: 65px;
+    top: 0;
+    vertical-align: top;
+}
+.zarejestruj_sie a{
+        width: auto;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    display: inline-block;
+    padding: 8px 41px;
+    background-color: #003169 !important;
+    color: #fff !important;
+    font-family: 'Titillium Web', sans-serif;
+    font-display: swap;
+    font-size: 19px;
+    font-weight: 400;
+}
+#podsumowanie{
+    width: 50%;
+    float: left;
+}
+.cart-voucher{
+    width: 50%;
+    float: left;
+}
+
+.block-promo .promo-input {
+    border: #e2e2e2 1px solid;
+    height: 40px;
+    max-width: 200px;
+    text-indent: 10px;
+    float: left;
+    margin-left: 5px;
+}
+.block-promo .promo-input+button {
+    text-transform: uppercase;
+    padding: 10px 20px !important;
+    min-width: auto;
+    height: 40px;
+    float: left;
+    margin-bottom: 0;
+    border: none !important;
+    background-color: #003169 !important;
+    color: #fff !important;
+    font-size: 19px;
+    margin-top: 0px;
+    margin-left: 10px;
+    padding-bottom: 15px !important;
+}
+#pods2 .label{
+    font-size: 18px;
+    font-weight: 400;
+}
+#pods2 .value{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#final #finalb{
+    width: auto;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    display: inline-block;
+    padding: 8px 41px;
+    background-color: #003169;
+    color: #fff;
+    font-family: 'Titillium Web', sans-serif;
+    font-display: swap;
+    font-size: 19px;
+    font-weight: 400;
+    float: right;
+    width: 273px;
+}
+
+#wrapper2 #sciezka{
+    background-color: transparent !important;
+    visibility: hidden;
+}
+body#checkout #footer {
+    padding: 0px !important; 
+    color: #7a7a7a;
+    background: #fff;
+}
+#wrapper .cart-voucher {
+    width: 100% !important;
+}
+
+#kontynuuj{
+    margin-left: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+#kontynuuj:hover{
+    color:#014c8c !important;
+    text-decoration: underline;
+    
+}
+.step-number{
+    background: transparent !important;
+    font-size: 20px !important;
+   margin-right: 0px !important;
+    margin-left: 30px !important;
+    color: #fff !important;
+    padding-bottom: 5px;
+    border: none !important;
+
+    
+    
+    
+}
+.step-title{
+    font-size: 20px !important;
+    background-color: #003169 !important;
+    color: #fff !important;    
+    padding-top: 5px;
+    height: 40px;
+    padding-right: 50px;
+} 
+.nav-link {
+    color: #0275d8 !important;
+        font-weight: 400  !important;
+        font-size: 16px;
+
+}
+.nav-link:hover {
+    color: #003169 !important;
+}
+.my-2{
+    margin-top: 0px !important;
+}
+#tyt{
+    font-size: 16px;
+    color:#292b2c !important;
+    padding-left: 5px;
+}
+.form-control-label{
+    font-size: 16px !important;
+    color:#292b2c !important;
+    font-weight: 400 !important;
+}
+.form-group{
+    margin-bottom: 0px;
+}
+#customer-form{
+    margin-top: 0px !important;
+}
+.form-control-comment{
+    visibility: hidden;
+    height: 0px;
+}
+.form-group .col-md-6{
+    height: auto !important;
+}
+.form-control{
+        border-radius: 0;
+    height: 35px;
+    padding: 0 6px;
+    border: 1px solid #e2e2e2;
+    outline: none;
+    margin: 0 6px 12px 0;
+    display: block;
+    width: 100%;
+    font-family: 'Titillium Web', sans-serif;
+    background-color: #fff !important;
+}
+
+#checkiii .form-group .col-md-6{
+    height: auto !important;
+}
+#js-checkout-summary{
+        position: relative;
+    display: block;
+    margin-bottom: .75rem;
+    background-color: #fff;
+    border-radius: .25rem;
+    border: 1px solid rgba(0, 0, 0, .125) !important;
+}
+#js-checkout-summary .card-block{
+    border-top: none !important;
+     border-bottom: none !important;
+}
+#js-checkout-summary #cart-subtotal-products{
+    border-top: 1px solid rgba(0, 0, 0, .125) !important;
+    width: 100%;
+    padding: 30px 10px 0px 10px;
+    margin-bottom: 0px;
+    
+}
+#js-checkout-summary #cart-subtotal-shipping{
+
+    width: 100%;
+    padding: 0px 10px;
+}
+#js-checkout-summary .card-block{
+    padding: 0 !important;
+}
+#js-checkout-summary .cart-total{
+    padding: 0px 10px;
+    margin-bottom: 20px;
+   
+}
+#js-checkout-summary .cart-total .label{
+    font-size: 16px !important;
+   
+}
+#js-checkout-summary .cart-total .value{
+    font-size: 16px !important;
+   
+}
+#js-checkout-summary .cart-voucher{
+    margin-bottom: 20px;
+}
+#js-checkout-summary .block-promo-title{
+        margin-left: 0px !important;
+}
+
+#js-checkout-summary .product-price{
+        font-size: 24px;
+    color: #003169;
+    font-weight: 700;
+    margin-bottom: 0;
+    padding-right: 10px;
+}
+#js-checkout-summary .product-name a{
+        margin-bottom: 10px;
+    color: #003169;
+    font-weight: 700;
+    line-height: 1.2;
+    font-size: 16px;
+}
+#js-checkout-summary .media-object{
+    height: 98px;
+    width: 98px !important;
+}
+#js-checkout-summary p{
+        font-weight: 400;
+    font-size: 17px;
+    line-height: 27px;
+    color: #696969 !important;
+    padding: 10px;
+}
+body#checkout section.checkout-step.-current+.checkout-step .step-title {
+     padding-top: 5px !important;
+}
+
+.block-promo .promo-input+button:hover {
+background-color: #0050a7 !important;
+}
+.btn:hover {
+background-color: #0050a7 !important;
+}
+
+*::placeholder {
+    color: #003169 !important;
+    opacity: 1 !important; 
+
+}
+#logowanko .forgot-password{
+    padding: 30px 28px;
+    background-color: #ebebeb;
+    margin: 0 12px 20px;
+        width: 900px;
+    margin-left: -150px;
+    height: 150px;
+}
+#logowanko *::placeholder {
+    font-weight: 600;
+}
+
+#logowanko .no-account{
+        padding: 30px 28px;
+    background-color: #ebebeb;
+    margin: 0 12px 20px;
+        width: 900px;
+    margin-left: -150px;
+
+
+}
+#logowanko #login-form{
+        padding: 30px 28px;
+    background-color: #003169;
+    margin: 0 12px 20px;
+        width: 900px;
+    margin-left: -150px;
+    height: 150px;
+}
+#nima{
+  padding: 30px 28px;
+    background-color: #ebebeb;
+    margin: 0 12px 20px;  
+        width: 900px;
+    margin-left: -150px;
+    height: 150px;
+}
+#logowanko #submit-login{
+    background-color: #fff !important;
+    color: #003169 !important;
+}
+#logowanko .btn{
+    background-color: #f0f0f0 !important;
+    height: 35px;
+}
+#logowanko h1{
+    color: #fff !important;
+        font-weight: 700;
+        font-size: 2rem;
+}
+#logowanko p{
+color: #fff !important;
+    font-weight: 400;
+    font-size: 17px;
+}
+#zalll{
+    float: left;
+    width: 290px;
+
+}
+#logowanko input{
+    float: left;
+    
+   
+}
+#logowanko button{
+    float: left;
+    
+}
+#logowanko .col-md-6{
+    margin: 0px;
+    padding: 0px;
+    width: 173px;
+    
+}
+#logowanko label{
+    width: 0px;
+}
+#logowanko .form-group{
+    width: 174px;
+    float: left !important;
+}
+#logowanko .form-footer{
+    width: 174px;
+    float: left !important;
+}
+#logowanko #field-email{
+    position:absolute;
+    top:30%;
+    left:0px;
+}
+#logowanko .input-group{
+    position:absolute;
+    top:30%;
+    left:35px;
+}
+#logowanko #submit-login{
+        position: absolute;
+    top: 73px;
+    left: 535px;
+    width:160px;
+    height: 67px;
+    margin-left: 20px;
+       font-size: 17px;
+}
+#logowanko #submit-login:hover{
+    background-color: #0050a7 !important;
+    color:#fff !important;
+ 
+}
+#przypom{
+    position: absolute;
+    top: 233px;
+    left: 535px;
+    display:inline-block;
+    width:160px !important;
+    height: 84px !important;
+    margin-left: 20px;
+       font-size: 17px;
+        background-color: #003169 !important;
+    color:#fff !important;
+    padding: 20px;
+    font-weight: 600;
+   
+    
+}
+#przypom_te{
+        color: #003169 !important;
+        font-weight: 700;
+        font-size: 2rem;
+        width: 400px;
+        text-align: left;
+}
+#napis_nima{
+         color: #003169 !important;
+        font-weight: 700;
+        font-size: 2rem;
+        width: 500px;
+        text-align: left;
+}
+#guzik_nima{
+     position: absolute;
+    top: 403px;
+    left: 535px;
+    display:inline-block;
+    width:160px !important;
+    height: 67px !important;
+    margin-left: 20px;
+       font-size: 17px;
+        background-color: #003169 !important;
+    color:#fff !important;
+    padding: 20px 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+#guzik_nima:hover{
+    background-color: #0050a7 !important;
+}
+#przypom:hover{
+background-color: #0050a7 !important;
+}
+#opis_nima{
+    text-align: left;
+    width: 650px;
+}
+#nagl_zal{
+    color: #003169;
+    font-size: 24px;
+    line-height: 1.2em;
+    border-bottom: 1px solid #e0e9f3;
+    font-weight: 700;
+    padding: 27px 0 7px;
+    float: none;
+    width: 100%;
+    padding-top: 50px;
+}
+#main{
+    margin-top: 20px;
 }

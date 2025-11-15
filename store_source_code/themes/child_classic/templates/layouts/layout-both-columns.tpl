@@ -51,19 +51,32 @@
         {/block}
       </header>
 
+      {if isset($page.page_name) && ($page.page_name == 'category' || $page.page_name == 'index'|| $page.page_name == 'product' ||$page.page_name == 'checkout'  )}
+      
       <section id="wrapper">
+      {else}
+      <section id="wrapper2">
+      {/if}
+
        
         {block name='notifications'}
           {include file='_partials/notifications.tpl'}
         {/block}
         
+         {if isset($page.page_name) && $page.page_name != 'checkout' }
+      
         <div id="kategorie">
+        
           {hook h="displayWrapperTop"}
         </div>
+        {/if}
         <div class="container">
+        {if isset($page.page_name) && ($page.page_name =='authentication' || $page.page_name =='cart' || $page.page_name =='checkout') }
+        {else}
           {block name='breadcrumb'}
             {include file='_partials/breadcrumb.tpl'}
           {/block}
+          {/if}
 
           {block name="left_column"}
             <div id="left-column" class="col-xs-12 col-sm-4 col-md-3">
@@ -98,7 +111,15 @@
         {hook h="displayWrapperBottom"}
       </section>
 
-      <footer id="footer" class="js-footer">
+      <footer id="footer" class="js-footer"
+      {if isset($page.page_name) && ($page.page_name == 'category'|| $page.page_name == 'cart' )}
+      style="margin-top:400px !important;"
+      {/if}
+      {if isset($page.page_name) &&  ($page.page_name == 'product'|| $page.page_name == 'my-account')}
+      style="margin-top:100px !important;"
+      {/if}
+      
+      >
         <div class="footer-top-bar">
     <div class="container2">
         <div class="footer-boxes1">
@@ -128,9 +149,9 @@
         <div class="footer-boxes">
             <h6>Informacje</h6>
             <ul>
-                <li><a href="http://localhost:8080/content/4-about-us">Dlaczego Mop Serwis</a></li>
-                <li><a href="http://localhost:8080/content/3-terms-and-conditions-of-use">Regulamin zakupów</a></li>
-                <li><a href="http://localhost:8080/content/2-legal-notice">Polityka prywatności</a></li>
+                <li><a href="http://localhost:8080/content/4-dlaczego-mop-serwis">Dlaczego Mop Serwis</a></li>
+                <li><a href="http://localhost:8080/content/3-regulamin-zakupow">Regulamin zakupów</a></li>
+                <li><a href="http://localhost:8080/content/2-polityka-prywatnosci">Polityka prywatności</a></li>
                 <li><a href="http://localhost:8080/contact-us">Kontakt</a></li>
             </ul>
         </div>
@@ -138,7 +159,7 @@
         <div class="footer-boxes">
             <h6>Twoje zamówienie</h6>
             <ul>
-                <li><a href="http://localhost:8080/content/6-zwroty">Zwroty towarów</a></li>
+                <li><a href="http://localhost:8080/content/6-zwroty-towarow">Zwroty towarów</a></li>
                 <li><a href="http://localhost:8080/content/7-reklamacje">Reklamacje</a></li>
             </ul>
         </div>
@@ -146,8 +167,8 @@
         <div class="footer-boxes">
             <h6>Zamówienia</h6>
             <ul>
-                <li><a href="http://localhost:8080/content/5-secure-payment">Płatności</a></li>
-                <li><a href="http://localhost:8080/content/1-delivery">Koszty dostawy</a></li>
+                <li><a href="http://localhost:8080/content/5-platnosci">Płatności</a></li>
+                <li><a href="http://localhost:8080/content/1-koszty-dostawy">Koszty dostawy</a></li>
             </ul>
         </div>
     </div>

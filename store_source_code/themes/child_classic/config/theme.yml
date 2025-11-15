@@ -4,3 +4,7 @@ display_name: Child theme of classic's theme
 version: 1.0.0
 assets:
   use_parent_assets: false
+
+layouts:
+  checkout:
+    layout: layout-both-columns
