@@ -11,7 +11,7 @@
 
  *
  {
-/* color:#003169; */
+    color:#003169 !important;
     transition: all 300ms ease;
  }
  #header{ background: #003169 !important; }
@@ -58,6 +58,312 @@ color:white !important;
 #_desktop_user_info{
     float: right;
 }
+
+.contact-main-title {
+    font-family: 'Titillium Web', sans-serif !important;
+    color: #003169 !important;
+    font-size: 30px !important;
+    font-weight: 400 !important;
+    margin-bottom: 20px !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+/* Ukrycie starego tytułu jeśli istnieje */
+.h3-contact-title {
+    display: none !important;
+}
+
+/* Wrapper strony kontaktowej */
+.contact-page-wrapper {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Formularz kontaktowy */
+.contact-form {
+    margin-bottom: 40px !important;
+    max-width: 100% !important;
+}
+
+.contact-form .form-control {
+    border-radius: 0 !important;
+    border: 1px solid #ccc !important;
+    padding: 6px 10px !important;
+    font-family: 'Titillium Web', sans-serif !important;
+    font-size: 14px !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    height: 34px !important;
+}
+
+.contact-form .form-control:focus {
+    border-color: #2fb5d2 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.contact-form .form-control-label {
+    font-family: 'Titillium Web', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: #333 !important;
+    text-align: left !important;
+    padding-top: 8px !important;
+}
+
+.contact-form textarea.form-control {
+    height: auto !important;
+    min-height: 90px !important;
+}
+
+.form-footer {
+    text-align: right !important;
+    margin-left: 580px;
+    margin-top: 20px !important;
+    clear: both !important;
+}
+
+.btn-wyslij-button {
+    background-color: #003169 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 8px 25px !important;
+    font-family: 'Titillium Web', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    border-radius: 0 !important;
+    transition: all 300ms ease !important;
+    height: 36px !important;
+    line-height: 1 !important;
+}
+
+.btn-wyslij-button:hover {
+    background-color: #0050a7 !important;
+}
+
+/* Checkbox RODO - większy, obok tekstu */
+.custom-checkbox-wrapper {
+    display: flex !important;
+    align-items: flex-start !important;
+    padding: 15px 0 !important;
+}
+
+.rodo-checkbox,
+.custom-checkbox-wrapper input[type="checkbox"] {
+    margin-right: 10px !important;
+    margin-top: 3px !important;
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+}
+
+.custom-checkbox-wrapper label {
+    font-size: 13px !important;
+    color: #666 !important;
+    line-height: 1.6 !important;
+    margin-bottom: 0 !important;
+    flex: 1 !important;
+    cursor: pointer !important;
+}
+
+.custom-checkbox-wrapper label a {
+    color: #0275d8 !important;
+    text-decoration: none !important;
+}
+
+.custom-checkbox-wrapper label a:hover {
+    text-decoration: underline !important;
+}
+
+/* Sekcje z pracownikami */
+.contact-person-list-wrap {
+    margin-top: 35px !important;
+    clear: both !important;
+    width: 100% !important;
+}
+
+.dzial-row {
+    margin-bottom: 25px !important;
+    clear: both !important;
+    width: 100% !important;
+}
+
+.nazwa_dzialu {
+    background-color: #003169 !important;
+    color: #fff !important;
+    padding: 10px 15px !important;
+    font-weight: 700 !important;
+    margin-bottom: 0 !important;
+    text-transform: uppercase !important;
+    font-size: 13px !important;
+    font-family: 'Titillium Web', sans-serif !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* Kontenery pracowników - bez ramek, białe tło */
+.dzial-kontakty {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0 !important;
+    width: 100% !important;
+    background-color: #fff !important;
+    border: none !important;
+}
+
+/* BIURO OBSŁUGI KLIENTA - 3 osoby */
+.dzial-row:nth-child(1) .dzial-kontakty {
+    max-width: 600px !important;
+}
+
+.dzial-row:nth-child(1) .kontakt-dane-osobowe {
+    flex: 0 0 33.33% !important;
+    max-width: 33.33% !important;
+}
+
+/* DYSTRYBUCJA / HURTOWNIE - 1 osoba */
+.dzial-row:nth-child(2) .dzial-kontakty {
+    max-width: 600px !important;
+}
+
+.dzial-row:nth-child(2) .kontakt-dane-osobowe {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+}
+
+/* DZIAŁ DS. OBSŁUGI KLIENTÓW BIZNESOWYCH - 3 osoby */
+.dzial-row:nth-child(3) .dzial-kontakty {
+    max-width: 800px !important;
+}
+
+.dzial-row:nth-child(3) .kontakt-dane-osobowe {
+    flex: 0 0 33.33% !important;
+    max-width: 33.33% !important;
+}
+
+/* Dopasowanie szerokości nagłówków do zawartości */
+.dzial-row:nth-child(1) .nazwa_dzialu {
+    max-width: 600px !important;
+}
+
+.dzial-row:nth-child(2) .nazwa_dzialu {
+    max-width: 600px !important;
+}
+
+.dzial-row:nth-child(3) .nazwa_dzialu {
+    max-width: 800px !important;
+}
+
+.kontakt-dane-osobowe {
+    padding: 18px 15px !important;
+    border-right: none !important;
+    background-color: #fff !important;
+    box-sizing: border-box !important;
+    min-height: 110px !important;
+}
+
+/* Imiona - czarne, niepogrubione */
+.kontakt-dane-osobowe h5 {
+    color: #000 !important;
+    font-weight: 400 !important;
+    margin-bottom: 8px !important;
+    font-size: 15px !important;
+    font-family: 'Titillium Web', sans-serif !important;
+}
+
+/* Stanowisko */
+.kontakt-dane-osobowe .stanowisko {
+    color: #7a7a7a !important;
+    font-size: 12px !important;
+    margin: 3px 0 10px 0 !important;
+    font-style: normal !important;
+}
+
+.kontakt-dane-osobowe p {
+    margin: 5px 0 !important;
+    color: #333 !important;
+    font-size: 14px !important;
+}
+
+.person-phone {
+    margin: 5px 0 !important;
+    display: block !important;
+}
+
+.person-email {
+    display: block !important;
+    margin: 5px 0 !important;
+    text-decoration: none !important;
+}
+
+/* Telefon - czarna ikona, niebieski tekst */
+.person-phone i {
+    color: #000 !important;
+    margin-right: 6px !important;
+    width: 14px !important;
+    display: inline-block !important;
+    text-align: center !important;
+}
+
+.person-phone a {
+    color: #2fb5d2 !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+}
+
+.person-phone a:hover {
+    text-decoration: underline !important;
+}
+
+/* Email - niebieska ikona, niebieski tekst */
+.person-email i {
+    color: #2fb5d2 !important;
+    margin-right: 6px !important;
+    width: 14px !important;
+    display: inline-block !important;
+    text-align: center !important;
+}
+
+.person-email,
+.person-email span {
+    color: #2fb5d2 !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+}
+
+.person-email:hover {
+    text-decoration: underline !important;
+}
+
+/* Usunięcie marginesów */
+body#contact #wrapper {
+    margin-left: 0 !important;
+}
+
+body#contact #content-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+}
+
+body#contact #main {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    padding: 20px 15px !important;
+}
+
+body#contact .page-content {
+    padding: 0 !important;
+}
+
+body#contact .breadcrumb {
+    display: none !important;
+}
+
+
 .header-nav-phone {
     display: inline-block;
     padding-left: 28px; 
