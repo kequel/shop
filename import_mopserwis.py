@@ -1,0 +1,485 @@
+import requests
+import xml.etree.ElementTree as ET
+import unicodedata
+import re
+import json
+from pathlib import Path
+import mimetypes
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+# === KONFIGURACJA ===
+API_URL = "http://localhost:8080/api"
+API_KEY = "JY8D3795PHEFZT5EDT16E9VI777FBQUB"
+
+# Zazwyczaj:
+# 1 = domyślny język sklepu, 2 = kategoria "Home", 1 = sklep, 1 = grupa sklepu
+DEFAULT_LANG_ID = "1"
+HOME_CATEGORY_ID = "2"
+DEFAULT_SHOP_ID = "1"
+DEFAULT_SHOP_GROUP_ID = "1"
+
+auth = (API_KEY, "")
+
+
+def slugify(value: str) -> str:
+    value = unicodedata.normalize("NFKD", value)
+    value = value.encode("ascii", "ignore").decode("ascii")
+    value = value.lower()
+    value = re.sub(r"[^a-z0-9]+", "-", value)
+    value = value.strip("-")
+    if not value:
+        value = "produkt"
+    return value
+
+
+def strip_html(html: str) -> str:
+    return re.sub(r"<[^>]*>", "", html or "").strip()
+
+
+def remove_empty_nodes(element: ET.Element):
+    for child in list(element):
+        remove_empty_nodes(child)
+        if len(child) == 0:
+            text = child.text or ""
+            if text.strip() == "":
+                element.remove(child)
+
+
+def get_blank_schema(resource: str) -> ET.Element:
+    resp = requests.get(f"{API_URL}/{resource}", params={"schema": "blank"}, auth=auth)
+    if resp.status_code != 200:
+        raise RuntimeError(
+            f"Nie udało się pobrać schema=blank dla {resource}: "
+            f"{resp.status_code} {resp.text}"
+        )
+    return ET.fromstring(resp.content)
+
+
+def set_multilang_text(parent: ET.Element, field_name: str, text: str):
+    field = parent.find(field_name)
+    if field is None:
+        raise RuntimeError(f"Brak pola <{field_name}> w schemacie")
+
+    languages = field.findall("language")
+    if not languages:
+        lang = ET.SubElement(field, "language")
+        lang.set("id", DEFAULT_LANG_ID)
+        lang.text = text
+        return
+
+    target = None
+    for lang in languages:
+        if lang.get("id") == DEFAULT_LANG_ID:
+            target = lang
+            break
+
+    if target is None:
+        target = languages[0]
+
+    target.text = text
+
+
+def create_category(category_json: dict, parent_id=None) -> int:
+    if parent_id is None:
+        parent_id_str = HOME_CATEGORY_ID
+    else:
+        parent_id_str = str(parent_id)
+
+    root = get_blank_schema("categories")
+    category = root.find("category")
+    if category is None:
+        raise RuntimeError("Brak węzła <category> w schemacie kategorii")
+
+    # Rodzic
+    id_parent_el = category.find("id_parent")
+    if id_parent_el is not None:
+        id_parent_el.text = parent_id_str
+
+    active_el = category.find("active")
+    if active_el is not None:
+        active_el.text = "1"
+
+    name = category_json.get("name", "Nowa kategoria")
+    set_multilang_text(category, "name", name)
+    set_multilang_text(category, "link_rewrite", slugify(name))
+
+    remove_empty_nodes(category)
+
+    xml_data = ET.tostring(root, encoding="utf-8")
+    headers = {"Content-Type": "application/xml", "Accept": "application/xml"}
+    resp = requests.post(
+        f"{API_URL}/categories",
+        data=xml_data,
+        auth=auth,
+        headers=headers,
+    )
+    if resp.status_code not in (200, 201):
+        raise RuntimeError(
+            f"Nie udało się utworzyć kategorii: "
+            f"{resp.status_code} {resp.text}"
+        )
+
+    resp_root = ET.fromstring(resp.content)
+    new_cat_id_el = resp_root.find(".//category/id")
+    if new_cat_id_el is None or not new_cat_id_el.text:
+        raise RuntimeError("Nie udało się odczytać id nowej kategorii z odpowiedzi")
+
+    return int(new_cat_id_el.text)
+
+
+def create_product(prod_json: dict, default_category_id: int, categories_by_name=None) -> int:
+    if categories_by_name is None:
+        categories_by_name = {}
+
+    root = get_blank_schema("products")
+    product = root.find("product")
+    if product is None:
+        raise RuntimeError("Brak węzła <product> w schemacie produktu")
+
+    # Aktywny produkt
+    active_el = product.find("active")
+    if active_el is not None:
+        active_el.text = "1"
+
+    # state = 1 -> produkt widoczny w BO
+    state_el = product.find("state")
+    if state_el is not None:
+        state_el.text = "1"
+
+    # Produkt ma być kupowalny i z widoczną ceną
+    avail_el = product.find("available_for_order")
+    if avail_el is not None:
+        avail_el.text = "1"
+
+    show_price_el = product.find("show_price")
+    if show_price_el is not None:
+        show_price_el.text = "1"
+
+    min_qty_el = product.find("minimal_quantity")
+    if min_qty_el is not None:
+        min_qty_el.text = "1"
+
+    # Nazwa + link_rewrite
+    name = prod_json.get("name", "Nowy produkt")
+    set_multilang_text(product, "name", name)
+    set_multilang_text(product, "link_rewrite", slugify(name))
+
+    # Cena netto
+    price_netto = prod_json.get("price_netto") or prod_json.get("price")
+    if price_netto is None:
+        price_netto = 0.0
+    price_el = product.find("price")
+    if price_el is not None:
+        price_el.text = str(price_netto)
+
+    # Brak podatków (MVP)
+    id_tax_el = product.find("id_tax_rules_group")
+    if id_tax_el is not None:
+        id_tax_el.text = "0"
+
+    # --- KATEGORIA Z JSON-A ---
+    target_cat_id = default_category_id
+
+    # 1) Jeśli w JSON-ie jest category_id (ID z Presty) – użyj tego
+    if "category_id" in prod_json:
+        try:
+            target_cat_id = int(prod_json["category_id"])
+        except (TypeError, ValueError):
+            pass
+    # 2) Jeśli jest category_name – szukamy po mapie nazw
+    elif "category_name" in prod_json:
+        cat_name = prod_json["category_name"]
+        if cat_name in categories_by_name:
+            target_cat_id = categories_by_name[cat_name]
+
+    # Domyślna kategoria
+    default_cat_el = product.find("id_category_default")
+    if default_cat_el is not None:
+        default_cat_el.text = str(target_cat_id)
+
+    # Opisy
+    long_desc = strip_html(prod_json.get("long_description", ""))
+    short_desc = prod_json.get("short_description", "")[:800]
+    if long_desc and not short_desc:
+        short_desc = long_desc[:800]
+
+    set_multilang_text(product, "description", long_desc)
+    set_multilang_text(product, "description_short", short_desc)
+
+    # Waga
+    weight_val = prod_json.get("weight")
+    if weight_val is not None:
+        weight_el = product.find("weight")
+        if weight_el is not None:
+            weight_el.text = str(weight_val)
+
+    # Powiązania z kategoriami (Home + nasza kategoria)
+    associations = product.find("associations")
+    if associations is not None:
+        cats = associations.find("categories")
+        if cats is not None:
+            for child in list(cats):
+                cats.remove(child)
+
+            unique_ids = {str(HOME_CATEGORY_ID), str(target_cat_id)}
+            for cid in unique_ids:
+                cat_el = ET.SubElement(cats, "category")
+                cid_el = ET.SubElement(cat_el, "id")
+                cid_el.text = cid
+
+    remove_empty_nodes(product)
+
+    xml_data = ET.tostring(root, encoding="utf-8")
+    headers = {"Content-Type": "application/xml", "Accept": "application/xml"}
+    resp = requests.post(
+        f"{API_URL}/products",
+        data=xml_data,
+        auth=auth,
+        headers=headers,
+    )
+    if resp.status_code not in (200, 201):
+        raise RuntimeError(
+            f"Nie udało się utworzyć produktu: "
+            f"{resp.status_code} {resp.text}"
+        )
+
+    resp_root = ET.fromstring(resp.content)
+    new_prod_id_el = resp_root.find(".//product/id")
+    if new_prod_id_el is None or not new_prod_id_el.text:
+        raise RuntimeError("Nie udało się odczytać id nowego produktu z odpowiedzi")
+
+    return int(new_prod_id_el.text)
+
+
+def set_product_quantity(product_id: int, quantity):
+    if quantity is None:
+        return
+
+    try:
+        qty_int = int(quantity)
+    except (TypeError, ValueError):
+        print(f"Uwaga: nieprawidłowa ilość '{quantity}' dla produktu {product_id}, pomijam.")
+        return
+
+    if qty_int < 0:
+        qty_int = 0
+
+    headers = {"Content-Type": "application/xml", "Accept": "application/xml"}
+
+    # Szukamy istniejącego rekordu stock_available
+    params = {"filter[id_product]": product_id}
+    resp = requests.get(f"{API_URL}/stock_availables", params=params, auth=auth)
+    if resp.status_code != 200:
+        raise RuntimeError(
+            f"Nie udało się pobrać stock_availables dla produktu {product_id}: "
+            f"{resp.status_code} {resp.text}"
+        )
+
+    root = ET.fromstring(resp.content)
+    stock_nodes = root.findall(".//stock_available")
+
+    if stock_nodes:
+        # Rekord istnieje – id jest atrybutem <stock_available id="...">
+        stock_id = stock_nodes[0].get("id")
+        if not stock_id:
+            raise RuntimeError(
+                f"Brak atrybutu id w istniejącym stock_available dla produktu {product_id}"
+            )
+
+        resp2 = requests.get(f"{API_URL}/stock_availables/{stock_id}", auth=auth)
+        if resp2.status_code != 200:
+            raise RuntimeError(
+                f"Nie udało się pobrać stock_available {stock_id}: "
+                f"{resp2.status_code} {resp2.text}"
+            )
+        root2 = ET.fromstring(resp2.content)
+        stock = root2.find("stock_available")
+        if stock is None:
+            raise RuntimeError(f"Brak węzła <stock_available> w rekordzie {stock_id}")
+
+        qty_el = stock.find("quantity")
+        if qty_el is not None:
+            qty_el.text = str(qty_int)
+
+        xml_data = ET.tostring(root2, encoding="utf-8")
+        resp3 = requests.put(
+            f"{API_URL}/stock_availables/{stock_id}",
+            data=xml_data,
+            auth=auth,
+            headers=headers,
+        )
+        if resp3.status_code not in (200, 201):
+            raise RuntimeError(
+                f"Nie udało się zaktualizować ilości dla produktu {product_id}: "
+                f"{resp3.status_code} {resp3.text}"
+            )
+    else:
+        # Brak rekordu – tworzymy nowy
+        root2 = get_blank_schema("stock_availables")
+        stock = root2.find("stock_available")
+        if stock is None:
+            raise RuntimeError("Brak węzła <stock_available> w schemacie")
+
+        id_prod_el = stock.find("id_product")
+        if id_prod_el is not None:
+            id_prod_el.text = str(product_id)
+
+        id_attr_el = stock.find("id_product_attribute")
+        if id_attr_el is not None:
+            id_attr_el.text = "0"
+
+        id_shop_el = stock.find("id_shop")
+        if id_shop_el is not None:
+            id_shop_el.text = DEFAULT_SHOP_ID
+
+        id_group_el = stock.find("id_shop_group")
+        if id_group_el is not None:
+            id_group_el.text = DEFAULT_SHOP_GROUP_ID
+
+        qty_el = stock.find("quantity")
+        if qty_el is not None:
+            qty_el.text = str(qty_int)
+
+        xml_data = ET.tostring(root2, encoding="utf-8")
+        resp3 = requests.post(
+            f"{API_URL}/stock_availables",
+            data=xml_data,
+            auth=auth,
+            headers=headers,
+        )
+        if resp3.status_code not in (200, 201):
+            raise RuntimeError(
+                f"Nie udało się utworzyć rekordu stock_available dla produktu {product_id}: "
+                f"{resp3.status_code} {resp3.text}"
+            )
+
+def upload_product_images(product_id: int, image_urls, referer_url: str | None = None):
+    if not image_urls:
+        return
+
+    for idx, url in enumerate(image_urls, start=1):
+        if not url:
+            continue
+
+        print(f"    [IMG] Pobieram obraz {idx}: {url}")
+
+        # Nagłówki jak „normalna” przeglądarka
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/123.0.0.0 Safari/537.36"
+            ),
+            "Referer": referer_url or "https://mopserwis.pl/",
+            "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+        }
+
+        try:
+            resp = requests.get(url, timeout=20, verify=False, headers=headers)
+        except Exception as e:
+            print(f"    [IMG] Błąd pobierania {url}: {e}")
+            continue
+
+        if resp.status_code != 200:
+            print(f"    [IMG] HTTP {resp.status_code} przy pobieraniu {url}")
+            continue
+
+        content = resp.content
+
+        filename = url.split("/")[-1] or f"product_{product_id}_{idx}.jpg"
+
+        mime_type, _ = mimetypes.guess_type(filename)
+        if mime_type is None:
+            mime_type = "image/jpeg"
+
+        files = {
+            "image": (filename, content, mime_type),
+        }
+
+        try:
+            resp2 = requests.post(
+                f"{API_URL}/images/products/{product_id}",
+                auth=auth,
+                files=files,
+            )
+        except Exception as e:
+            print(f"    [IMG] Błąd wysyłania obrazu do Presty: {e}")
+            continue
+
+        if resp2.status_code not in (200, 201):
+            print(
+                f"    [IMG] Nie udało się dodać obrazu {url}: "
+                f"{resp2.status_code} {resp2.text[:200]}"
+            )
+        else:
+            print(f"    [IMG] OK – obraz {idx} dodany")
+
+
+
+def main():
+    base_dir = Path(__file__).resolve().parent
+    cat_file = base_dir / "categories_mopserwis.json"
+    prod_file = base_dir / "products_details_Linie_dozowników.json"
+
+    with cat_file.open(encoding="utf-8") as f:
+        categories = json.load(f)
+
+    with prod_file.open(encoding="utf-8") as f:
+        products = json.load(f)
+
+    if not categories:
+        raise RuntimeError("Plik kategorii jest pusty")
+
+    # Tworzymy wszystkie kategorie z JSON-a (łącznie z podkategoriami) i mapę nazwa -> ID
+    categories_by_name = {}
+    default_cat_id = None
+
+    for cat_json in categories:
+        parent_name = cat_json.get("name", "Nowa kategoria")
+        print(f"Tworzę kategorię główną: {parent_name}")
+        parent_id = create_category(cat_json)
+        categories_by_name[parent_name] = parent_id
+        if default_cat_id is None:
+            default_cat_id = parent_id
+
+        # podkategorie (jeśli są)
+        for sub_json in cat_json.get("subcategories", []):
+            sub_name = sub_json.get("name", "Nowa podkategoria")
+            print(f"  Tworzę podkategorię: {sub_name} (rodzic: {parent_name})")
+            sub_id = create_category(sub_json, parent_id=parent_id)
+            categories_by_name[sub_name] = sub_id
+
+    created_ids = []
+
+    # TERAZ: wszystkie produkty z pliku
+    for prod_json in products:
+        print(f"Tworzę produkt: {prod_json.get('name')}")
+        prod_id = create_product(prod_json, default_cat_id, categories_by_name)
+        created_ids.append((prod_json.get("name"), prod_id))
+        print(f"  -> ID nowego produktu: {prod_id}")
+
+        qty = prod_json.get("quantity")
+        if qty is not None:
+            print(f"  Ustawiam ilość: {qty}")
+            set_product_quantity(prod_id, qty)
+
+        image_urls = (prod_json.get("images") or [])[:3]
+        if image_urls:
+            referer = prod_json.get("url")
+            print(f"  Dodaję {len(image_urls)} obrazów do produktu {prod_id}")
+            upload_product_images(prod_id, image_urls, referer_url=referer)
+
+
+    print("\nPodsumowanie:")
+    print("Kategorie:")
+    for name, cid in categories_by_name.items():
+        print(f"  '{name}' -> ID {cid}")
+    print("Produkty:")
+    for name, pid in created_ids:
+        print(f"  '{name}' -> ID {pid}")
+
+
+if __name__ == "__main__":
+    main()

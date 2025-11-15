@@ -1,0 +1,30 @@
+[
+  {
+    "name": "PROMOCJE",
+    "url": "https://mopserwis.pl/3-promocje",
+    "subcategories": []
+  },
+  {
+    "name": "Wyprzedaże",
+    "url": "https://mopserwis.pl/239-wyprzedaze",
+    "subcategories": []
+  },
+  {
+    "name": "DOZOWNIKI i WYPOSAŻENIE",
+    "url": "https://mopserwis.pl/4-dozowniki-i-wyposazenie",
+    "subcategories": [
+      {
+        "name": "Linie dozowników",
+        "url": "https://mopserwis.pl/299-linie-dozownikow"
+      },
+      {
+        "name": "Tork Linia Biała",
+        "url": "https://mopserwis.pl/300-tork-linia-biala"
+      },
+      {
+        "name": "Tork Linia Czarna",
+        "url": "https://mopserwis.pl/302-tork-linia-czarna"
+      }
+    ]
+  }
+]
