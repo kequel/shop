@@ -22,6 +22,10 @@ services:
       - db
     volumes:
       - ../store_source_code:/var/www/html
+      - ../docker/certs/prestashop.crt:/etc/ssl/certs/prestashop.crt
+      - ../docker/certs/prestashop.key:/etc/ssl/private/prestashop.key
+      - ./prestashop-ssl.conf:/etc/apache2/sites-available/default-ssl.conf
+      - ./ports.conf:/etc/apache2/ports.conf
     environment:
       DB_SERVER: db
       DB_USER: admin
@@ -30,3 +34,10 @@ services:
       PS_INSTALL_AUTO: '0'
       PS_DEV_MODE: 'false'
     restart: always
+    command: >
+      bash -c "
+      a2enmod ssl &&
+      a2enmod rewrite &&
+      a2ensite default-ssl &&
+      apache2-foreground
+      "
