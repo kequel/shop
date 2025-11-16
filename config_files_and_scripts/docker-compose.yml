@@ -25,6 +25,7 @@ services:
       - ../docker/certs/prestashop.crt:/etc/ssl/certs/prestashop.crt
       - ../docker/certs/prestashop.key:/etc/ssl/private/prestashop.key
       - ./prestashop-ssl.conf:/etc/apache2/sites-available/default-ssl.conf
+      - ./prestashop-http.conf:/etc/apache2/sites-available/000-default.conf
       - ./ports.conf:/etc/apache2/ports.conf
     environment:
       DB_SERVER: db
