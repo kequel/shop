@@ -1,0 +1,37 @@
+name: Code Verification & CI Checks
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+
+  code_checks:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v4
+      
+    - name: Setup PHP (required for syntax check)
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4' 
+        extensions: pdo_mysql, zip, mbstring
+        coverage: none
+        
+    - name: Verify PHP Syntax (checks for syntax errors in .php files)
+      # if any PHP file has a syntax error
+      run: find . -name "*.php" -print0 | xargs -0 -n1 php -l
+      
+    - name: Verify Docker Compose Config Exists
+      # if the essential docker-compose file is present in the expected subdirectory
+      run: |
+        if [ -f config_files_and_scripts/docker-compose.yml ]; then
+          echo "docker-compose.yml file found. Verification successful."
+        else
+          echo "ERROR: docker-compose.yml file not found in config_files_and_scripts/."
+          exit 1
+        fi
