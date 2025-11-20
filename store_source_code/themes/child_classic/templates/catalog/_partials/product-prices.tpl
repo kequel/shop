@@ -23,7 +23,7 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 {if $product.show_price}
-  
+  <div class="product-prices">
     
     {block name='product_price'}
       <div
@@ -65,7 +65,8 @@
      
               {/if}
 
-              <span class="cena_n">{$product.price}</span></span><span class="net-brut"> brutto</span>
+              <span class="cena_n">{$product.price}</span><span class="net-brut"> brutto</span>
+            </div>
             {/if}
           </span>
         </div>
@@ -98,7 +99,7 @@
 
     {block name='product_ecotax'}
       {if $product.ecotax.amount > 0}
-        <p class="price-ecotax">{l s='Including %amount% for ecotax' d='Shop.Theme.Catalog' sprintf=['%amount%' => $product.ecotax.value]}
+        <p id="" class="price-ecotax">{l s='Including %amount% for ecotax' d='Shop.Theme.Catalog' sprintf=['%amount%' => $product.ecotax.value]}
           {if $product.has_discount}
             {l s='(not impacted by the discount)' d='Shop.Theme.Catalog'}
           {/if}
@@ -108,6 +109,5 @@
 
     {hook h='displayProductPriceBlock' product=$product type="weight" hook_origin='product_sheet'}
 
-    
   </div>
 {/if}
