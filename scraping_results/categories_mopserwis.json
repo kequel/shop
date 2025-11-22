@@ -220,6 +220,16 @@
     ]
   },
   {
+    "name": "Wynajmij dozownik TORK",
+    "url": "https://tork.mopserwis.pl",
+    "subcategories": []
+  },
+  {
+    "name": "Wynajmij dozownik KATRIN",
+    "url": "https://mopserwis.pl/652-wynajmij-dozownik--katrin",
+    "subcategories": []
+  },
+  {
     "name": "KOSZE I WORKI NA ODPADY",
     "url": "https://mopserwis.pl/114-kosze-i-worki-na-odpady",
     "subcategories": [
@@ -846,16 +856,6 @@
   {
     "name": "KATALOG PRODUKTÓW",
     "url": "https://mopserwis.pl/387-katalog-produktow",
-    "subcategories": []
-  },
-  {
-    "name": "Wynajmij dozownik TORK",
-    "url": "https://mopserwis.pl/637-wynajem-dozownikow-tork",
-    "subcategories": []
-  },
-  {
-    "name": "Wynajmij dozownik KATRIN",
-    "url": "https://mopserwis.pl/652-wynajmij-dozownik--katrin",
     "subcategories": []
   }
 ]
