@@ -33,9 +33,9 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-md-5 divide-right">
+          <div class="col-md-6 divide-right">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 modal-img">
                 {if $product.default_image}
                   <img
                     src="{$product.default_image.medium.url}"
@@ -64,7 +64,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-7">
+          <div class="col-md-6">
             <div class="cart-content">
               {if $cart.products_count > 1}
                 <p class="cart-products-count">{l s='There are %products_count% items in your cart.' sprintf=['%products_count%' => $cart.products_count] d='Shop.Theme.Checkout'}</p>
@@ -87,12 +87,17 @@
                 <p class="product-tax">{l s='%label%:' sprintf=['%label%' => $cart.subtotals.tax.label] d='Shop.Theme.Global'}&nbsp;<span class="value">{$cart.subtotals.tax.value}</span></p>
               {/if}
               {hook h='displayCartModalContent' product=$product}
-              <div class="cart-content-btn">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{l s='Continue shopping' d='Shop.Theme.Actions'}</button>
+              
+            </div>
+           
+          </div>
+           <div class="col-md-12">
+                
                 <a href="{$cart_url}" class="btn btn-primary"><i class="material-icons rtl-no-flip">&#xE876;</i>{l s='Proceed to checkout' d='Shop.Theme.Actions'}</a>
               </div>
-            </div>
-          </div>
+             <div class="col-md-12">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{l s='Continue shopping' d='Shop.Theme.Actions'}</button>
+                </div>
         </div>
       </div>
       {hook h='displayCartModalFooter' product=$product}

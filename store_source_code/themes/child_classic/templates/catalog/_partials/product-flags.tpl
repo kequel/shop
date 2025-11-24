@@ -25,7 +25,7 @@
 {block name='product_flags'}
     <ul class="product-flags js-product-flags">
         {foreach from=$product.flags item=flag}
-
+            {if $flag.label!="Out-of-Stock"}
             <li class="product-flag {$flag.type} "
             {if $flag.label=="Nowy"}
                 {if $product.has_discount}
@@ -37,7 +37,10 @@
             <div class="novelty-arrow" ></div>
             {/if}
             
+            
+            
             {$flag.label}</li>
+            {/if}
         {/foreach}
     </ul>
 {/block}

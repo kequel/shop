@@ -1022,6 +1022,9 @@ button{
 .dostepny {
     background-color: green;
 }
+.niedostepny {
+    background-color: red;
+}
 .product-flag{
     position: absolute;
     top: 0;
@@ -1149,6 +1152,23 @@ button{
 }
 #product-availability2{
      background: #5bbd5b !important;
+     border-radius: 50%; 
+     width: 24px !important;
+     height: 24px !important;
+    padding: 5.5px 0px 1px 5.5px;
+    display: inline-table;
+}
+#product-availability3{
+     background: #ff4d4d !important;
+     border-radius: 50%; 
+     width: 24px !important;
+     height: 24px !important;
+    padding: 5.5px 0px 1px 5.5px;
+    display: inline-table;
+}
+
+#product-availability4{
+     background: orange !important;
      border-radius: 50%; 
      width: 24px !important;
      height: 24px !important;
@@ -2117,4 +2137,8 @@ background-color: #0050a7 !important;
 }
 #main{
     margin-top: 20px;
+}
+.alert-danger {
+
+    visibility: hidden !important;
 }

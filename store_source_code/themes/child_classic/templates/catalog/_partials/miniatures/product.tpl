@@ -82,8 +82,13 @@
 
               {hook h='displayProductPriceBlock' product=$product type="before_price"}
 
-
+              {if $product.availability == 'available'}
               <div class="dostepnosc dostepny"></div>
+              {elseif $product.availability == 'last_remaining_items'}
+              <div class="dostepnosc dostepny"></div>
+              {else}
+              <div class="dostepnosc niedostepny"></div>
+              {/if}
               <span class="price" aria-label="{l s='Price' d='Shop.Theme.Catalog'}">
                 {capture name='custom_price'}{hook h='displayProductPriceBlock' product=$product type='custom_price' hook_origin='products_list'}{/capture}
                 {if '' !== $smarty.capture.custom_price}
