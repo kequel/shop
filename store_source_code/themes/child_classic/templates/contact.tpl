@@ -34,10 +34,10 @@
   <div class="contact-page-wrapper">
     {* Standardowy widget formularza kontaktowego *}
     {widget name="contactform"}
-    
+
     {* Sekcja z listą pracowników - dodana poniżej formularza *}
     <div class="contact-person-list-wrap">
-      
+
       {* DZIAŁ 1: BIURO OBSŁUGI KLIENTA *}
       <div class="dzial-row">
         <div class="nazwa_dzialu">BIURO OBSŁUGI KLIENTA</div>
@@ -142,7 +142,44 @@
           </div>
         </div>
       </div>
-
+</div>
+<div style="height: 450px;"></div>
+    {* MAPA *}
+<div class="top-container clearfix">
+    <div class="contact-details">
+        
+        <div class="contact-details-left">
+            <img src="{$urls.theme_assets}logo-biale.png" alt="MOP SERWIS">
+            
+            <h5>    MOP SERWIS</h5>
+            
+            <p>
+                <i class="fa fa-map-marker"></i>
+                ul. Ogrodowa 14 82-500 Kwidzyn
+            </p>
+            
+            <a href="tel:5566463152">
+                <i class="fa fa-phone"></i>
+                55 646 31 52
+            </a>
+            
+            <a href="mailto:esklep@mopserwis.pl">
+                <i class="fa fa-envelope"></i>
+                esklep@mopserwis.pl
+            </a>
+        </div>
+<div style="height: 450px;"></div>        
+        <div class="contact-details-right">
+            <iframe 
+                frameborder="0" 
+                style="border:0; width: 100%; height: 450px;" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2043.69084653218!2d18.921266976133893!3d53.73193364580365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4702b0c62ada933b%3A0xa43b83c6693d9e2f!2sMop%20Serwis%20Sp.%20z%20o.o.!5e1!3m2!1spl!2spl!4v1764165810403!5m2!1spl!2spl" 
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        
     </div>
-  </div>
+</div>
 {/block}
