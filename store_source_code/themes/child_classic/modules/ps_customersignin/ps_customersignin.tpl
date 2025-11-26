@@ -43,9 +43,12 @@
         href="{$urls.pages.my_account}"
         title="{l s='View my customer account' d='Shop.Theme.Customeraccount'}"
         rel="nofollow"
+        style="display:flex"
       >
+      <br>
         <i class="material-icons hidden-md-up logged">&#xE7FF;</i>
-        <span class="hidden-sm-down">{$customerName}</span>
+        <span class="hidden-sm-down" style="text-align: center;
+    padding: 0;width: 173px;">{$customerName}</span>
       </a>
     {else}
     >
