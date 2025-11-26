@@ -12,3 +12,5 @@ volumes/
 config_files_and_scripts/volumes
 config_files_and_scripts/db_data/
 
+# scraper output
+scraping_results/product_images/
