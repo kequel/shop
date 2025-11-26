@@ -27,9 +27,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="{l s='Close' d='Shop.Theme.Global'}">
-          <span aria-hidden="true"><i class="material-icons">close</i></span>
+          <span aria-hidden="true" style="color: #fff !important">×</span>
         </button>
-        <h4 class="modal-title h6 text-sm-center" id="myModalLabel"><i class="material-icons rtl-no-flip">&#xE876;</i>{l s='Product successfully added to your shopping cart' d='Shop.Theme.Checkout'}</h4>
+        <h4 class="modal-title h6 text-sm-center" id="myModalLabel"><i class="fa fa-check"></i> {l s=' Produkt dodano to koszyka' d='Shop.Theme.Checkout'}</h4>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -60,7 +60,7 @@
                 {foreach from=$product.attributes item="property_value" key="property"}
                 <span class="{$property|lower}">{l s='%label%:' sprintf=['%label%' => $property] d='Shop.Theme.Global'}<strong> {$property_value}</strong></span><br>
                 {/foreach}
-                <span class="product-quantity">{l s='Quantity:' d='Shop.Theme.Checkout'}&nbsp;<strong>{$product.cart_quantity}</strong></span>
+                <span class="product-quantity"><strong>{l s='Quantity:' d='Shop.Theme.Checkout'}</strong>&nbsp;{$product.cart_quantity}</span>
               </div>
             </div>
           </div>
@@ -73,14 +73,14 @@
               {/if}
               <p><span class="label">{l s='Subtotal:' d='Shop.Theme.Checkout'}</span>&nbsp;<span class="subtotal value">{$cart.subtotals.products.value}</span></p>
               {if $cart.subtotals.shipping.value}
-                <p><span>{l s='Shipping:' d='Shop.Theme.Checkout'}</span>&nbsp;<span class="shipping value">{$cart.subtotals.shipping.value} {hook h='displayCheckoutSubtotalDetails' subtotal=$cart.subtotals.shipping}</span></p>
+                <p><span><strong>{l s='Shipping:' d='Shop.Theme.Checkout'}</strong></span>&nbsp;<span class="shipping value">{$cart.subtotals.shipping.value} {hook h='displayCheckoutSubtotalDetails' subtotal=$cart.subtotals.shipping}</span></p>
               {/if}
 
               {if !$configuration.display_prices_tax_incl && $configuration.taxes_enabled}
                 <p><span>{$cart.totals.total.label}&nbsp;{$cart.labels.tax_short}</span>&nbsp;<span>{$cart.totals.total.value}</span></p>
                 <p class="product-total"><span class="label">{$cart.totals.total_including_tax.label}</span>&nbsp;<span class="value">{$cart.totals.total_including_tax.value}</span></p>
               {else}
-                <p class="product-total"><span class="label">{$cart.totals.total.label}&nbsp;{if $configuration.taxes_enabled}{$cart.labels.tax_short}{/if}</span>&nbsp;<span class="value">{$cart.totals.total.value}</span></p>
+                <p class="product-total"><span class="label">{$cart.totals.total.label}&nbsp;{if $configuration.taxes_enabled}:{/if}</span>&nbsp;<span class="value">{$cart.totals.total.value} (z VAT)</span></p>
               {/if}
 
               {if $cart.subtotals.tax}
@@ -93,7 +93,7 @@
           </div>
            <div class="col-md-12">
                 
-                <a href="{$cart_url}" class="btn btn-primary"><i class="material-icons rtl-no-flip">&#xE876;</i>{l s='Proceed to checkout' d='Shop.Theme.Actions'}</a>
+                <a href="{$cart_url}" class="btn btn-primary">{l s='PRZEJDŹ DO KOSZYKA' d='Shop.Theme.Actions'}<i class="fa fa-angle-right"></i></a>
               </div>
              <div class="col-md-12">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{l s='Continue shopping' d='Shop.Theme.Actions'}</button>
