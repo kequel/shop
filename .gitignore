@@ -12,5 +12,3 @@ volumes/
 config_files_and_scripts/volumes
 config_files_and_scripts/db_data/
 
-# Klucze i certyfikaty SSL
-docker/certs/
