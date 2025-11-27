@@ -4,16 +4,19 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
+# >>> >>> >>> AKTYWACJA SRODOWISKA I INSTALACJA PLUGINOW <<< <<< <<<
+#
+# python3 -m venv venv
+# source venv/bin/activate
+# pip install -r requirements.txt
+#
 # >>> >>> >>> URUCHOMIENIE TESTOWANIA <<< <<< <<<
-# 
-# W TERMINALU:
 #
 # Graficzny Chrome (DOMYSLNIE): >>> pytest
 # Graficzny Firefox:            >>> pytest --browser=firefox
 #
 # Headless Chrome:              >>> pytest --headless
 # Headless Firefox:             >>> pytest --browser=firefox --headless
-
 
 def pytest_addoption(parser):
     """Dodanie wlasnych opcji do uruchomienia skryptu testowania"""
@@ -47,8 +50,15 @@ def driver(request):
         
         chrome_options = ChromeOptions()
 
+        # Ignorujemy warning "Your connection is not private" ktore blokowalo prace skryptu
+        chrome_options.accept_insecure_certs = True 
+        chrome_options.add_argument("--ignore-certificate-errors")
+        chrome_options.add_argument("--allow-insecure-localhost")
+        chrome_options.add_argument("--ignore-ssl-errors")
+
         # Jesli wybrany tryb headless (bez okna), to do ustawien przegladarki dodac te opcje
         if is_headless: chrome_options.add_argument("--headless")
+            
 
         # Potrzebne dla WSL opcje
         chrome_options.add_argument("--no-sandbox") 
@@ -59,6 +69,9 @@ def driver(request):
     elif browser_name == "firefox":
         
         firefox_options = FirefoxOptions()
+
+        # Ignorujemy warning "Your connection is not private" ktore blokowalo prace skryptu
+        firefox_options.accept_insecure_certs = True
 
         # Jesli wybrany tryb headless (bez okna), to do ustawien przegladarki dodac te opcje
         if is_headless: firefox_options.add_argument("--headless")

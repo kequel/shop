@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from variables import COMPLETE_SECTION_SLEEP_TIME
 
 class RegistrationPage:
     
@@ -43,20 +44,20 @@ class RegistrationPage:
         
         gender_element = self.driver.find_element(*selected_gender_locator)
         self.driver.execute_script("arguments[0].click();", gender_element)
-        if not self.driver.is_headless: time.sleep(0.5)
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
         # Pola tekstowe
         self.driver.find_element(*self.FIRST_NAME_INPUT).send_keys(first_name)
-        if not self.driver.is_headless: time.sleep(0.5)
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
         self.driver.find_element(*self.LAST_NAME_INPUT).send_keys(last_name)
-        if not self.driver.is_headless: time.sleep(0.5)
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
         self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
-        if not self.driver.is_headless: time.sleep(0.5)
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
         self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
-        if not self.driver.is_headless: time.sleep(0.5)
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
         # Losowy wybor opcjonalnych checkboxow
         
@@ -64,26 +65,26 @@ class RegistrationPage:
         if random.choice([True, False]):
             partner_checkbox = self.driver.find_element(*self.PARTNER_OFFERS_CHECKBOX)
             self.driver.execute_script("arguments[0].click();", partner_checkbox)
-            if not self.driver.is_headless: time.sleep(0.5)
+            if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
         
         # Newsletter
         if random.choice([True, False]):
             newsletter_checkbox = self.driver.find_element(*self.NEWSLETTER_CHECKBOX)
             self.driver.execute_script("arguments[0].click();", newsletter_checkbox)
-            if not self.driver.is_headless: time.sleep(0.5)
+            if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
         # Zaznaczanie obowiazkowych checkboxow
         
         # Przetwarzanie danych
         customer_privacy_box = self.driver.find_element(*self.CUSTOMER_PRIVACY_CHECKBOX)
         self.driver.execute_script("arguments[0].click();", customer_privacy_box)
-        if not self.driver.is_headless: time.sleep(0.5)
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
         # PSGDPR
         psgdpr_checkbox = self.driver.find_element(*self.PSGDPR_CHECKBOX)
         self.driver.execute_script("arguments[0].click();", psgdpr_checkbox)
-        if not self.driver.is_headless: time.sleep(0.5)
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
         # Klik "Zapisz"
         self.driver.find_element(*self.SUBMIT_BUTTON).click()
-        if not self.driver.is_headless: time.sleep(1.5)
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
