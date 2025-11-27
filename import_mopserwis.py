@@ -7,11 +7,12 @@ from pathlib import Path
 import mimetypes
 import urllib3
 
+# Wyłączenie ostrzeżeń o niezabezpieczonych żądaniach (dla verify=False)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # === KONFIGURACJA ===
-API_URL = "http://localhost:8080/api"
-API_KEY = "JY8D3795PHEFZT5EDT16E9VI777FBQUB"
+API_URL = "https://localhost:8443/api"
+API_KEY = "P56TI5Q7GLCTDHSDKBDI45W6KSYJ1BKP"
 
 # Zazwyczaj:
 # 1 = domyślny język sklepu, 2 = kategoria "Home", 1 = sklep, 1 = grupa sklepu
@@ -48,7 +49,13 @@ def remove_empty_nodes(element: ET.Element):
 
 
 def get_blank_schema(resource: str) -> ET.Element:
-    resp = requests.get(f"{API_URL}/{resource}", params={"schema": "blank"}, auth=auth)
+    # --- ZMIANA: Dodano verify=False ---
+    resp = requests.get(
+        f"{API_URL}/{resource}",
+        params={"schema": "blank"},
+        auth=auth,
+        verify=False
+    )
     if resp.status_code != 200:
         raise RuntimeError(
             f"Nie udało się pobrać schema=blank dla {resource}: "
@@ -109,11 +116,13 @@ def create_category(category_json: dict, parent_id=None) -> int:
 
     xml_data = ET.tostring(root, encoding="utf-8")
     headers = {"Content-Type": "application/xml", "Accept": "application/xml"}
+    # --- ZMIANA: Dodano verify=False ---
     resp = requests.post(
         f"{API_URL}/categories",
         data=xml_data,
         auth=auth,
         headers=headers,
+        verify=False
     )
     if resp.status_code not in (200, 201):
         raise RuntimeError(
@@ -233,11 +242,13 @@ def create_product(prod_json: dict, default_category_id: int, categories_by_name
 
     xml_data = ET.tostring(root, encoding="utf-8")
     headers = {"Content-Type": "application/xml", "Accept": "application/xml"}
+    # --- ZMIANA: Dodano verify=False ---
     resp = requests.post(
         f"{API_URL}/products",
         data=xml_data,
         auth=auth,
         headers=headers,
+        verify=False
     )
     if resp.status_code not in (200, 201):
         raise RuntimeError(
@@ -270,7 +281,13 @@ def set_product_quantity(product_id: int, quantity):
 
     # Szukamy istniejącego rekordu stock_available
     params = {"filter[id_product]": product_id}
-    resp = requests.get(f"{API_URL}/stock_availables", params=params, auth=auth)
+    # --- ZMIANA: Dodano verify=False ---
+    resp = requests.get(
+        f"{API_URL}/stock_availables",
+        params=params,
+        auth=auth,
+        verify=False
+    )
     if resp.status_code != 200:
         raise RuntimeError(
             f"Nie udało się pobrać stock_availables dla produktu {product_id}: "
@@ -288,7 +305,12 @@ def set_product_quantity(product_id: int, quantity):
                 f"Brak atrybutu id w istniejącym stock_available dla produktu {product_id}"
             )
 
-        resp2 = requests.get(f"{API_URL}/stock_availables/{stock_id}", auth=auth)
+        # --- ZMIANA: Dodano verify=False ---
+        resp2 = requests.get(
+            f"{API_URL}/stock_availables/{stock_id}",
+            auth=auth,
+            verify=False
+        )
         if resp2.status_code != 200:
             raise RuntimeError(
                 f"Nie udało się pobrać stock_available {stock_id}: "
@@ -304,11 +326,13 @@ def set_product_quantity(product_id: int, quantity):
             qty_el.text = str(qty_int)
 
         xml_data = ET.tostring(root2, encoding="utf-8")
+        # --- ZMIANA: Dodano verify=False ---
         resp3 = requests.put(
             f"{API_URL}/stock_availables/{stock_id}",
             data=xml_data,
             auth=auth,
             headers=headers,
+            verify=False
         )
         if resp3.status_code not in (200, 201):
             raise RuntimeError(
@@ -343,11 +367,13 @@ def set_product_quantity(product_id: int, quantity):
             qty_el.text = str(qty_int)
 
         xml_data = ET.tostring(root2, encoding="utf-8")
+        # --- ZMIANA: Dodano verify=False ---
         resp3 = requests.post(
             f"{API_URL}/stock_availables",
             data=xml_data,
             auth=auth,
             headers=headers,
+            verify=False
         )
         if resp3.status_code not in (200, 201):
             raise RuntimeError(
@@ -377,6 +403,7 @@ def upload_product_images(product_id: int, image_urls, referer_url: str | None =
         }
 
         try:
+            # --- ZMIANA: Dodano verify=False ---
             resp = requests.get(url, timeout=20, verify=False, headers=headers)
         except Exception as e:
             print(f"    [IMG] Błąd pobierania {url}: {e}")
@@ -399,10 +426,12 @@ def upload_product_images(product_id: int, image_urls, referer_url: str | None =
         }
 
         try:
+            # --- ZMIANA: Dodano verify=False ---
             resp2 = requests.post(
                 f"{API_URL}/images/products/{product_id}",
                 auth=auth,
                 files=files,
+                verify=False
             )
         except Exception as e:
             print(f"    [IMG] Błąd wysyłania obrazu do Presty: {e}")
