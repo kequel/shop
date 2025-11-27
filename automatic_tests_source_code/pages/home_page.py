@@ -30,25 +30,21 @@ class HomePage:
     def click_sign_in(self):
         """Klika przycisk 'Zaloguj / Zarejestruj'"""
 
-        # Czekamy az przycisk 'Zaloguj / Zarejestruj' sie zaladuje
         sign_in_link = self.wait.until(EC.element_to_be_clickable(self.SIGN_IN_BUTTON))
 
-        # Klikamy ten przycisk
+        # Klikamy przycisk 'Zaloguj / Zarejestruj'
         sign_in_link.click()
 
-        # Opoznienie zeby bylo widac co sie dzieje (zeby nie bylo za szybko)
         if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
         
     def search_for_product(self, product_name):
         """Klika pole 'Wpisz czego szukasz...', czysci je, wpisuje losowy produkt, klika lupe"""
 
-        # Czekamy az pole 'Wpisz czego szukasz...' sie zaladuje 
         search_field = self.wait.until(EC.visibility_of_element_located(self.SEARCH_INPUT))
 
-        # Czyszcimy to pole
+        # Czyszcimy pole 'Wpisz czego szukasz...'
         search_field.clear()
 
-        # Opoznienie zeby bylo widac co sie dzieje (zeby nie bylo za szybko)
         if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
         # Wpisujemy tekst do tego pola (w tym wypadku ogolna nazwa produktu)
@@ -57,5 +53,4 @@ class HomePage:
         # Klikamy lupe
         search_field.submit()
 
-        # Opoznienie zeby bylo widac co sie dzieje (zeby nie bylo za szybko)
         if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)

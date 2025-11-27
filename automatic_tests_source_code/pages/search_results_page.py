@@ -20,7 +20,6 @@ class SearchResultsPage:
     def open_random_product(self):
         """Pobiera wszystkie produkty i klika w losowy"""
         
-        # Czekamy az produkty sie zaladuja
         products = self.wait.until(EC.presence_of_all_elements_located(self.PRODUCT_LIST))
         
         # Wywalanie wyjatku jesli nie ma wynikow
@@ -32,5 +31,4 @@ class SearchResultsPage:
         # Klikniecie w wylosowany produkt
         random_product.click()
 
-        # Opoznienie zeby bylo widac co sie dzieje (zeby nie bylo za szybko)
         if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
