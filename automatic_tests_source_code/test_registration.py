@@ -16,12 +16,16 @@ def test_new_user_registration(driver):
     # Generowanie unikalnego emaila
     unique_email = f"test_user_{int(time.time())}@example.com"
     
-    # Poruszanie sie po stronie
+    # Wejscie na strone glowna
     home_page.go_to()
+
+    # Klikanie 'Zaloguj / Zarejestruj'
     home_page.click_sign_in()
+
+    # Klikanie 'Zarejestruj sie' w oknie logowania
     auth_page.click_register() 
     
-    # Dane do formularza
+    # Wprowadzenie ponizszych danych do formularza
     reg_page.fill_form_and_submit(
         first_name="Test",
         last_name="Testowy",
@@ -31,4 +35,4 @@ def test_new_user_registration(driver):
 
     # Wyologowanie po zakonczeniu rejestracji
     logout_button = driver.find_element(By.CLASS_NAME, "logout")
-    assert logout_button.is_displayed(), "Rejestracja nie powiodla sie, nie znaleziono przycisku wylogowania."
+    assert logout_button.is_displayed(), "Rejestracja nie powiodla sie, nie znaleziono przycisku wylogowania!"
