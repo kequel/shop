@@ -10,3 +10,5 @@ PRODUCTS_TO_BUY_IN_THE_CATEGORY = int(PRODUCTS_TO_BUY / 2)
 MAX_QTY_OF_SPECIFIC_PRODUCT = 5
 
 SEARCH_PHRASE = "dozownik"  # TODO: przeniesc do test_shop > test_search_and_add_product i zrobic losowym na podstawie dostepnych jsonow
+
+PRODUCTS_TO_REMOVE = 3
