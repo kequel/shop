@@ -6,6 +6,7 @@ from pages.home_page import HomePage
 from pages.category_page import CategoryPage
 from pages.product_page import ProductPage
 from pages.cart_page import CartPage
+from pages.registration_page import RegistrationPage
 
 from variables import (
     COMPLETE_WINDOW_SLEEP_TIME, 
@@ -38,6 +39,7 @@ def test_shop(driver):
     category_page = CategoryPage(driver)
     product_page = ProductPage(driver)
     cart_page = CartPage(driver)
+    registration_page = RegistrationPage(driver)
 
     # Wejscie na strone glowna
     home_page.go_to()
@@ -166,3 +168,41 @@ def test_shop(driver):
 
     assert count_after_remove < items_before_removal, \
         f"Blad usuwania! Licznik nie zmalal. Bylo: {items_before_removal}, Jest: {count_after_remove}"
+
+
+
+    # =========================================================================
+    # ETAP 4: Rejestracja nowego konta
+    # =========================================================================
+
+    # Klikamy 'Zarejestruj sie' na stronie koszyka
+    cart_page.click_register()
+
+    # Generowanie danych uzytkownika
+    first_name = "Test"
+    last_name = "Testowy"
+    password = "qwertyui123!"
+    email = f"test_{int(time.time())}@test.com" 
+    birthdate = "2000-01-01"
+
+    # Wypelnienie formularza
+    registration_page.fill_form(first_name, last_name, email, password, birthdate)
+
+    # Obsluga checkboxow (2 i 4 obowiazkowe, 1 i 3 losowe)
+    registration_page.toggle_checkboxes()
+
+    # Wyslanie formularza
+    registration_page.submit_form()
+    
+    # Oczekiwanie na przeladowanie i przekierowanie na strone glowna
+    time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
+
+    # Wrocic do koszyka
+    home_page.go_to_cart()
+    
+    # # >>> Weryfikacja posrednia <<<
+    
+    # final_count = home_page.get_cart_count()
+
+    # # Asercja: sprawdzamy czy w koszyku nadal sa produkty (nie zginely przy rejestracji)
+    # assert final_count > 0, "Koszyk jest pusty po rejestracji!"
