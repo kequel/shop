@@ -2,6 +2,7 @@ import time
 import random
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -15,6 +16,9 @@ class HomePage:
 
     # Lokator ikony wozka z liczba artykolow
     CART_QUANTITY = (By.CSS_SELECTOR, ".cart-products-count")
+
+    # Lokator searchboxa
+    SEARCH_INPUT = (By.NAME, "s")
 
     def __init__(self, driver):
         self.driver = driver
@@ -69,3 +73,20 @@ class HomePage:
             return int(count_element.text)
         except:
             return 0
+
+    def search_for_phrase(self, phrase):
+        """Wpisuje fraze w wyszukiwarke i wciska Enter"""
+        
+        search_input = self.wait.until(EC.visibility_of_element_located(self.SEARCH_INPUT))
+        
+        # Wyczysc zawartosc pola tekstowego
+        search_input.clear()
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
+
+        # Wpisujemy fraze
+        search_input.send_keys(phrase)
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
+
+        # Zatwierdzamy
+        search_input.send_keys(Keys.ENTER)
+        if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
