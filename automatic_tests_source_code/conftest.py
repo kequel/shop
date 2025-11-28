@@ -62,6 +62,9 @@ def driver(request):
         chrome_options.add_argument("--no-sandbox") 
         chrome_options.add_argument("--disable-dev-shm-usage") 
         
+        chrome_options.add_argument("--window-size=1920,1080") 
+        chrome_options.add_argument("--start-maximized")
+
         # Jesli wybrany tryb headless (bez okna), to do ustawien przegladarki dodac te opcje
         if is_headless: chrome_options.add_argument("--headless")
             
@@ -74,6 +77,9 @@ def driver(request):
         # Ignorujemy warning "Your connection is not private" ktore blokowalo prace skryptu
         firefox_options.accept_insecure_certs = True
 
+        firefox_options.add_argument("--width=1920")
+        firefox_options.add_argument("--height=1080")
+        
         # Jesli wybrany tryb headless (bez okna), to do ustawien przegladarki dodac te opcje
         if is_headless: firefox_options.add_argument("--headless")
 

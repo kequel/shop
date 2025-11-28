@@ -24,6 +24,8 @@ def test_add_products_from_two_categories(driver):
 
     for i in range(PRODUCTS_TO_BUY_IN_THE_CATEGORY):
 
+        current_category_url = driver.current_url
+        
         # Wejscie w losowy produkt
         category_page.click_random_product()
 
@@ -38,7 +40,7 @@ def test_add_products_from_two_categories(driver):
         product_page.continue_shopping()
         
         # Powrot wstecz przegladarki do kategorii
-        driver.back()
+        driver.get(current_category_url)
         time.sleep(COMPLETE_WINDOW_SLEEP_TIME) 
 
     # Druga kategoria (2 produkty)
@@ -48,6 +50,8 @@ def test_add_products_from_two_categories(driver):
 
     for i in range(PRODUCTS_TO_BUY_IN_THE_CATEGORY):
         
+        current_category_url = driver.current_url
+
         # Wejscie w losowy produkt
         category_page.click_random_product()
 
@@ -62,7 +66,7 @@ def test_add_products_from_two_categories(driver):
         product_page.continue_shopping()
         
         # Powrot wstecz przegladarki do kategorii
-        driver.back()
+        driver.get(current_category_url)
         time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
     
     # Weryfikacja 
