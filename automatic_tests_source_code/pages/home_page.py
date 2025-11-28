@@ -1,4 +1,5 @@
 import time
+import random
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -8,49 +9,63 @@ from variables import COMPLETE_WINDOW_SLEEP_TIME, COMPLETE_SECTION_SLEEP_TIME, U
 
 
 class HomePage:
+    
+    # Lokator panelu z kategoriami
+    CATEGORY_LINKS = (By.CSS_SELECTOR, "#kategorie #top-menu > li > a")
 
-    # Lokator przycisku logowania
-    SIGN_IN_BUTTON = (By.CLASS_NAME, "logowanie")
-
-    # Lokator search baru
-    SEARCH_INPUT = (By.NAME, "s") 
-
-    # Lokator lupy
-    SEARCH_BUTTON = (By.XPATH, "//button[contains(@type, 'submit')]")
+    # Lokator ikony wozka z liczba artykolow
+    CART_QUANTITY = (By.CSS_SELECTOR, ".cart-products-count")
 
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
     def go_to(self):
-        """Otwiera strone glowna"""
+        """Wchodzi na strone"""
 
         self.driver.get(URL)
-
-    def click_sign_in(self):
-        """Klika przycisk 'Zaloguj / Zarejestruj'"""
-
-        sign_in_link = self.wait.until(EC.element_to_be_clickable(self.SIGN_IN_BUTTON))
-
-        # Klikamy przycisk 'Zaloguj / Zarejestruj'
-        sign_in_link.click()
-
-        if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
-        
-    def search_for_product(self, product_name):
-        """Klika pole 'Wpisz czego szukasz...', czysci je, wpisuje losowy produkt, klika lupe"""
-
-        search_field = self.wait.until(EC.visibility_of_element_located(self.SEARCH_INPUT))
-
-        # Czyszcimy pole 'Wpisz czego szukasz...'
-        search_field.clear()
-
         if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
-        # Wpisujemy tekst do tego pola (w tym wypadku ogolna nazwa produktu)
-        search_field.send_keys(product_name)
+    def get_category_elements(self):
+        """Zwraca liste kategorii"""
+        
+        return self.wait.until(EC.presence_of_all_elements_located(self.CATEGORY_LINKS))
 
-        # Klikamy lupe
-        search_field.submit()
+    def go_to_random_category(self, exclude_index=None):
+        """Klika w losowa kategorie"""
 
-        if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
+        categories = self.get_category_elements()
+        
+        # Filtrujemy zeby nie klikac w puste linki lub ukryte
+        valid_categories = [cat for cat in categories if cat.is_displayed()]
+        
+        if not valid_categories: raise Exception("Nie znaleziono kategorii w panelu bocznym!")
+
+        # Logika wyboru losowego indeksu (zeby sie nie powtarzal)
+        indices = list(range(len(valid_categories)))
+        if exclude_index is not None and exclude_index in indices:
+            indices.remove(exclude_index)
+            
+        random_index = random.choice(indices)
+
+        # Wylosowana kategoria
+        category_to_click = valid_categories[random_index]
+        
+        category_name = category_to_click.text
+
+        # Klikamy wybrana kategorie
+        category_to_click.click()
+        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
+        
+        return random_index
+
+    def get_cart_count(self):
+        """Zwraca liczbe produktow w koszyku"""
+
+        try:
+            count_element = self.driver.find_element(*self.CART_QUANTITY)
+            if not count_element.text:
+                return 0
+            return int(count_element.text)
+        except:
+            return 0
