@@ -12,7 +12,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # === KONFIGURACJA ===
 API_URL = "https://localhost:8443/api"
-API_KEY = "P56TI5Q7GLCTDHSDKBDI45W6KSYJ1BKP"
+API_KEY = "MEMT24WPYXXRTXHV137QY9A6U1KDCPII"
 
 # Zazwyczaj:
 # 1 = domyślny język sklepu, 2 = kategoria "Home", 1 = sklep, 1 = grupa sklepu
@@ -49,12 +49,11 @@ def remove_empty_nodes(element: ET.Element):
 
 
 def get_blank_schema(resource: str) -> ET.Element:
-    # --- ZMIANA: Dodano verify=False ---
     resp = requests.get(
         f"{API_URL}/{resource}",
         params={"schema": "blank"},
         auth=auth,
-        verify=False
+        verify=False,
     )
     if resp.status_code != 200:
         raise RuntimeError(
@@ -116,13 +115,12 @@ def create_category(category_json: dict, parent_id=None) -> int:
 
     xml_data = ET.tostring(root, encoding="utf-8")
     headers = {"Content-Type": "application/xml", "Accept": "application/xml"}
-    # --- ZMIANA: Dodano verify=False ---
     resp = requests.post(
         f"{API_URL}/categories",
         data=xml_data,
         auth=auth,
         headers=headers,
-        verify=False
+        verify=False,
     )
     if resp.status_code not in (200, 201):
         raise RuntimeError(
@@ -242,13 +240,12 @@ def create_product(prod_json: dict, default_category_id: int, categories_by_name
 
     xml_data = ET.tostring(root, encoding="utf-8")
     headers = {"Content-Type": "application/xml", "Accept": "application/xml"}
-    # --- ZMIANA: Dodano verify=False ---
     resp = requests.post(
         f"{API_URL}/products",
         data=xml_data,
         auth=auth,
         headers=headers,
-        verify=False
+        verify=False,
     )
     if resp.status_code not in (200, 201):
         raise RuntimeError(
@@ -281,12 +278,11 @@ def set_product_quantity(product_id: int, quantity):
 
     # Szukamy istniejącego rekordu stock_available
     params = {"filter[id_product]": product_id}
-    # --- ZMIANA: Dodano verify=False ---
     resp = requests.get(
         f"{API_URL}/stock_availables",
         params=params,
         auth=auth,
-        verify=False
+        verify=False,
     )
     if resp.status_code != 200:
         raise RuntimeError(
@@ -298,18 +294,16 @@ def set_product_quantity(product_id: int, quantity):
     stock_nodes = root.findall(".//stock_available")
 
     if stock_nodes:
-        # Rekord istnieje – id jest atrybutem <stock_available id="...">
         stock_id = stock_nodes[0].get("id")
         if not stock_id:
             raise RuntimeError(
                 f"Brak atrybutu id w istniejącym stock_available dla produktu {product_id}"
             )
 
-        # --- ZMIANA: Dodano verify=False ---
         resp2 = requests.get(
             f"{API_URL}/stock_availables/{stock_id}",
             auth=auth,
-            verify=False
+            verify=False,
         )
         if resp2.status_code != 200:
             raise RuntimeError(
@@ -326,13 +320,12 @@ def set_product_quantity(product_id: int, quantity):
             qty_el.text = str(qty_int)
 
         xml_data = ET.tostring(root2, encoding="utf-8")
-        # --- ZMIANA: Dodano verify=False ---
         resp3 = requests.put(
             f"{API_URL}/stock_availables/{stock_id}",
             data=xml_data,
             auth=auth,
             headers=headers,
-            verify=False
+            verify=False,
         )
         if resp3.status_code not in (200, 201):
             raise RuntimeError(
@@ -367,19 +360,19 @@ def set_product_quantity(product_id: int, quantity):
             qty_el.text = str(qty_int)
 
         xml_data = ET.tostring(root2, encoding="utf-8")
-        # --- ZMIANA: Dodano verify=False ---
         resp3 = requests.post(
             f"{API_URL}/stock_availables",
             data=xml_data,
             auth=auth,
             headers=headers,
-            verify=False
+            verify=False,
         )
         if resp3.status_code not in (200, 201):
             raise RuntimeError(
                 f"Nie udało się utworzyć rekordu stock_available dla produktu {product_id}: "
                 f"{resp3.status_code} {resp3.text}"
             )
+
 
 def upload_product_images(product_id: int, image_urls, referer_url: str | None = None):
     if not image_urls:
@@ -391,7 +384,6 @@ def upload_product_images(product_id: int, image_urls, referer_url: str | None =
 
         print(f"    [IMG] Pobieram obraz {idx}: {url}")
 
-        # Nagłówki jak „normalna” przeglądarka
         headers = {
             "User-Agent": (
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -403,7 +395,6 @@ def upload_product_images(product_id: int, image_urls, referer_url: str | None =
         }
 
         try:
-            # --- ZMIANA: Dodano verify=False ---
             resp = requests.get(url, timeout=20, verify=False, headers=headers)
         except Exception as e:
             print(f"    [IMG] Błąd pobierania {url}: {e}")
@@ -426,12 +417,11 @@ def upload_product_images(product_id: int, image_urls, referer_url: str | None =
         }
 
         try:
-            # --- ZMIANA: Dodano verify=False ---
             resp2 = requests.post(
                 f"{API_URL}/images/products/{product_id}",
                 auth=auth,
                 files=files,
-                verify=False
+                verify=False,
             )
         except Exception as e:
             print(f"    [IMG] Błąd wysyłania obrazu do Presty: {e}")
@@ -446,17 +436,18 @@ def upload_product_images(product_id: int, image_urls, referer_url: str | None =
             print(f"    [IMG] OK – obraz {idx} dodany")
 
 
-
 def main():
     base_dir = Path(__file__).resolve().parent
     cat_file = base_dir / "categories_mopserwis.json"
-    prod_file = base_dir / "products_details_Linie_dozowników.json"
+
+    # *** NOWE: bierzemy wszystkie pliki zaczynające się od "products"
+    product_files = sorted(base_dir.glob("products*.json"))
+
+    if not product_files:
+        raise RuntimeError("Nie znaleziono żadnych plików 'products*.json' w katalogu skryptu")
 
     with cat_file.open(encoding="utf-8") as f:
         categories = json.load(f)
-
-    with prod_file.open(encoding="utf-8") as f:
-        products = json.load(f)
 
     if not categories:
         raise RuntimeError("Plik kategorii jest pusty")
@@ -473,7 +464,6 @@ def main():
         if default_cat_id is None:
             default_cat_id = parent_id
 
-        # podkategorie (jeśli są)
         for sub_json in cat_json.get("subcategories", []):
             sub_name = sub_json.get("name", "Nowa podkategoria")
             print(f"  Tworzę podkategorię: {sub_name} (rodzic: {parent_name})")
@@ -482,24 +472,32 @@ def main():
 
     created_ids = []
 
-    # TERAZ: wszystkie produkty z pliku
-    for prod_json in products:
-        print(f"Tworzę produkt: {prod_json.get('name')}")
-        prod_id = create_product(prod_json, default_cat_id, categories_by_name)
-        created_ids.append((prod_json.get("name"), prod_id))
-        print(f"  -> ID nowego produktu: {prod_id}")
+    # *** NOWE: iterujemy po wszystkich plikach products*.json
+    for prod_path in product_files:
+        print(f"\n===== Przetwarzam plik: {prod_path.name} =====")
+        with prod_path.open(encoding="utf-8") as f:
+            products = json.load(f)
 
-        qty = prod_json.get("quantity")
-        if qty is not None:
-            print(f"  Ustawiam ilość: {qty}")
-            set_product_quantity(prod_id, qty)
+        if not isinstance(products, list):
+            print(f"  Uwaga: plik {prod_path.name} nie zawiera listy produktów, pomijam.")
+            continue
 
-        image_urls = (prod_json.get("images") or [])[:3]
-        if image_urls:
-            referer = prod_json.get("url")
-            print(f"  Dodaję {len(image_urls)} obrazów do produktu {prod_id}")
-            upload_product_images(prod_id, image_urls, referer_url=referer)
+        for prod_json in products:
+            print(f"Tworzę produkt: {prod_json.get('name')}")
+            prod_id = create_product(prod_json, default_cat_id, categories_by_name)
+            created_ids.append((prod_json.get("name"), prod_id))
+            print(f"  -> ID nowego produktu: {prod_id}")
 
+            qty = prod_json.get("quantity")
+            if qty is not None:
+                print(f"  Ustawiam ilość: {qty}")
+                set_product_quantity(prod_id, qty)
+
+            image_urls = (prod_json.get("images") or [])[:3]
+            if image_urls:
+                referer = prod_json.get("url")
+                print(f"  Dodaję {len(image_urls)} obrazów do produktu {prod_id}")
+                upload_product_images(prod_id, image_urls, referer_url=referer)
 
     print("\nPodsumowanie:")
     print("Kategorie:")
