@@ -99,14 +99,20 @@ class HomePage:
         search_input.send_keys(phrase)
         if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
-        # Klikamy przycisk lupy (alternatywnie Enter)
-        try:
-            search_btn = self.wait.until(EC.element_to_be_clickable(self.SEARCH_BUTTON))
-            search_btn.click()
-        except:
-            search_input.send_keys(Keys.ENTER)
+        old_url = self.driver.current_url
 
-        self.wait.until(lambda d: "controller=search" in d.current_url)
+        # Czekamy aż przycisk będzie w drzewie DOM
+        search_btn = self.wait.until(EC.presence_of_element_located(self.SEARCH_BUTTON))
+
+        # Klikamy lupe
+        self.driver.execute_script("arguments[0].click();", search_btn)
+
+        # Czekamy az URL sie zmieni (niezaleznie czy na liste wynikow czy na produkt)
+        try:
+            self.wait.until(lambda d: d.current_url != old_url)
+        except:
+            print("URL sie nie zmienil po kliknieciu 'szukaj'.")
+
         if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
 
     def go_to_cart(self):
@@ -115,5 +121,5 @@ class HomePage:
         cart_btn = self.wait.until(EC.element_to_be_clickable(self.CART_BUTTON))
 
         # Klikamy przycisk koszyka
-        cart_btn.click()
+        self.driver.execute_script("arguments[0].click();", cart_btn)
         if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
