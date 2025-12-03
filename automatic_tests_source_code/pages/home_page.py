@@ -26,6 +26,9 @@ class HomePage:
     # Lokator przycisku koszyka
     CART_BUTTON = (By.CSS_SELECTOR, "#_desktop_cart a")
 
+    # Lokator przycisku z imieniem i nazwiskiem
+    MY_ACCOUNT_BTN = (By.CLASS_NAME, "account")
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
@@ -122,4 +125,13 @@ class HomePage:
 
         # Klikamy przycisk koszyka
         self.driver.execute_script("arguments[0].click();", cart_btn)
+        if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
+
+    def go_to_my_account(self):
+        """Klika w imie i nazwisko uzytkownika (przejscie do panelu klienta)"""
+        
+        btn = self.wait.until(EC.element_to_be_clickable(self.MY_ACCOUNT_BTN))
+        
+        # Klikamy przycisk imie+nazwisko
+        self.driver.execute_script("arguments[0].click();", btn)
         if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)

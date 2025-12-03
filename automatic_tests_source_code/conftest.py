@@ -1,8 +1,11 @@
 import pytest
+import os
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
+
+DOWNLOAD_DIR = os.path.join(os.getcwd(), "downloads")
 
 # >>> >>> >>> AKTYWACJA SRODOWISKA I INSTALACJA PLUGINOW <<< <<< <<<
 #
@@ -40,6 +43,10 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="function")
 def driver(request):
+
+    # Upewniamy sie, ze katalog istnieje
+    if not os.path.exists(DOWNLOAD_DIR):
+        os.makedirs(DOWNLOAD_DIR)
 
     # Pobieramy obie opcje z terminala
     browser_name = request.config.getoption("browser") 

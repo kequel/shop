@@ -8,6 +8,8 @@ from pages.product_page import ProductPage
 from pages.cart_page import CartPage
 from pages.registration_page import RegistrationPage
 from pages.order_page import OrderPage
+from pages.my_account_page import MyAccountPage
+from pages.order_history_page import OrderHistoryPage
 
 from variables import (
     COMPLETE_WINDOW_SLEEP_TIME, 
@@ -42,6 +44,8 @@ def test_shop(driver):
     cart_page = CartPage(driver)
     registration_page = RegistrationPage(driver)
     order_page = OrderPage(driver)
+    my_account_page = MyAccountPage(driver)
+    order_history_page = OrderHistoryPage(driver)
 
     # Wejscie na strone glowna
     home_page.go_to()
@@ -224,8 +228,24 @@ def test_shop(driver):
     order_page.choose_payment_and_order()
 
     # =========================================================================
-    # ETAP 6: Weryfikacja zamowienia
+    # ETAP 6: Weryfikacja zamowienia i pobranie faktury
     # =========================================================================
-    
-    # Sprawdzamy czy w URL jest 'confirmation' lub na stronie jest komunikat sukcesu
-    # assert "order-confirmation" in driver.current_url, "Nie przekierowano na strone potwierdzenia zamowienia!"
+
+    # Przejscie do panelu klienta
+    home_page.go_to_my_account()
+
+    # Przejscie do historii zamowien
+    my_account_page.go_to_order_history()
+
+    # Wejscie w szczegoly zamowienia
+    order_history_page.go_to_details()
+
+    # Powrot do listy zamowien (imie -> historia)
+    home_page.go_to_my_account()
+    my_account_page.go_to_order_history()
+
+    # Pobranie faktury
+    order_history_page.download_invoice()
+
+    # Weryfikacja pliku na dysku
+    order_history_page.verify_invoice_downloaded()
