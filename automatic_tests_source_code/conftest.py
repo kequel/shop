@@ -45,6 +45,8 @@ def driver(request):
     browser_name = request.config.getoption("browser") 
     is_headless = request.config.getoption("headless") 
     
+    driver = None
+
     # Sprawdzamy ktora przegladarka zostala wybrana
     if browser_name == "chrome":
         
@@ -56,14 +58,16 @@ def driver(request):
         chrome_options.add_argument("--allow-insecure-localhost")
         chrome_options.add_argument("--ignore-ssl-errors")
 
-        # Jesli wybrany tryb headless (bez okna), to do ustawien przegladarki dodac te opcje
-        if is_headless: chrome_options.add_argument("--headless")
-            
-
         # Potrzebne dla WSL opcje
         chrome_options.add_argument("--no-sandbox") 
         chrome_options.add_argument("--disable-dev-shm-usage") 
         
+        chrome_options.add_argument("--window-size=1920,1080") 
+        chrome_options.add_argument("--start-maximized")
+
+        # Jesli wybrany tryb headless (bez okna), to do ustawien przegladarki dodac te opcje
+        if is_headless: chrome_options.add_argument("--headless")
+            
         driver = webdriver.Chrome(options=chrome_options) 
 
     elif browser_name == "firefox":
@@ -73,6 +77,9 @@ def driver(request):
         # Ignorujemy warning "Your connection is not private" ktore blokowalo prace skryptu
         firefox_options.accept_insecure_certs = True
 
+        firefox_options.add_argument("--width=1920")
+        firefox_options.add_argument("--height=1080")
+        
         # Jesli wybrany tryb headless (bez okna), to do ustawien przegladarki dodac te opcje
         if is_headless: firefox_options.add_argument("--headless")
 
@@ -81,9 +88,6 @@ def driver(request):
     else:
         raise pytest.UsageError(f"--browser={browser_name} jest nieobslugiwany")
     
-    # Maksymalizujemy okno tylko jeśli NIE JEST w trybie headless
-    if not is_headless: driver.maximize_window()
-
     # Dodanie informacji w ktorym trybie dzialamy (zeby mozna bylo skorzystac w innych plikach)
     driver.is_headless = is_headless
     
