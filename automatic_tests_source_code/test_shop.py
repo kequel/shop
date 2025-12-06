@@ -6,71 +6,144 @@ from pages.home_page import HomePage
 from pages.category_page import CategoryPage
 from pages.product_page import ProductPage
 
-from variables import COMPLETE_WINDOW_SLEEP_TIME, PRODUCTS_TO_BUY_IN_THE_CATEGORY
+from variables import (
+    COMPLETE_WINDOW_SLEEP_TIME, 
+    PRODUCTS_TO_BUY_IN_THE_CATEGORY, 
+    SEARCH_PHRASE, 
+    MAX_QTY_OF_SPECIFIC_PRODUCT, 
+    PRODUCTS_TO_BUY
+)
 
 
-def test_add_products_from_two_categories(driver):
+def test_shop(driver):
+    """
+    Skrypt realizujacy:
+
+    Dodanie do koszyka 10 produktów (w różnych ilościach) z dwóch różnych kategorii,
+    Wyszukanie produktu po nazwie i dodanie do koszyka losowego produktu spośród znalezionych
+    Usunięcie z koszyka 3 produktów,
+    Rejestrację nowego konta,
+    Wykonanie zamówienia zawartości koszyka,
+    Wybór metody płatności: przy odbiorze,
+    Wybór jednego z dwóch przewoźników,
+    Zatwierdzenie zamówienia,
+    Sprawdzenie statusu zamówienia.
+    Pobranie faktury VAT.
+    """
 
     # Inicjalizacja stron
     home_page = HomePage(driver)
     category_page = CategoryPage(driver)
     product_page = ProductPage(driver)
 
-    # Wejscie na strone
+    # Wejscie na strone glowna
     home_page.go_to()
 
-    # Pierwsza kategoria
+    # =========================================================================
+    # ETAP 1: Dodawanie N produktow z dwoch roznych kategorii
+    # =========================================================================
+    
+    # >>> Kategoria pierwsza <<<
+
     cat_a_index = home_page.go_to_random_category()
 
     for i in range(PRODUCTS_TO_BUY_IN_THE_CATEGORY):
-
-        current_category_url = driver.current_url
         
-        # Wejscie w losowy produkt
+        # Zapamietujemy URL kategorii zeby moc tu wrocic
+        current_category_url = driver.current_url
+
+        # Wybor i klikniecie w produkt
         category_page.click_random_product()
 
-        # Losowa ilosc produktu
-        qty = random.randint(1, 5)
+        # Ustawienie losowej ilosci
+        qty = random.randint(1, MAX_QTY_OF_SPECIFIC_PRODUCT)
         product_page.set_quantity(qty)
         
-        # Dodaj do koszyka
+        # Dodanie do koszyka i zamkniecie okienka
         product_page.add_to_cart()
-        
-        # Obsluga okienka 
         product_page.continue_shopping()
         
-        # Powrot wstecz przegladarki do kategorii
+        # Powrot do kategorii
         driver.get(current_category_url)
         time.sleep(COMPLETE_WINDOW_SLEEP_TIME) 
 
-    # Druga kategoria (2 produkty)
 
-    # Przekazujemy indeks kategorii A zeby jej nie wylosowac ponownie
+
+    # >>> Kategoria druga <<<
+    
+    # Przechodzimy do innej losowej kategorii (wykluczajac ta pierwsza)
     _ = home_page.go_to_random_category(exclude_index=cat_a_index)
 
     for i in range(PRODUCTS_TO_BUY_IN_THE_CATEGORY):
         
+        # Zapamietujemy URL kategorii zeby moc tu wrocic
         current_category_url = driver.current_url
 
-        # Wejscie w losowy produkt
+        # Wybor i klikniecie w produkt
         category_page.click_random_product()
 
-        # Losowa ilosc produktu
-        qty = random.randint(1, 5)
+        # Ustawienie losowej ilosci
+        qty = random.randint(1, MAX_QTY_OF_SPECIFIC_PRODUCT)
         product_page.set_quantity(qty)
         
-        # Dodaj do koszyka
+        # Dodanie do koszyka i zamkniecie okienka
         product_page.add_to_cart()
-
-        # Obsluga okienka
         product_page.continue_shopping()
         
-        # Powrot wstecz przegladarki do kategorii
+        # Powrot do kategorii
         driver.get(current_category_url)
         time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
+
     
-    # Weryfikacja 
-    cart_items_count = home_page.get_cart_count()
-     
-    # Asercja: skoro dodalismy 5 produktow po minimum 1 sztuce, powinno byc >= 5 sztuk
-    assert cart_items_count >= 5, "Koszyk ma mniej produktow niz oczekiwano!"
+
+    # >>> Weryfikacja posrednia <<<
+
+    # Sprawdzamy ile mamy produktow przed etapem wyszukiwania
+    items_before_search = home_page.get_cart_count()
+
+    print(f"Liczba sztuk w koszyku po etapie kategorii: {items_before_search}")
+    
+    assert items_before_search >= PRODUCTS_TO_BUY, "Za malo produktow po etapie kategorii!"
+
+
+
+    # =========================================================================
+    # ETAP 2: Wyszukanie produktu i dodanie do koszyka
+    # =========================================================================
+
+    # Wracamy na glowna
+    home_page.go_to()
+
+    # Wyszukiwanie frazy
+    home_page.search_for_phrase(SEARCH_PHRASE)
+
+    # Wybor losowego produktu z wynikow wyszukiwania
+    category_page.click_random_product()
+
+    # Losowa ilosc dla produktu z wyszukiwania
+    search_qty = random.randint(1, MAX_QTY_OF_SPECIFIC_PRODUCT)
+    product_page.set_quantity(search_qty)
+
+    # Dodanie do koszyka
+    product_page.add_to_cart()
+    product_page.continue_shopping()
+
+
+
+    # =========================================================================
+    # WERYFIKACJA KONCOWA
+    # =========================================================================
+    
+    # Odswiezamy zeby miec pewnosc ze licznik w naglowku sie zaktualizowal
+    driver.refresh()
+    time.sleep(1)
+
+    final_cart_count = home_page.get_cart_count()
+
+    print(f"Koncowa liczba sztuk w koszyku: {final_cart_count}")
+
+    # Asercja: mielismy X produktow. Dodalismy Y (search_qty). Powinnismy miec X + Y.
+    expected_count = items_before_search + search_qty
+    
+    assert final_cart_count == expected_count, \
+        f"Blad sumowania koszyka! Mielismy {items_before_search}, dodalismy {search_qty}, a w koszyku jest {final_cart_count}"
