@@ -14,6 +14,9 @@ class CartPage:
 
     # Lokator przycisku 'Zarejestruj sie'
     REGISTER_BTN = (By.CSS_SELECTOR, "a[data-link-action='display-register-form']")
+    
+    # Lokator przycisku "Finalizacja zakupow"
+    CHECKOUT_BTN = (By.CSS_SELECTOR, "a#finalb")
 
     def __init__(self, driver):
         self.driver = driver
@@ -51,3 +54,13 @@ class CartPage:
         # Klikamy przycisk 'Zarejestruj sie'
         btn.click()
         if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
+
+    def click_checkout(self):
+        """Klika przycisk 'Finalizacja zakupów'"""
+        
+        btn = self.wait.until(EC.element_to_be_clickable(self.CHECKOUT_BTN))
+
+        # Klikamy przycisk 'Finalizacja zakupow'
+        btn.click()
+        if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
+
