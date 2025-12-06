@@ -20,10 +20,12 @@ class CategoryPage:
     def click_random_product(self):
         """Wybiera losowy produkt z listy i wchodzi w niego"""
 
-        products = self.wait.until(EC.presence_of_all_elements_located(self.PRODUCT_TILES))
+        try:
+            # Czekmy az produkty sie zaladuja
+            products = self.wait.until(EC.visibility_of_any_elements_located(self.PRODUCT_TILES))
+        except:
+            raise Exception(f"Nie znaleziono żadnych produktów na stronie! URL: {self.driver.current_url}")
         
-        if not products: raise Exception("Brak produktów w tej kategorii!")
-
         # Wybor losowego produktu
         random_product = random.choice(products)
         

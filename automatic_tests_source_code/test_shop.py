@@ -5,13 +5,15 @@ import pytest
 from pages.home_page import HomePage
 from pages.category_page import CategoryPage
 from pages.product_page import ProductPage
+from pages.cart_page import CartPage
 
 from variables import (
     COMPLETE_WINDOW_SLEEP_TIME, 
     PRODUCTS_TO_BUY_IN_THE_CATEGORY, 
     SEARCH_PHRASE, 
     MAX_QTY_OF_SPECIFIC_PRODUCT, 
-    PRODUCTS_TO_BUY
+    PRODUCTS_TO_BUY,
+    PRODUCTS_TO_REMOVE
 )
 
 
@@ -35,6 +37,7 @@ def test_shop(driver):
     home_page = HomePage(driver)
     category_page = CategoryPage(driver)
     product_page = ProductPage(driver)
+    cart_page = CartPage(driver)
 
     # Wejscie na strone glowna
     home_page.go_to()
@@ -130,20 +133,36 @@ def test_shop(driver):
 
 
 
-    # =========================================================================
-    # WERYFIKACJA KONCOWA
-    # =========================================================================
-    
-    # Odswiezamy zeby miec pewnosc ze licznik w naglowku sie zaktualizowal
-    driver.refresh()
-    time.sleep(1)
+    # >>> Weryfikacja posrednia <<<
 
-    final_cart_count = home_page.get_cart_count()
+    # Sprawdzamy ile mamy produktow przed etapem usuniecia
+    items_before_removal = home_page.get_cart_count()
 
-    print(f"Koncowa liczba sztuk w koszyku: {final_cart_count}")
+    print(f"Liczba sztuk w koszyku po etapie wyszukiwania: {items_before_removal}")
 
     # Asercja: mielismy X produktow. Dodalismy Y (search_qty). Powinnismy miec X + Y.
     expected_count = items_before_search + search_qty
     
-    assert final_cart_count == expected_count, \
-        f"Blad sumowania koszyka! Mielismy {items_before_search}, dodalismy {search_qty}, a w koszyku jest {final_cart_count}"
+    assert items_before_removal == expected_count, \
+        f"Blad sumowania koszyka! Mielismy {items_before_search}, dodalismy {search_qty}, a w koszyku jest {items_before_removal}"
+
+
+
+    # =========================================================================
+    # ETAP 3: Usuniecie z koszyka M produktow
+    # =========================================================================
+
+    # Przejscie do koszyka
+    home_page.go_to_cart()
+
+    # Usuniecie M pozycji
+    cart_page.remove_products(PRODUCTS_TO_REMOVE)
+
+    # >>> Weryfikacja posrednia <<<
+
+    count_after_remove = home_page.get_cart_count()
+
+    print(f"Liczba sztuk w koszyku po etapie usuniecia: {count_after_remove}")
+
+    assert count_after_remove < items_before_removal, \
+        f"Blad usuwania! Licznik nie zmalal. Bylo: {items_before_removal}, Jest: {count_after_remove}"

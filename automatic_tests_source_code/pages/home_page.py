@@ -20,6 +20,9 @@ class HomePage:
     # Lokator searchboxa
     SEARCH_INPUT = (By.NAME, "s")
 
+    # Lokator przycisku koszyka
+    CART_BUTTON = (By.CSS_SELECTOR, "#_desktop_cart a")
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
@@ -89,4 +92,13 @@ class HomePage:
 
         # Zatwierdzamy
         search_input.send_keys(Keys.ENTER)
+        time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
+
+    def go_to_cart(self):
+        """Klika w ikone koszyka, aby przejsc do podsumowania"""
+        
+        cart_btn = self.wait.until(EC.element_to_be_clickable(self.CART_BUTTON))
+
+        # Klikamy przycisk koszyka
+        cart_btn.click()
         if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
