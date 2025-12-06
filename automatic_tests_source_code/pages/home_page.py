@@ -20,6 +20,9 @@ class HomePage:
     # Lokator searchboxa
     SEARCH_INPUT = (By.NAME, "s")
 
+    # Lokator przycisku lupy
+    SEARCH_BUTTON = (By.CSS_SELECTOR, "#search_widget button[type='submit']")
+
     # Lokator przycisku koszyka
     CART_BUTTON = (By.CSS_SELECTOR, "#_desktop_cart a")
 
@@ -31,6 +34,8 @@ class HomePage:
         """Wchodzi na strone"""
 
         self.driver.get(URL)
+
+        self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
         if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
     def get_category_elements(self):
@@ -82,17 +87,27 @@ class HomePage:
         
         search_input = self.wait.until(EC.visibility_of_element_located(self.SEARCH_INPUT))
         
+        # Klikamy zeby aktywowac
+        search_input.click() 
+        
         # Wyczysc zawartosc pola tekstowego
-        search_input.clear()
-        if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
+        search_input.send_keys(Keys.CONTROL, "a")
+        search_input.send_keys(Keys.BACK_SPACE)
+        time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
         # Wpisujemy fraze
         search_input.send_keys(phrase)
         if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
-        # Zatwierdzamy
-        search_input.send_keys(Keys.ENTER)
-        time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
+        # Klikamy przycisk lupy (alternatywnie Enter)
+        try:
+            search_btn = self.wait.until(EC.element_to_be_clickable(self.SEARCH_BUTTON))
+            search_btn.click()
+        except:
+            search_input.send_keys(Keys.ENTER)
+
+        self.wait.until(lambda d: "controller=search" in d.current_url)
+        if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
 
     def go_to_cart(self):
         """Klika w ikone koszyka, aby przejsc do podsumowania"""

@@ -12,6 +12,9 @@ class CartPage:
     # Lokator ikony koszyka
     DELETE_ICON = (By.XPATH, "//a[@class='remove-from-cart']//i[text()='delete']")
 
+    # Lokator przycisku 'Zarejestruj sie'
+    REGISTER_BTN = (By.CSS_SELECTOR, "a[data-link-action='display-register-form']")
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
@@ -38,4 +41,13 @@ class CartPage:
             self.wait.until(EC.staleness_of(button_to_click))
             if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
 
+        if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
+
+    def click_register(self):
+        """Klika przycisk 'Zarejestruj się' widoczny w koszyku"""
+
+        btn = self.wait.until(EC.element_to_be_clickable(self.REGISTER_BTN))
+
+        # Klikamy przycisk 'Zarejestruj sie'
+        btn.click()
         if not self.driver.is_headless: time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
