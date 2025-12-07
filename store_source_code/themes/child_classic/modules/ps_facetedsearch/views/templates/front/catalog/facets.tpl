@@ -22,16 +22,7 @@
       <p class="text-uppercase h6 hidden-sm-down">{l s='Filter By' d='Shop.Theme.Actions'}</p>
     {/block}
 
-    {block name='facets_clearall_button'}
-      {if $activeFilters|count}
-        <div id="_desktop_search_filters_clear_all" class="hidden-sm-down clear-all-wrapper">
-          <button data-search-url="{$clear_all_link}" class="btn btn-tertiary js-search-filters-clear-all">
-            <i class="material-icons">&#xE14C;</i>
-            {l s='Clear all' d='Shop.Theme.Actions'}
-          </button>
-        </div>
-      {/if}
-    {/block}
+   
 
     {foreach from=$displayedFacets item="facet"}
       <section class="facet clearfix" data-type="{$facet.type}" data-name="{$facet.label}">
@@ -176,6 +167,16 @@
         {/if}
       </section>
     {/foreach}
+     {block name='facets_clearall_button'}
+      {if $activeFilters|count}
+        <div id="_desktop_search_filters_clear_all" class="hidden-sm-down clear-all-wrapper">
+          <button data-search-url="{$clear_all_link}" class="btn btn-tertiary js-search-filters-clear-all">
+            <i class="material-icons">&#xE14C;</i>
+            {l s='Clear all' d='Shop.Theme.Actions'}
+          </button>
+        </div>
+      {/if}
+    {/block}
   </div>
 {else}
   <div id="search_filters" style="display:none;">
