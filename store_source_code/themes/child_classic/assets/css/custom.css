@@ -2495,3 +2495,90 @@ color: #fff !important;
 
 
 }
+
+#search_filters p.facet-title.hidden-sm-down {
+    background: #003169 !important;
+    padding: 10px !important;
+    color: #fff !important;
+    font-size: 20px !important;
+    line-height: normal !important;
+    font-weight: 500 !important;
+    width: 100%;
+}
+#search_filters p.text-uppercase.h6.hidden-sm-down {
+    font-size: 1rem !important;
+    padding-left: 0px;
+    margin-bottom: 0 !important;
+}
+#search_filters {
+    padding-left: 37px;
+}
+#search_filters .facet.clearfix{
+    padding-top: 0 !important;
+}
+#search_filters .custom-checkbox .ps-shown-by-js{
+    border-radius: 2px !important;
+    border: 1.5px solid gray  !important;
+    
+}
+
+#search_filters .custom-checkbox:hover .ps-shown-by-js {
+    border: 1.5px solid #414141 !important;
+}
+
+#search_filters .custom-checkbox{
+    top: -10px !important;
+}
+#search_filters *{
+    color: #414141 !important;
+}
+#search_filters .magnitude{
+    color: gray !important;
+}
+
+#search_filters ._gray-darker.search-link.js-search-link:hover{
+    text-decoration: underline !important;
+    font-weight: 700;
+}
+.active_filters{
+    position:absolute;
+    visibility: hidden;
+}
+#search_filters .btn.btn-tertiary.js-search-filters-clear-all{
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0;
+    text-transform: uppercase;
+    margin-left: -40px !important;
+}
+#search_filters .btn.btn-tertiary.js-search-filters-clear-all:hover{
+
+    background: #F7F7F7 !important;
+}
+#search_filters .btn.btn-tertiary.js-search-filters-clear-all .material-icons{
+   font-weight: 900 !important;
+}
+
+#search_filters .custom-checkbox input:checked + .ps-shown-by-js {
+    background: #a94dc1 !important;
+    border-color: #a94dc1 !important;
+
+}
+#search_filters .custom-checkbox input:checked + .ps-shown-by-js i{
+    color: white !important;
+
+}
+#search_filters .custom-checkbox:hover input:checked + .ps-shown-by-js {
+    background: #793789 !important;
+    border-color: #793789!important;
+
+}
