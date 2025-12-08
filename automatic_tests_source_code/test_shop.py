@@ -58,21 +58,38 @@ def test_shop(driver):
 
     cat_a_index = home_page.go_to_random_category()
 
-    for i in range(PRODUCTS_TO_BUY_IN_THE_CATEGORY):
+    products_added_cat_a = 0
+
+    while products_added_cat_a < PRODUCTS_TO_BUY_IN_THE_CATEGORY:
         
         # Zapamietujemy URL kategorii zeby moc tu wrocic
         current_category_url = driver.current_url
 
         # Wybor i klikniecie w produkt
-        category_page.click_random_product()
+        try:
+            category_page.click_random_product()
+        except Exception as e:
+            print(f"Nie udalo sie wybrac produktu: {e}")
+            break
 
-        # Ustawienie losowej ilosci
-        qty = random.randint(1, MAX_QTY_OF_SPECIFIC_PRODUCT)
-        product_page.set_quantity(qty)
-        
-        # Dodanie do koszyka i zamkniecie okienka
-        product_page.add_to_cart()
-        product_page.continue_shopping()
+        # Sprawdzamy czy produkt jest dostepny
+        if product_page.is_add_to_cart_possible():
+            
+            print("Produkt dostepny - dodaje do koszyka.")
+            
+            # Ustawienie losowej ilosci
+            qty = random.randint(1, MAX_QTY_OF_SPECIFIC_PRODUCT)
+            product_page.set_quantity(qty)
+            
+            # Dodanie do koszyka i zamkniecie okienka
+            product_page.add_to_cart()
+            product_page.continue_shopping()
+            
+            # Zwiekszamy licznik TYLKO gdy udalo sie dodac
+            products_added_cat_a += 1
+            
+        else:
+            print("Produkt NIEDOSTEPNY (out of stock) - wracam i szukam innego.")
         
         # Powrot do kategorii
         driver.get(current_category_url)
@@ -85,21 +102,35 @@ def test_shop(driver):
     # Przechodzimy do innej losowej kategorii (wykluczajac ta pierwsza)
     _ = home_page.go_to_random_category(exclude_index=cat_a_index)
 
-    for i in range(PRODUCTS_TO_BUY_IN_THE_CATEGORY):
+    products_added_cat_b = 0
+
+    while products_added_cat_b < PRODUCTS_TO_BUY_IN_THE_CATEGORY:
         
         # Zapamietujemy URL kategorii zeby moc tu wrocic
         current_category_url = driver.current_url
 
         # Wybor i klikniecie w produkt
-        category_page.click_random_product()
+        try:
+            category_page.click_random_product()
+        except Exception as e:
+            print(f"Nie udalo sie wybrac produktu w kat B: {e}")
+            break
 
-        # Ustawienie losowej ilosci
-        qty = random.randint(1, MAX_QTY_OF_SPECIFIC_PRODUCT)
-        product_page.set_quantity(qty)
-        
-        # Dodanie do koszyka i zamkniecie okienka
-        product_page.add_to_cart()
-        product_page.continue_shopping()
+        # Sprawdzenie dostepnosci
+        if product_page.is_add_to_cart_possible():
+            
+            print("Produkt dostepny - dodaje do koszyka.")
+            
+            qty = random.randint(1, MAX_QTY_OF_SPECIFIC_PRODUCT)
+            product_page.set_quantity(qty)
+            
+            product_page.add_to_cart()
+            product_page.continue_shopping()
+            
+            products_added_cat_b += 1
+            
+        else:
+            print("Produkt NIEDOSTEPNY - pomijam.")
         
         # Powrot do kategorii
         driver.get(current_category_url)
