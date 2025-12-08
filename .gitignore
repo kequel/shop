@@ -1,16 +1,158 @@
-#temp
+#archives
 *.tar
 *.gz
 *.zip
 
-#Python
-venv/
+#temp files
+*~
+.DS_Store
+.idea/
+.vscode/
 
-# Docker
+#python venv
+venv/
+__pycache__/
+*.pyc
+
+#scraper img
+scraping_results/product_images/
+
+#logs
 *.log
+
+# docker volumes
 volumes/
 config_files_and_scripts/volumes
 config_files_and_scripts/db_data/
+config_files_and_scripts/backup/*.sql
 
-# scraper output
-scraping_results/product_images/
+# cache
+/store_source_code/cache/*
+!/store_source_code/cache/.htaccess
+!/store_source_code/cache/cachefs/index.php
+!/store_source_code/cache/deprecated.txt
+!/store_source_code/cache/index.php
+!/store_source_code/cache/purifier/index.php
+!/store_source_code/cache/push/activity
+!/store_source_code/cache/push/index.php
+!/store_source_code/cache/push/trends
+!/store_source_code/cache/sandbox/index.php
+!/store_source_code/cache/smarty/cache/index.php
+!/store_source_code/cache/smarty/compile/index.php
+!/store_source_code/cache/smarty/index.php
+!/store_source_code/cache/tcpdf/index.php
+
+/store_source_code/download/*
+!/store_source_code/download/.htaccess
+!/store_source_code/download/index.php
+
+/store_source_code/upload/*
+!/store_source_code/upload/.htaccess
+
+#uploads, img
+/store_source_code/img/*
+!/store_source_code/img/.htaccess
+!/store_source_code/img/index.php
+!/store_source_code/img/404.gif
+!/store_source_code/img/bg_500.png
+!/store_source_code/img/bg_loader.png
+!/store_source_code/img/favicon.ico
+!/store_source_code/img/loader.gif
+!/store_source_code/img/loadingAnimation.gif
+!/store_source_code/img/logo.jpg
+!/store_source_code/img/logo.png
+!/store_source_code/img/logo_invoice.jpg
+!/store_source_code/img/logo_stores.png
+!/store_source_code/img/macFFBgHack.png
+!/store_source_code/img/prestashop-avatar.png
+!/store_source_code/img/prestashop@2x.png
+!/store_source_code/img/preston-login-wink@2x.png
+!/store_source_code/img/preston-login@2x.png
+!/store_source_code/img/questionmark.png
+!/store_source_code/img/genders/index.php
+!/store_source_code/img/admin/index.php
+!/store_source_code/img/c/index.php
+!/store_source_code/img/cms/index.php
+!/store_source_code/img/co/index.php
+!/store_source_code/img/jquery-ui
+!/store_source_code/img/l/index.php
+!/store_source_code/img/m/index.php
+!/store_source_code/img/os/index.php
+/store_source_code/img/p/* # Ignorowanie generowanych obrazów produktów
+!/store_source_code/img/p/index.php
+!/store_source_code/img/s/index.php
+!/store_source_code/img/scenes
+!/store_source_code/img/st/index.php
+!/store_source_code/img/su/index.php
+!/store_source_code/img/t/index.php
+!/store_source_code/img/tmp/index.php
+
+#vendor, dependency
+/store_source_code/vendor/*
+/store_source_code/bower_components/
+/store_source_code/node_modules/
+/store_source_code/composer.phar
+/store_source_code/php-cs-fixer
+/store_source_code/.grunt/*
+/store_source_code/composer.lock
+/store_source_code/*.hot-update.js
+/store_source_code/*.hot-update.json
+
+#config files
+/store_source_code/config/settings.inc.php
+/store_source_code/config/settings.old.php
+/store_source_code/config/xml/*
+/store_source_code/config/themes/*
+!/store_source_code/config/xml/themes/default.xml
+/store_source_code/themes/*/config/settings_*.json
+/store_source_code/app/config/parameters.old.yml
+/store_source_code/app/config/config.php
+/store_source_code/app/config/parameters.yml
+/store_source_code/app/config/parameters.php
+
+#templates
+/store_source_code/themes/*/cache/*
+
+#translations, mails
+/store_source_code/translations/*
+/store_source_code/mails/*
+/store_source_code/app/Resources/translations/*
+!/store_source_code/mails/themes/
+!/store_source_code/mails/_partials/
+!/store_source_code/app/Resources/translations/default
+/store_source_code/themes/default-bootstrap/lang/*
+/store_source_code/themes/default-bootstrap/modules/*/translations/*.php
+/store_source_code/themes/default-bootstrap/mails/*
+!/store_source_code/themes/default-bootstrap/mails/en/
+/store_source_code/themes/default-bootstrap/modules/*/mails/*
+!/store_source_code/themes/default-bootstrap/modules/*/mails/en
+
+#symfony
+/store_source_code/bin/
+/store_source_code/var/*
+!/store_source_code/var/cache
+/store_source_code/var/cache/*
+!/store_source_code/var/logs
+/store_source_code/var/logs/*
+!/store_source_code/var/sessions
+/store_source_code/var/sessions/*
+!/store_source_code/var/cache/.gitkeep
+!/store_source_code/var/logs/.gitkeep
+!/store_source_code/var/sessions/.gitkeep
+!/store_source_code/var/SymfonyRequirements.php
+/store_source_code/web/bundles/
+/store_source_code/app/Resources/geoip/GeoLite2-City.mmdb
+/store_source_code/.htaccess
+
+#temps
+/store_source_code/admin-dev/autoupgrade/*
+!/store_source_code/admin-dev/autoupgrade/index.php
+!/store_source_code/admin-dev/autoupgrade/backup/index.php
+/store_source_code/admin-dev/backups/*
+!/store_source_code/admin-dev/backups/.htaccess
+/store_source_code/admin-dev/import/*
+!/store_source_code/admin-dev/import/.htaccess
+!/store_source_code/admin-dev/import/index.php
+/store_source_code/admin-dev/export/*
+!/store_source_code/admin-dev/export/.htaccess
+!/store_source_code/admin-dev/export/index.php
