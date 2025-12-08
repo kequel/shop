@@ -8,10 +8,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700;800;900&display=swap');
 /* ========================================= */
 
-
+.contact-page-wrapper *{
+        color:white !important;
+    transition: all 300ms ease;
+}
  *
  {
-    color:#003169;
+    color:#003169 !important;
     transition: all 300ms ease;
  }
  #header{ background: #003169 !important; }
@@ -122,7 +125,7 @@ color:white !important;
 
 .contact-details-left a:hover {
     color: #003169;
-top-container clearfix    text-decoration: underline;
+    text-decoration: underline;
 }
 
 .contact-details-left h5 {
@@ -2581,4 +2584,61 @@ color: #fff !important;
     background: #793789 !important;
     border-color: #793789!important;
 
+}
+.checkout-step.-current.-reachable.js-current-step.-clickable .btn.btn-primary.continue.float-xs-right{
+background-color: #003169 !important;
+color: white !important;
+    display: inline-block;
+    padding: 8px 41px;
+        font-size: 19px;
+    font-weight: 400;
+}
+
+#checkout-personal-information-step .continue.btn.btn-primary.float-xs-right{
+    background-color: #003169 !important;
+color: white !important;
+    display: inline-block;
+    padding: 8px 28px 8px 10px;
+        font-size: 19px;
+    font-weight: 400;
+}
+
+#checkout-personal-information-step .continue.btn.btn-primary.float-xs-right:hover{
+  background-color: #0050a7 !important;
+}
+
+.checkout-step.-current.-reachable.js-current-step.-clickable .btn.btn-primary.continue.float-xs-right:hover{
+background-color: #0050a7 !important;
+
+}
+#checkout-payment-step .btn.btn-primary.center-block:focus{
+background-color: #003169 !important;
+color: white !important;
+    display: inline-block;
+    padding: 8px 41px;
+        font-size: 19px;
+    font-weight: 400;
+}
+.btn-primary {
+    color: #fff !important;
+    background-color:  #003169 !important;
+}
+#checkout-payment-step .btn.btn-primary.center-block{
+    background-color: #0050a7 !important;
+}
+.btn.disabled, .btn.disabled:hover {
+    color: #ddd !important;
+    background: #f6f6f6 !important;
+    opacity: 1;
+}
+ .label.label-pill.bright{
+    color: #ddd !important;
+}
+
+#history .table.table-striped.table-bordered.table-labeled.hidden-sm-down{
+    width: 100% !important;
+}
+ 
+#history .table.table-striped.table-bordered.table-labeled.hidden-sm-down .text-xs-right{
+    width: auto !important;
 }
