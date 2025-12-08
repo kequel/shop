@@ -69,7 +69,7 @@
     font-size: 18px;
 
     width: 300px;
-	  background-color:{if $product.quantity < 1}#999{else}green{/if};
+	  background-color:{if $product.quantity < 1}#999!important{else}green !important{/if};
     height: 50px;
     display: inline-block;    float: none;
     margin: 10px 0 0 0;
@@ -134,11 +134,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var currentQty = parseInt(qtyInput.value) || 1;
     if (maxQty < 1 || currentQty > maxQty) {
       addToCartBtn.disabled = true;
-      addToCartBtn.style.backgroundColor = '#999';
+      addToCartBtn.style.backgroundColor = '#999 !important';
       addToCartBtn.style.cursor = 'not-allowed';
     } else {
       addToCartBtn.disabled = false;
-      addToCartBtn.style.backgroundColor = 'green';
+      addToCartBtn.style.backgroundColor = 'green !important';
       addToCartBtn.style.cursor = 'pointer';
     }
   }
