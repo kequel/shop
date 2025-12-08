@@ -1,29 +1,57 @@
 [
   {
-    "name": "PROMOCJE",
-    "url": "https://mopserwis.pl/3-promocje",
-    "subcategories": []
-  },
-  {
-    "name": "Wyprzedaże",
-    "url": "https://mopserwis.pl/239-wyprzedaze",
-    "subcategories": []
-  },
-  {
-    "name": "DOZOWNIKI i WYPOSAŻENIE",
-    "url": "https://mopserwis.pl/4-dozowniki-i-wyposazenie",
+    "name": "UTRZYMANIE CZYSTOŚCI I HIGIENA",
+    "url": "",
     "subcategories": [
       {
-        "name": "Linie dozowników",
-        "url": "https://mopserwis.pl/299-linie-dozownikow"
+        "name": "Kompleksowa higiena obiektu",
+        "url": ""
       },
       {
-        "name": "Tork Linia Biała",
-        "url": "https://mopserwis.pl/300-tork-linia-biala"
+        "name": "Środki i artykuły myjące",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "name": "WYPOSAŻENIE I SYSTEMY DLA FIRM",
+    "url": "",
+    "subcategories": [
+      {
+        "name": "Elementy wyposażenia wnętrz",
+        "url": ""
       },
       {
-        "name": "Tork Linia Czarna",
-        "url": "https://mopserwis.pl/302-tork-linia-czarna"
+        "name": "Profesjonalne systemy dozowania",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "name": "ARTYKUŁY GOSPODARCZE I PRZEMYSŁOWE",
+    "url": "",
+    "subcategories": [
+      {
+        "name": "Rozwiązania do sprzątania",
+        "url": ""
+      },
+      {
+        "name": "Produkty specjalistyczne i uniwersalne",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "name": "AKCESORIA I MATERIAŁY EKSPLOATACYJNE",
+    "url": "",
+    "subcategories": [
+      {
+        "name": "Niezbędne w codziennym użytku",
+        "url": ""
+      },
+      {
+        "name": "Zaopatrzenie sanitarne i bhp",
+        "url": ""
       }
     ]
   }
