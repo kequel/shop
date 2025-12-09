@@ -25,6 +25,9 @@ class ProductPage:
     # Lokator przycisku 'Kontynuuj zakupy' w okienku modalnym po dodaniu produktu do koszyka
     MODAL_CONTINUE_BTN = (By.XPATH, "//button[contains(text(), 'Kontynuuj zakupy')]")
 
+    # Dodatkowy lokator do sprawdzenia samego istnienia przycisku (bez czekania na klikalność)
+    ADD_BTN_SELECTOR = "button[data-button-action='add-to-cart']"
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
@@ -71,3 +74,23 @@ class ProductPage:
         # Klikamy 'Kontynuuj zakupy'
         continue_btn.click()
         if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)
+
+    def is_add_to_cart_possible(self):
+        """
+        Sprawdza czy przycisk dodawania do koszyka jest dostepny i aktywny.
+        Zwraca True jesli mozna kupic, False jesli out-of-stock.
+        """
+        try:
+            # Szukamy elementu z malym timeoutem lub bezposrednio w DOM
+            # Uzywamy find_elements zeby nie rzucalo bledu jak nie znajdzie
+            btns = self.driver.find_elements(By.CSS_SELECTOR, self.ADD_BTN_SELECTOR)
+            
+            if len(btns) > 0:
+                btn = btns[0]
+                # Sprawdzamy czy przycisk jest wyswietlony i czy jest wlaczony (nie ma atrybutu disabled)
+                if btn.is_displayed() and btn.is_enabled():
+                    return True
+            
+            return False
+        except:
+            return False
