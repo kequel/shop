@@ -42,3 +42,10 @@ services:
       a2ensite default-ssl &&
       apache2-foreground
       "
+      
+  mailhog:
+    image: mailhog/mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
