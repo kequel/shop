@@ -159,21 +159,62 @@ def test_shop(driver):
     # Wyszukiwanie frazy
     home_page.search_for_phrase(SEARCH_PHRASE)
 
+    product_found_and_added = False
+
     # Sprawdzamy czy w URL jest 'controller=search'
     # Jesli tak to mamy liste wynikow i trzeba wybrać losowy produkt
     if "controller=search" in driver.current_url:
-        print("Znaleziono liste wynikow - wybieram losowy produkt.")
-        category_page.click_random_product()
+
+        # Probujemy max 5 razy znalezc dostepny produkt
+        max_search_attempts = 5
+        attempts = 0
+
+        while attempts < max_search_attempts:
+
+            # Zapamietujemy URL wynikow wyszukiwania
+            search_results_url = driver.current_url
+
+            try:
+                # Wybor losowego produktu 
+                category_page.click_random_product()
+            except Exception as e:
+                print(f"Brak kolejnych unikalnych produktow do sprawdzenia: {e}")
+                break
+
+            # Sprawdzenie dostepnosci
+            if product_page.is_add_to_cart_possible():
+                print("Produkt z wyszukiwania dostepny - dodaje.")
+                
+                # Losowa ilosc i dodanie do koszyka
+                search_qty = random.randint(1, MAX_QTY_OF_SPECIFIC_PRODUCT)
+                product_page.set_quantity(search_qty)
+                product_page.add_to_cart()
+                product_page.continue_shopping()
+                
+                product_found_and_added = True
+                break # Sukces - przerywamy petle
+            else:
+                print("Wylosowany produkt NIEDOSTEPNY - wracam do listy wynikow.")
+                driver.get(search_results_url)
+                time.sleep(COMPLETE_WINDOW_SLEEP_TIME)
+                attempts += 1
+                
     else:
-        print("Przekierowano bezposrednio na strone produktu (tylko 1 wynik). Pomijam wybor z listy.")
+        
+        print("Przekierowano bezposrednio na strone produktu (tylko 1 wynik).")
+        
+        if product_page.is_add_to_cart_possible():
+            search_qty = random.randint(1, MAX_QTY_OF_SPECIFIC_PRODUCT)
+            product_page.set_quantity(search_qty)
+            product_page.add_to_cart()
+            product_page.continue_shopping()
+            product_found_and_added = True
+        else:
+            print("Jedyny znaleziony produkt jest niedostepny.")
 
-    # Losowa ilosc dla produktu z wyszukiwania
-    search_qty = random.randint(1, MAX_QTY_OF_SPECIFIC_PRODUCT)
-    product_page.set_quantity(search_qty)
-
-    # Dodanie do koszyka
-    product_page.add_to_cart()
-    product_page.continue_shopping()
+    # Jesli po wszystkich probach nie dodano produktu, test powinien sie wywalic
+    if not product_found_and_added:
+        pytest.fail(f"Nie udalo sie dodac zadnego produktu dla frazy '{SEARCH_PHRASE}' (brak dostepnych stanow lub bledy).")
 
 
 
