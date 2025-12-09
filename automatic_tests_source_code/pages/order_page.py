@@ -25,7 +25,7 @@ class OrderPage:
     DELIVERY_OPTIONS = (By.XPATH, "//input[starts-with(@id, 'delivery_option_')]/..")
 
     # Lokatory opcji platnosci
-    PAYMENT_OPTION_PERSONALLY = (By.CSS_SELECTOR, "label[for='payment-option-1']")
+    PAYMENT_OPTION_PERSONALLY = (By.CSS_SELECTOR, "label[for='payment-option-2']")
     
     # Lokator obowiazkowego checkboxu
     TERMS_CHECKBOX = (By.ID, "conditions_to_approve[terms-and-conditions]")
