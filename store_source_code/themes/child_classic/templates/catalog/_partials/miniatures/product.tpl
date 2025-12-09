@@ -82,8 +82,13 @@
 
               {hook h='displayProductPriceBlock' product=$product type="before_price"}
 
-
+              {if $product.availability == 'available'}
               <div class="dostepnosc dostepny"></div>
+              {elseif $product.availability == 'last_remaining_items'}
+              <div class="dostepnosc dostepny"></div>
+              {else}
+              <div class="dostepnosc niedostepny"></div>
+              {/if}
               <span class="price" aria-label="{l s='Price' d='Shop.Theme.Catalog'}">
                 {capture name='custom_price'}{hook h='displayProductPriceBlock' product=$product type='custom_price' hook_origin='products_list'}{/capture}
                 {if '' !== $smarty.capture.custom_price}
@@ -105,53 +110,66 @@
           {/if}
           
           
-          <div id="dodaj_do_koszyka">
-              <form action="http://localhost:8080/cart" method="post" id="add-to-cart-or-refresh">
-              <input type="hidden" name="token" value="ec77e8c82bb21ce2ddf48940f7ecbd54">
-              <input type="hidden" name="id_product" value="2255">
-		
-		          <div id="plusminus" style="display:inline-block; float:left;"> 
-                <button style=" display:inline-block; padding: 2.5px 5px;" type="button" id="sub" class="sub">-</button>
-                <input style=" display:inline-block; width:30px;    display: inline-block;width: 30px; height: 26px; padding: 2px 0px; text-align: center;" type="" name="qty" value="1" min="1" data-button-action="add-to-cart">
-                <button style="display:inline-block; padding: 2.5px 5px;" type="button" id="add" class="add">+</button>
+                    <div id="dodaj_do_koszyka">
+            <form action="{$urls.pages.cart}" method="post" class="add-to-cart-or-refresh">
+              {* PrestaShop używa tych pól do koszyka *}
+              <input type="hidden" name="token" value="{$static_token}">
+              <input type="hidden" name="id_product" value="{$product.id_product}">
+              <input type="hidden" name="id_product_attribute" value="{$product.id_product_attribute}">
+              <input type="hidden" name="id_customization" value="0">
+              <input type="hidden" name="add" value="1">
+
+              <div id="plusminus" style="display:inline-block; float:left;">
+                <button style="display:inline-block; padding: 2.5px 5px;" type="button" class="sub">-</button>
+                <input
+                  style="display:inline-block; width:30px; height:26px; padding:2px 0; text-align:center;"
+                  type="number" name="qty" value="1" min="1"
+                >
+                <button style="display:inline-block; padding: 2.5px 5px;" type="button" class="add">+</button>
               </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('#plusminus').forEach(function(container) {
-    const addBtn = container.querySelector('.add');
-    const subBtn = container.querySelector('.sub');
-    const qtyInput = container.querySelector('input[name="qty"]');
 
-    addBtn.replaceWith(addBtn.cloneNode(true));
-    subBtn.replaceWith(subBtn.cloneNode(true));
+              <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('#plusminus').forEach(function(container) {
+                  const addBtn = container.querySelector('.add');
+                  const subBtn = container.querySelector('.sub');
+                  const qtyInput = container.querySelector('input[name="qty"]');
 
-    const newAddBtn = container.querySelector('.add');
-    const newSubBtn = container.querySelector('.sub');
+                  addBtn.replaceWith(addBtn.cloneNode(true));
+                  subBtn.replaceWith(subBtn.cloneNode(true));
 
-    newAddBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      let value = parseInt(qtyInput.value) || 1;
-      qtyInput.value = value + 1;
-    });
+                  const newAddBtn = container.querySelector('.add');
+                  const newSubBtn = container.querySelector('.sub');
 
-    newSubBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      let value = parseInt(qtyInput.value) || 1;
-      const min = parseInt(qtyInput.min) || 1;
-      if (value > min) {
-        qtyInput.value = value - 1;
-      }
-    });
-  });
-});
-</script>
+                  newAddBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let value = parseInt(qtyInput.value) || 1;
+                    qtyInput.value = value + 1;
+                  });
 
+                  newSubBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let value = parseInt(qtyInput.value) || 1;
+                    const min = parseInt(qtyInput.min) || 1;
+                    if (value > min) {
+                      qtyInput.value = value - 1;
+                    }
+                  });
+                });
+              });
+              </script>
 
-	
-		
-        <a id="dodaj1" class="button add-to-cart" href="#" data-button-action="add-to-cart" data-url="https://mopserwis.pl/koszyk?add=1&amp;id_product=2255&amp;id_product_attribute=0"><i class="fa fa-cart-plus"></i> Do koszyka</a>
-    </form>
-        </div>
+              <button
+                id="dodaj1"
+                class="button add-to-cart"
+                type="submit"
+                data-button-action="add-to-cart"
+              >
+                <i class="fa fa-cart-plus"></i> Do koszyka
+              </button>
+            </form>
+          </div>
+
         {/block}
         
 

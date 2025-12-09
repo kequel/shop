@@ -36,14 +36,24 @@
         " 
         > 
         <div class="qty" style="line-height: 0;    margin-left: 75px;">
-          <span id="product-availability2" class="product-available"  >
+          <span
+          {if $product.availability == 'available'}
+           id="product-availability2" class="product-available"  >
             <i class="fa fa-check" title="Produkt dostępny" style="color: #fff !important;"></i>
+          {elseif $product.availability == 'last_remaining_items'}
+         id="product-availability4" class="product-available"  >
+            <i class="fa fa-check" title="Produkt niedostępny" style="color: #fff !important;"></i>
+          {else}
+           id="product-availability3" class="product-available"  >
+            <i class="fa fa-close" title="Produkt niedostępny" style="color: #fff !important;"></i>
+          {/if}
+            
 				  </span>
           <span style="font-size: 20px; margin-left:5px;color: #0050a7 !important;    margin-top: 15px;">ILOŚĆ</span>
           
           <div id="plusminus" style="display:inline-block; float:left;"> 
                 <button style=" display:inline-block; margin-top:5px; padding: 2.5px 5px; background: #fff !important;" type="button" id="sub" class="sub"><span class="quantity-minus fa fa-minus-square" style="color: #0050a7 !important;"></span></button>
-                <input style=" font-size:20px !important; color:#0050a7 !important;  display:inline-block; width:22px;    display: inline-block;height: 33px; padding: 2px 0px; text-align: center;" type="" name="qty" value="1" min="1" data-button-action="add-to-cart">
+                <input style=" font-size:20px !important; color:#0050a7 !important;  display:inline-block; width:22px;    display: inline-block;height: 33px; padding: 2px 0px; text-align: center;" type="number" name="qty" value="1" min="1" max="{$product.quantity}" data-button-action="add-to-cart">
                 <button style="display:inline-block;margin-top:5px; padding: 2.5px 5px; background: #fff !important;" type="button" id="add" class="add"><span class="quantity-minus fa fa-plus-square" style="color: #0050a7 !important;"></span></button>
               </div>
         </div>
@@ -53,17 +63,19 @@
             class="btn btn-primary add-to-cart"
             data-button-action="add-to-cart"
             type="submit"
+            {if $product.quantity < 1}disabled{/if}
             style="min-width: 0px;
             
     font-size: 18px;
 
     width: 300px;
-	  background-color:green;
+	  background-color:{if $product.quantity < 1}#999!important{else}green !important{/if};
     height: 50px;
     display: inline-block;    float: none;
     margin: 10px 0 0 0;
     color: #fff !important;
-    font-weight: 400;"
+    font-weight: 400;
+    {if $product.quantity < 1}cursor: not-allowed;{/if}"
             
           >
             <i class="fa fa-shopping-cart" style=" font-size: 12px;color: #fff !important"></i>
@@ -107,3 +119,75 @@
     {/block}
   {/if}
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var qtyInput = document.querySelector('#plusminus input[name="qty"]');
+  var addBtn = document.getElementById('add');
+  var subBtn = document.getElementById('sub');
+  var addToCartBtn = document.querySelector('.add-to-cart');
+  
+  var minQty = parseInt(qtyInput.getAttribute('min')) || 1;
+  var maxQty = parseInt(qtyInput.getAttribute('max')) || 0;
+  
+  function updateButtonState() {
+    var currentQty = parseInt(qtyInput.value) || 1;
+    if (maxQty < 1 || currentQty > maxQty) {
+      addToCartBtn.disabled = true;
+      addToCartBtn.style.backgroundColor = '#999 !important';
+      addToCartBtn.style.cursor = 'not-allowed';
+    } else {
+      addToCartBtn.disabled = false;
+      addToCartBtn.style.backgroundColor = 'green !important';
+      addToCartBtn.style.cursor = 'pointer';
+    }
+  }
+  
+  addBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var currentValue = parseInt(qtyInput.value) || 1;
+    if (currentValue < maxQty) {
+      qtyInput.value = currentValue + 1;
+    }
+    updateButtonState();
+  });
+  
+  subBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var currentValue = parseInt(qtyInput.value) || 1;
+    if (currentValue > minQty) {
+      qtyInput.value = currentValue - 1;
+    }
+    updateButtonState();
+  });
+  
+  qtyInput.addEventListener('change', function() {
+    var value = parseInt(this.value) || 1;
+    if (value < minQty) value = minQty;
+    if (value > maxQty) value = maxQty;
+    this.value = value;
+    updateButtonState();
+  });
+  
+  addToCartBtn.addEventListener('click', function(e) {
+    var currentQty = parseInt(qtyInput.value);
+    if (maxQty < 1 || currentQty > maxQty) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+  });
+  
+  prestashop.on('updatedCart', function() {
+    var modal = document.querySelector('.modal');
+    if (modal) {
+      $(modal).on('hidden.bs.modal', function() {
+        location.reload();
+      });
+    }
+  });
+  
+  
+  updateButtonState();
+});
+</script>

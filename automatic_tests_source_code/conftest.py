@@ -1,19 +1,25 @@
 import pytest
+import os
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
+DOWNLOAD_DIR = os.path.join(os.getcwd(), "downloads")
+
+# >>> >>> >>> AKTYWACJA SRODOWISKA I INSTALACJA PLUGINOW <<< <<< <<<
+#
+# python3 -m venv venv
+# source venv/bin/activate
+# pip install -r requirements.txt
+#
 # >>> >>> >>> URUCHOMIENIE TESTOWANIA <<< <<< <<<
-# 
-# W TERMINALU:
 #
 # Graficzny Chrome (DOMYSLNIE): >>> pytest
 # Graficzny Firefox:            >>> pytest --browser=firefox
 #
 # Headless Chrome:              >>> pytest --headless
 # Headless Firefox:             >>> pytest --browser=firefox --headless
-
 
 def pytest_addoption(parser):
     """Dodanie wlasnych opcji do uruchomienia skryptu testowania"""
@@ -38,28 +44,49 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="function")
 def driver(request):
 
+    # Upewniamy sie, ze katalog istnieje
+    if not os.path.exists(DOWNLOAD_DIR):
+        os.makedirs(DOWNLOAD_DIR)
+
     # Pobieramy obie opcje z terminala
     browser_name = request.config.getoption("browser") 
     is_headless = request.config.getoption("headless") 
     
+    driver = None
+
     # Sprawdzamy ktora przegladarka zostala wybrana
     if browser_name == "chrome":
         
         chrome_options = ChromeOptions()
 
-        # Jesli wybrany tryb headless (bez okna), to do ustawien przegladarki dodac te opcje
-        if is_headless: chrome_options.add_argument("--headless")
+        # Ignorujemy warning "Your connection is not private" ktore blokowalo prace skryptu
+        chrome_options.accept_insecure_certs = True 
+        chrome_options.add_argument("--ignore-certificate-errors")
+        chrome_options.add_argument("--allow-insecure-localhost")
+        chrome_options.add_argument("--ignore-ssl-errors")
 
         # Potrzebne dla WSL opcje
         chrome_options.add_argument("--no-sandbox") 
         chrome_options.add_argument("--disable-dev-shm-usage") 
         
+        chrome_options.add_argument("--window-size=1920,1080") 
+        chrome_options.add_argument("--start-maximized")
+
+        # Jesli wybrany tryb headless (bez okna), to do ustawien przegladarki dodac te opcje
+        if is_headless: chrome_options.add_argument("--headless")
+            
         driver = webdriver.Chrome(options=chrome_options) 
 
     elif browser_name == "firefox":
         
         firefox_options = FirefoxOptions()
 
+        # Ignorujemy warning "Your connection is not private" ktore blokowalo prace skryptu
+        firefox_options.accept_insecure_certs = True
+
+        firefox_options.add_argument("--width=1920")
+        firefox_options.add_argument("--height=1080")
+        
         # Jesli wybrany tryb headless (bez okna), to do ustawien przegladarki dodac te opcje
         if is_headless: firefox_options.add_argument("--headless")
 
@@ -68,9 +95,6 @@ def driver(request):
     else:
         raise pytest.UsageError(f"--browser={browser_name} jest nieobslugiwany")
     
-    # Maksymalizujemy okno tylko jeśli NIE JEST w trybie headless
-    if not is_headless: driver.maximize_window()
-
     # Dodanie informacji w ktorym trybie dzialamy (zeby mozna bylo skorzystac w innych plikach)
     driver.is_headless = is_headless
     

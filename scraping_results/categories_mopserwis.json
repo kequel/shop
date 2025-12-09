@@ -1,0 +1,58 @@
+[
+  {
+    "name": "CZYSTOŚĆ I HIGIENA",
+    "url": "",
+    "subcategories": [
+      {
+        "name": "Kompleksowa higiena obiektu",
+        "url": ""
+      },
+      {
+        "name": "Środki i artykuły myjące",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "name": "DLA FIRM",
+    "url": "",
+    "subcategories": [
+      {
+        "name": "Elementy wyposażenia wnętrz",
+        "url": ""
+      },
+      {
+        "name": "Profesjonalne systemy dozowania",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "name": "ARTYKUŁY GOSPODARCZE",
+    "url": "",
+    "subcategories": [
+      {
+        "name": "Rozwiązania do sprzątania",
+        "url": ""
+      },
+      {
+        "name": "Produkty specjalistyczne i uniwersalne",
+        "url": ""
+      }
+    ]
+  },
+  {
+    "name": "AKCESORIA I MATERIAŁY",
+    "url": "",
+    "subcategories": [
+      {
+        "name": "Niezbędne w codziennym użytku",
+        "url": ""
+      },
+      {
+        "name": "Zaopatrzenie sanitarne i bhp",
+        "url": ""
+      }
+    ]
+  }
+]

@@ -52,7 +52,9 @@
     <meta content="{$product.url}">
     <div class="row product-container js-product-container">
     <h1 class="h1_nazwa">{block name='page_title'}{$product.name}{/block}</h1>
-    <a href="" class="back-link">&lt; Wróć do kategorii</a>
+    <a href="{$link->getCategoryLink($product.id_category_default)}" class="back-link">
+  &lt; Wróć do kategorii
+</a>
       <div class="col-md-6" id="produkt_lewo">
         {block name='page_content_container'}
           <section class="page-content" id="content">
@@ -79,9 +81,7 @@
           {/block}
 
           <div class="product-information">
-            {block name='product_description_short'}
-              <div id="product-description-short-{$product.id}" class="product-description">{$product.description_short nofilter}</div>
-            {/block}
+           
 
             {if $product.is_customizable && count($product.customizations.fields)}
               {block name='product_customization'}

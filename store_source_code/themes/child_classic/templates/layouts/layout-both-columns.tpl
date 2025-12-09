@@ -24,7 +24,9 @@
  *}
 
 {include file='_partials/helpers.tpl'}
+{if isset($page.page_name) && ($page.page_name != 'contact')}
 
+{/if}
 <!doctype html>
 <html lang="{$language.locale}">
 
@@ -33,7 +35,6 @@
       {include file='_partials/head.tpl'}
     {/block}
   </head>
-
   <body id="{$page.page_name}" class="{$page.body_classes|classnames}">
 
     {block name='hook_after_body_opening_tag'}
@@ -51,11 +52,11 @@
         {/block}
       </header>
 
-      {if isset($page.page_name) && ($page.page_name == 'category' || $page.page_name == 'index'|| $page.page_name == 'product' ||$page.page_name == 'checkout'  )}
+      {if isset($page.page_name) && ($page.page_name == 'category'  || $page.page_name == 'index'|| $page.page_name == 'product' ||$page.page_name == 'checkout'  )}
       
       <section id="wrapper">
       {else}
-      <section id="wrapper2">
+      <section id="wrapper2" style="min-height:700px">
       {/if}
 
        
@@ -70,8 +71,8 @@
           {hook h="displayWrapperTop"}
         </div>
         {/if}
-        <div class="container">
-        {if isset($page.page_name) && ($page.page_name =='authentication' || $page.page_name =='cart' || $page.page_name =='checkout') }
+        <div class="container" >
+        {if isset($page.page_name) && ($page.page_name =='discount'||$page.page_name =='order-detail'||$page.page_name =='authentication'||$page.page_name =='order-confirmation' || $page.page_name =='cart' || $page.page_name =='checkout'|| $page.page_name == 'my-account'|| $page.page_name == 'history'|| $page.page_name == 'identity'|| $page.page_name == 'address'|| $page.page_name == 'order-slip'|| $page.page_name == 'credit-slip' || $page.page_name == 'addresses') }
         {else}
           {block name='breadcrumb'}
             {include file='_partials/breadcrumb.tpl'}
@@ -112,13 +113,15 @@
       </section>
 
       <footer id="footer" class="js-footer"
-      {if isset($page.page_name) && ($page.page_name == 'category'|| $page.page_name == 'cart' )}
+      {if isset($page.page_name) && ( $page.page_name == 'cart' || $page.page_name == 'history' ||$page.page_name == 'order-slip'    )}
       style="margin-top:400px !important;"
       {/if}
-      {if isset($page.page_name) &&  ($page.page_name == 'product'|| $page.page_name == 'my-account')}
+      {if isset($page.page_name) &&  ( $page.page_name == 'my-account')}
       style="margin-top:100px !important;"
       {/if}
-      
+      {if isset($page.page_name) &&  (  $page.page_name == 'category'|| $page.page_name == 'addresses' ||$page.page_name == 'discount')}
+      style="margin-top:200px !important;"
+      {/if}
       >
         <div class="footer-top-bar">
     <div class="container2">
