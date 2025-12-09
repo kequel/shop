@@ -119,7 +119,7 @@
       {if isset($page.page_name) &&  ( $page.page_name == 'my-account')}
       style="margin-top:100px !important;"
       {/if}
-      {if isset($page.page_name) &&  ( $page.page_name == 'addresses' ||$page.page_name == 'discount')}
+      {if isset($page.page_name) &&  (  $page.page_name == 'category'|| $page.page_name == 'addresses' ||$page.page_name == 'discount')}
       style="margin-top:200px !important;"
       {/if}
       >
