@@ -52,7 +52,9 @@
     <meta content="{$product.url}">
     <div class="row product-container js-product-container">
     <h1 class="h1_nazwa">{block name='page_title'}{$product.name}{/block}</h1>
-    <a href="" class="back-link">&lt; Wróć do kategorii</a>
+    <a href="{$link->getCategoryLink($product.id_category_default)}" class="back-link">
+  &lt; Wróć do kategorii
+</a>
       <div class="col-md-6" id="produkt_lewo">
         {block name='page_content_container'}
           <section class="page-content" id="content">

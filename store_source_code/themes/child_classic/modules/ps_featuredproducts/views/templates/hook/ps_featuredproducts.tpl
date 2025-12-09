@@ -26,12 +26,22 @@
   <a id="h2_produkty_link" class="h2 products-section-title text-uppercase" href="http://localhost:8080/3-promocje">
     Produkty promocyjne
   </a>
-  <!--Przecenione tutaj-->
-  {include file="catalog/_partials/productlist.tpl" products=$products cssClass="row" productClass="col-xs-12 col-sm-6 col-lg-4 col-xl-3"}
-  
+ <div class="products row">
+    {foreach from=$products item=product}
+      {if $product.has_discount}
+        {include file="catalog/_partials/miniatures/product.tpl" product=$product productClasses="col-xs-12 col-sm-6 col-lg-4 col-xl-3"}
+      {/if}
+    {/foreach}
+  </div>
 
   <h2 id="h2_produkty" class="h2 products-section-title text-uppercase">
     Nowe produkty
   </h2>
-  {include file="catalog/_partials/productlist.tpl" products=$products cssClass="row" productClass="col-xs-12 col-sm-6 col-lg-4 col-xl-3"}
+  <div class="products row">
+    {foreach from=$products item=product}
+      {if $product.new}
+        {include file="catalog/_partials/miniatures/product.tpl" product=$product productClasses="col-xs-12 col-sm-6 col-lg-4 col-xl-3"}
+      {/if}
+    {/foreach}
+  </div>
 </section>
