@@ -32,7 +32,7 @@ else
     exit 1
 fi
 
-# 2. img
+# 2.1 img
 IMAGES_BACKUP="${BACKUP_PATH}/img.tar.gz"
 
 docker compose -f ../docker-compose.yml exec -T $PS_SERVICE \
@@ -47,6 +47,21 @@ if [ $? -eq 0 ]; then
 else
     echo "could not backup images"
     IMAGES_BACKUP=""
+fi
+
+# 2.2 modules (slider images)
+MODULES_BACKUP="${BACKUP_PATH}/modules.tar.gz"
+
+docker compose -f ../docker-compose.yml exec -T $PS_SERVICE \
+  tar -czf /tmp/modules_backup.tar.gz \
+  -C /var/www/html/modules ps_imageslider/ 2>/dev/null
+
+if [ $? -eq 0 ]; then
+    docker compose -f ../docker-compose.yml cp $PS_SERVICE:/tmp/modules_backup.tar.gz "$MODULES_BACKUP"
+    docker compose -f ../docker-compose.yml exec -T $PS_SERVICE rm /tmp/modules_backup.tar.gz
+    MODULES_SIZE=$(du -h "$MODULES_BACKUP" | cut -f1)
+else
+    echo "could not backup modules"
 fi
 
 # 3. upload and download

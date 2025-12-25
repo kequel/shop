@@ -45,7 +45,7 @@ else
     exit 1
 fi
 
-# 2. images
+# 2.1 images
 IMG_PATH="${BACKUP_PATH}/img"
 
 if [ -d "$IMG_PATH" ]; then
@@ -58,6 +58,16 @@ if [ -d "$IMG_PATH" ]; then
     fi
 else
     echo "imges folder not found"
+fi
+
+# 2.2 modules
+MODULES_PATH="${BACKUP_PATH}/modules"
+
+if [ -d "$MODULES_PATH" ]; then
+    docker compose -f ../docker-compose.yml cp -r "$MODULES_PATH"/* "$PS_SERVICE:/var/www/html/modules/"
+    echo "modules restored"
+else
+    echo "modules folder not found"
 fi
 
 # 3. upload
