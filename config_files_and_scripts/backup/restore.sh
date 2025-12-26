@@ -27,6 +27,12 @@ fi
 
 echo "restoring backup: $BACKUP_NAME "
 
+# Fix backup structure - if ps_imageslider exists at root level, move it to modules/
+if [ -d "$BACKUP_PATH/ps_imageslider" ] && [ ! -d "$BACKUP_PATH/modules" ]; then
+    mkdir -p "$BACKUP_PATH/modules"
+    mv "$BACKUP_PATH/ps_imageslider" "$BACKUP_PATH/modules/"
+fi
+
 # 1. database
 if [ ! -f "$DUMP_FILE" ]; then
     echo "sql file not found: $DUMP_FILE"
@@ -64,7 +70,7 @@ fi
 MODULES_PATH="${BACKUP_PATH}/modules"
 
 if [ -d "$MODULES_PATH" ]; then
-    docker compose -f ../docker-compose.yml cp -r "$MODULES_PATH"/* "$PS_SERVICE:/var/www/html/modules/"
+    docker compose -f ../docker-compose.yml cp "$MODULES_PATH/." "$PS_SERVICE:/var/www/html/modules/"
     echo "modules restored"
 else
     echo "modules folder not found"
