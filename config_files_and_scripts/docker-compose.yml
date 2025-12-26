@@ -4,7 +4,7 @@ services:
   db_init:
     image: mysql:8.0
     volumes:
-      - ./prestashop_dump.sql:/tmp/prestashop_dump.sql:ro
+      - ./backup/prestashop_dump.sql:/tmp/prestashop_dump.sql:ro
       - ./init-db.sh:/init-db.sh:ro
     entrypoint: ["/bin/bash", "/init-db.sh"]
     restart: "no"
