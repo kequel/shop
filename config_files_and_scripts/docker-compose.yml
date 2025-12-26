@@ -1,40 +1,47 @@
 version: '3.8'
 
 services:
-  db:
-    image: mariadb:10.6
-    command: --default-authentication-plugin=mysql_native_password
+  db_init:
+    image: mysql:8.0
     volumes:
-      - ./db_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: prestashop_db
-      MYSQL_USER: prestashop_user
-      MYSQL_PASSWORD: admin
-    restart: always
-
+      - ./prestashop_dump.sql:/tmp/prestashop_dump.sql:ro
+      - ./init-db.sh:/init-db.sh:ro
+    entrypoint: ["/bin/bash", "/init-db.sh"]
+    restart: "no"
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+      
   prestashop:
     image: prestashop/prestashop:1.7-apache
     ports:
-      - "8080:80"
-      - "8443:443"
+      - "12345:80"    # ZMIEŃ na swój wyliczony port!
+      - "12346:443"   # ZMIEŃ na swój wyliczony port!
     depends_on:
-      - db
+      - db_init
     volumes:
-      - ../store_source_code:/var/www/html
-      - ../docker/certs/prestashop.crt:/etc/ssl/certs/prestashop.crt
-      - ../docker/certs/prestashop.key:/etc/ssl/private/prestashop.key
+      - prestashop_data:/var/www/html
       - ./prestashop-ssl.conf:/etc/apache2/sites-available/default-ssl.conf
       - ./prestashop-http.conf:/etc/apache2/sites-available/000-default.conf
       - ./ports.conf:/etc/apache2/ports.conf
     environment:
-      DB_SERVER: db
-      DB_USER: admin
+      DB_SERVER: student-swarm01.maas
+      DB_PORT: 3306
+      DB_USER: root
       DB_PASSWORD: admin
-      DB_NAME: prestashop_db
+      DB_NAME: RSWW_123456_prestashop  # MUSI BYĆ TAKIE SAMO jak w init-db.sh!
       PS_INSTALL_AUTO: '0'
       PS_DEV_MODE: 'false'
     restart: always
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '1.0'      # Wymagane dla 3 pkt!
+          memory: 1024M    # Wymagane dla 3 pkt!
     command: >
       bash -c "
       a2enmod ssl &&
@@ -45,7 +52,16 @@ services:
       
   mailhog:
     image: mailhog/mailhog
-    restart: unless-stopped
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - "12347:1025"  # ZMIEŃ na swój port!
+      - "12348:8025"  # ZMIEŃ na swój port!
+    restart: unless-stopped
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+
+volumes:
+  prestashop_data:
