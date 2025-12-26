@@ -8,11 +8,11 @@ All scripts **must** be executed from within this directory (`backup/`). They us
 
 ## Scripts Summary
 
-### 1. Database Backup (`./export.sh`)
-Creates a database dump, saving it as `prestashop_dump.sql` in this folder. It connects to the `db` service.
+### 1. Database & Files Backup (`./export.sh`)
+Creates a complete backup including database dump (`prestashop_dump.sql`), product images (`img.tar.gz`), and user uploads (`upload.tar.gz`). Saves everything in a timestamped folder in `backups/`.
 
-### 2. Database Restore (`./restore.sh`)
-Loads data from `prestashop_dump.sql` into the database and clears the PrestaShop cache in the `prestashop` container.
+### 2. Database & Files Restore (`./restore.sh`)
+Loads data from a backup folder into the database, restores all images and uploads, and clears the PrestaShop cache in the `prestashop` container.
 
 ### 3. SSL Generation (`./gen-cert.sh`)
 Generates self-signed SSL keys and certificates (`prestashop.key` and `prestashop.crt`) using the `openssl.conf` file. The output files are saved to `../../docker/certs`.
@@ -34,4 +34,8 @@ Generates self-signed SSL keys and certificates (`prestashop.key` and `prestasho
 4.  **Run Backup:**
     ```bash
     ./export.sh
+    ```
+5.  **Restore Backup:**
+    ```bash
+    ./restore.sh prestashop_backup_YYYYMMDD_HHMMSS
     ```
