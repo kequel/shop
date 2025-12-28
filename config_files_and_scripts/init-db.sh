@@ -4,8 +4,8 @@ set -e
 DB_HOST="student-swarm01.maas"
 DB_PORT="3306"
 DB_USER="root"
-DB_PASSWORD="admin"
-DB_NAME="RSWW_123456_prestashop"  # ZMIEŃ NA SWÓJ PREFIX!
+DB_PASSWORD="student"
+DB_NAME="BE_196615_prestashop"
 
 echo "Waiting for MySQL server..."
 until mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" -e "SELECT 1" &>/dev/null; do
