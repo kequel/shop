@@ -1,49 +1,21 @@
 version: '3.8'
 
 services:
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: prestashop_local
-   #przy wdrozeniu na klaster ma byc: 
-   #environment:
-      #DB_SERVER: student-swarm01.maas
-      #DB_NAME: BE_196615_prestashop
-      #DB_PASSWORD: student
-    volumes:
-      - db_data:/var/lib/mysql
-      - ./backup/prestashop_dump.sql:/docker-entrypoint-initdb.d/init.sql:ro
-    restart: always
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-
   prestashop:
     image: kequel/be-prestashop-196615:test
     ports:
       - "19661:80"
       - "19662:443"
-    depends_on:
-      - db
     volumes:
-      - ../store_source_code:/var/www/html
-      - ./prestashop-ssl.conf:/etc/apache2/sites-available/default-ssl.conf
-      - ./prestashop-http.conf:/etc/apache2/sites-available/000-default.conf
-      - ./ports.conf:/etc/apache2/ports.conf
-      - ../docker/certs/prestashop.crt:/etc/ssl/certs/prestashop.crt:ro
-      - ../docker/certs/prestashop.key:/etc/ssl/private/prestashop.key:ro
+      - prestashop_data:/var/www/html
     environment:
-      DB_SERVER: db
+      DB_SERVER: student-swarm01.maas
       DB_PORT: 3306
       DB_USER: root
-      DB_PASSWORD: admin
-      DB_NAME: prestashop_local
+      DB_PASSWORD: student
+      DB_NAME: BE_196615_prestashop
       PS_INSTALL_AUTO: '0'
       PS_DEV_MODE: 'false'
-    restart: always
     deploy:
       replicas: 1
       resources:
@@ -56,7 +28,6 @@ services:
     ports:
       - "19663:1025"
       - "19664:8025"
-    restart: unless-stopped
     deploy:
       replicas: 1
       resources:
@@ -65,4 +36,4 @@ services:
           memory: 128M
 
 volumes:
-  db_data:
+  prestashop_data:
