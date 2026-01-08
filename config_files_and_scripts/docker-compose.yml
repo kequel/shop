@@ -1,19 +1,38 @@
 version: '3.8'
 
 services:
+  db_init:
+    image: mysql:5.7
+    volumes:
+      - ./backup/prestashop_dump.sql:/tmp/prestashop_dump.sql:ro
+      - ./init-db.sh:/init-db.sh:ro
+    entrypoint: ["/bin/bash", "/init-db.sh"]
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+
   prestashop:
     image: kequel/be-prestashop-196615:test
     ports:
       - "19661:80"
       - "19662:443"
+    depends_on:
+      - db_init
     volumes:
       - prestashop_data:/var/www/html
+      - ./prestashop-ssl.conf:/etc/apache2/sites-available/default-ssl.conf:ro
+      - ./prestashop-http.conf:/etc/apache2/sites-available/000-default.conf:ro
+      - ./ports.conf:/etc/apache2/ports.conf:ro
     environment:
       DB_SERVER: student-swarm01.maas
       DB_PORT: 3306
       DB_USER: root
       DB_PASSWORD: student
-      DB_NAME: BE_196615_prestashop
+      DB_NAME: BE_196615
       PS_INSTALL_AUTO: '0'
       PS_DEV_MODE: 'false'
     deploy:

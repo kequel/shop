@@ -5,24 +5,25 @@ DB_HOST="student-swarm01.maas"
 DB_PORT="3306"
 DB_USER="root"
 DB_PASSWORD="student"
-DB_NAME="BE_196615_prestashop"
+DB_NAME="BE_196615"
 
-echo "Waiting for MySQL server..."
+echo "Czekam na serwer MySQL..."
 until mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" -e "SELECT 1" &>/dev/null; do
-  echo "MySQL not ready yet..."
+  echo "MySQL nie jest gotowy..."
   sleep 2
 done
 
-echo "Creating database if not exists..."
-mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+HAS_PRODUCTS=$(mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" -N -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='$DB_NAME' AND table_name='ps_product';")
 
-echo "Checking if database is empty..."
-TABLE_COUNT=$(mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" -N -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='$DB_NAME';")
-
-if [ "$TABLE_COUNT" -eq "0" ]; then
-  echo "Database is empty. Importing dump..."
-  mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" < /tmp/prestashop_dump.sql
-  echo "Database initialized successfully!"
+if [ "$HAS_PRODUCTS" -eq "0" ]; then
+  echo "Baza danych nie zawiera produktów. Rozpoczynam import dumpa..."
+  if [ -f "/tmp/prestashop_dump.sql" ]; then
+    mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" < /tmp/prestashop_dump.sql
+    echo "Inicjalizacja zakończona sukcesem!"
+  else
+    echo "BŁĄD: Nie znaleziono pliku /tmp/prestashop_dump.sql w kontenerze!"
+    exit 1
+  fi
 else
-  echo "Database already contains $TABLE_COUNT tables. Skipping initialization."
+  echo "Produkty już istnieją w bazie $DB_NAME. Pomijam import."
 fi
