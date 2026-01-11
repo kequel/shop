@@ -1,0 +1,7 @@
+.git
+**/db_data/**
+**/var/cache/**
+**/var/logs/**
+node_modules
+*.sql
+!docker/prestashop_dump.sql
