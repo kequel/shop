@@ -1,38 +1,46 @@
 version: '3.8'
 
 services:
-  db_init:
+  db:
     image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: prestashop_local
+   #przy wdrozeniu na klaster ma byc: 
+   #environment:
+      #DB_SERVER: student-swarm01.maas
+      #DB_NAME: BE_196615_prestashop
+      #DB_PASSWORD: student
     volumes:
-      - ./backup/prestashop_dump.sql:/tmp/prestashop_dump.sql:ro
-      - ./init-db.sh:/init-db.sh:ro
-    entrypoint: ["/bin/bash", "/init-db.sh"]
-    restart: "no"
+      - db_data:/var/lib/mysql
+      - ./backup/prestashop_dump.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    restart: always
     deploy:
-      replicas: 1
       resources:
         limits:
-          cpus: '0.25'
-          memory: 256M
-      
+          cpus: '0.5'
+          memory: 512M
+
   prestashop:
-    image: prestashop/prestashop:1.7-apache
+    image: kequel/be-prestashop-196615:test
     ports:
-      - "12345:80"    # ZMIEŃ na swój wyliczony port!
-      - "12346:443"   # ZMIEŃ na swój wyliczony port!
+      - "19661:80"
+      - "19662:443"
     depends_on:
-      - db_init
+      - db
     volumes:
-      - prestashop_data:/var/www/html
+      - ../store_source_code:/var/www/html
       - ./prestashop-ssl.conf:/etc/apache2/sites-available/default-ssl.conf
       - ./prestashop-http.conf:/etc/apache2/sites-available/000-default.conf
       - ./ports.conf:/etc/apache2/ports.conf
+      - ../docker/certs/prestashop.crt:/etc/ssl/certs/prestashop.crt:ro
+      - ../docker/certs/prestashop.key:/etc/ssl/private/prestashop.key:ro
     environment:
-      DB_SERVER: student-swarm01.maas
+      DB_SERVER: db
       DB_PORT: 3306
       DB_USER: root
       DB_PASSWORD: admin
-      DB_NAME: RSWW_123456_prestashop  # MUSI BYĆ TAKIE SAMO jak w init-db.sh!
+      DB_NAME: prestashop_local
       PS_INSTALL_AUTO: '0'
       PS_DEV_MODE: 'false'
     restart: always
@@ -40,21 +48,14 @@ services:
       replicas: 1
       resources:
         limits:
-          cpus: '1.0'      # Wymagane dla 3 pkt!
-          memory: 1024M    # Wymagane dla 3 pkt!
-    command: >
-      bash -c "
-      a2enmod ssl &&
-      a2enmod rewrite &&
-      a2ensite default-ssl &&
-      apache2-foreground
-      "
-      
+          cpus: '1.0'
+          memory: 1024M
+
   mailhog:
     image: mailhog/mailhog
     ports:
-      - "12347:1025"  # ZMIEŃ na swój port!
-      - "12348:8025"  # ZMIEŃ na swój port!
+      - "19663:1025"
+      - "19664:8025"
     restart: unless-stopped
     deploy:
       replicas: 1
@@ -64,4 +65,4 @@ services:
           memory: 128M
 
 volumes:
-  prestashop_data:
+  db_data:
