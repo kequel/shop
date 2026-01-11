@@ -1,32 +1,29 @@
-# PrestaShop 1.7 with Apache
 FROM prestashop/prestashop:1.7-apache
 
-LABEL maintainer="Team BE_196615"
-LABEL description="PrestaShop - BE Project"
-
-# additional tools
 RUN apt-get update && apt-get install -y \
     vim \
     curl \
+    ssl-cert \
+    default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
-# SSL certificates
-COPY certs/prestashop.crt /etc/ssl/certs/prestashop.crt
-COPY certs/prestashop.key /etc/ssl/private/prestashop.key
+RUN a2enmod ssl rewrite headers
 
-# permissions for certificates
-RUN chmod 600 /etc/ssl/private/prestashop.key
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/ssl/private/apache-selfsigned.key \
+    -out /etc/ssl/certs/apache-selfsigned.crt \
+    -subj "/C=PL/ST=Pomorskie/L=Gdansk/O=PJATK/OU=BE/CN=localhost"
 
-# enable required Apache modules
-RUN a2enmod ssl rewrite headers \
-    && a2ensite default-ssl
+RUN sed -i 's|/etc/ssl/certs/ssl-cert-snakeoil.pem|/etc/ssl/certs/apache-selfsigned.crt|g' /etc/apache2/sites-available/default-ssl.conf && \
+    sed -i 's|/etc/ssl/private/ssl-cert-snakeoil.key|/etc/ssl/private/apache-selfsigned.key|g' /etc/apache2/sites-available/default-ssl.conf
 
-# ports
+RUN a2ensite default-ssl
+
+COPY docker/init-db.sh /init-db.sh
+COPY docker/prestashop_dump.sql /tmp/prestashop_dump.sql
+COPY store_source_code /var/www/html
+
+RUN chmod +x /init-db.sh && \
+    chown -R www-data:www-data /var/www/html
+
 EXPOSE 80 443
-
-# health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-    CMD curl -f http://localhost/ || exit 1
-
-# start Apache
-CMD ["apache2-foreground"]
