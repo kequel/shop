@@ -2,38 +2,51 @@ version: '3.8'
 
 services:
   prestashop:
-    image: kequel/be-prestashop-196615:test
+    image: kequel/be-prestashop-196615:latest
     ports:
-      - "19661:80"
-      - "19662:443"
-    volumes:
-      - prestashop_data:/var/www/html
+      - target: 443
+        published: 19665
+        protocol: tcp
+        mode: host
     environment:
-      DB_SERVER: student-swarm01.maas
-      DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: student
-      DB_NAME: BE_196615_prestashop
-      PS_INSTALL_AUTO: '0'
-      PS_DEV_MODE: 'false'
+      - PS_DEV_MODE=1
+      - DB_SERVER=admin-mysql_db
+      - DB_NAME=BE_196615_prestashop
+      - DB_USER=root
+      - DB_PASSWORD=student
+    networks:
+      - default
+      - admin-mysql_default
     deploy:
-      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == student-swarm01
       resources:
         limits:
           cpus: '1.0'
-          memory: 1024M
+          memory: 1G
+      restart_policy:
+        condition: on-failure
 
   mailhog:
-    image: mailhog/mailhog
+    image: mailhog/mailhog:latest
     ports:
-      - "19663:1025"
-      - "19664:8025"
+      - target: 8025
+        published: 19666
+        protocol: tcp
+        mode: host
+    networks:
+      - default
     deploy:
-      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == student-swarm01
       resources:
         limits:
-          cpus: '0.25'
-          memory: 128M
+          cpus: '0.5'
+          memory: 512M
 
-volumes:
-  prestashop_data:
+networks:
+  default:
+  admin-mysql_default:
+    external: true
