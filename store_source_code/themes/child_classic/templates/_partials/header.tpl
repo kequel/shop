@@ -23,7 +23,7 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 
-
+{literal}
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S37Y4Y35YM"></script>
 <script>
@@ -33,6 +33,8 @@
 
   gtag('config', 'G-S37Y4Y35YM');
 </script>
+{/literal}
+
 <script src="{$urls.theme_assets}js/ga-events.js"></script>
 
 {block name='header_banner'}
