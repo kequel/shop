@@ -9,13 +9,25 @@ document.addEventListener('click', (e) => {
   }
 });
 
-if (window.prestashop) {
-  prestashop.on('updateCart', () => {
-    const promo = document.querySelector('.product-flag.discount, .product-flag.on-sale, .on-sale');
-    if (!promo) return;
 
-    if (typeof gtag === 'function') {
-      gtag('event', 'promo_add_to_cart', { source: 'cart' });
-    }
-  });
-}
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('button.add-to-cart, #dodaj1, [data-button-action="add-to-cart"]');
+  if (!btn) return;
+
+  const card = btn.closest('.thumbnail-container');
+  if (!card) return;
+
+  const promoFlag = card.querySelector('li.product-flag.discount, .discount-percentage');
+  if (!promoFlag) return;
+
+  const form = btn.closest('form');
+  const idProduct = form?.querySelector('input[name="id_product"]')?.value || '';
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'promo_add_to_cart', {
+      id_product: idProduct,
+      promo_label: (promoFlag.textContent || '').trim().slice(0, 30),
+      source: 'product_list'
+    });
+  }
+}, true);
