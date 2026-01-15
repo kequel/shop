@@ -14,6 +14,9 @@ services:
       - DB_NAME=BE_196615_prestashop
       - DB_USER=root
       - DB_PASSWORD=student
+    volumes:
+      - /opt/storage/actina15-20/block-storage/students/projects/students-swarm-services/BE_196615/img:/var/www/html/img
+      - /opt/storage/actina15-20/block-storage/students/projects/students-swarm-services/BE_196615/prestashop_dump.sql:/tmp/prestashop_dump.sql
     networks:
       - default
       - admin-mysql_default
