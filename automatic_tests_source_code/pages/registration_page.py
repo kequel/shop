@@ -11,8 +11,8 @@ from variables import COMPLETE_SECTION_SLEEP_TIME, COMPLETE_WINDOW_SLEEP_TIME
 class RegistrationPage:
 
     # Lokatory pol danych uzytkownika
-    GENDER_MR_RADIO = (By.CSS_SELECTOR, "label[for='field-id_gender-1']") 
-    GENDER_MRS_RADIO = (By.CSS_SELECTOR, "label[for='field-id_gender-2']")
+    GENDER_MR_RADIO = (By.ID, "field-id_gender-1") 
+    GENDER_MRS_RADIO = (By.ID, "field-id_gender-2")
     FIRSTNAME_INPUT = (By.NAME, "firstname")
     LASTNAME_INPUT = (By.NAME, "lastname")
     EMAIL_INPUT = (By.ID, "field-email")
@@ -25,20 +25,29 @@ class RegistrationPage:
     # Przycisk zapisu
     SUBMIT_BTN = (By.CSS_SELECTOR, "button[data-link-action='save-customer']")
 
+    # Lokator formularza
+    FORM_CONTAINER = (By.ID, "customer-form")
+
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 10)
+        self.wait = WebDriverWait(driver, 15)
 
     def fill_form(self, first_name, last_name, email, password, birthdate):
         """Wypelnia podstawowe pola tekstowe formularza"""
         
+        # Sprawdzamy czy formularz sie zaladowal
+        self.wait.until(EC.presence_of_element_located(self.FORM_CONTAINER))
+
         # Wybor plci
         genders = [self.GENDER_MR_RADIO, self.GENDER_MRS_RADIO]
         random_gender_locator = random.choice(genders)
         
-        # Klikamy w wylosowaną plec
-        self.wait.until(EC.element_to_be_clickable(random_gender_locator)).click()
-        
+        # Znajdujemy guzik z wyborem plci
+        gender_element = self.wait.until(EC.presence_of_element_located(random_gender_locator))
+
+        # Klikamy w wylosowany guzik z plcia
+        self.driver.execute_script("arguments[0].click();", gender_element)
+
         # Wypelnianie pol
         self.driver.find_element(*self.FIRSTNAME_INPUT).send_keys(first_name)
         if not self.driver.is_headless: time.sleep(COMPLETE_SECTION_SLEEP_TIME)

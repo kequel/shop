@@ -299,6 +299,8 @@ def test_shop(driver):
     # Wybor platnosci i finalizacja
     order_page.choose_payment_and_order()
 
+    time.sleep(5) # Czasami strona mruga i niszczy znaleziony przycisk wiec dajemy troszke wiecej czasu na zaladowanie
+
     # =========================================================================
     # ETAP 6: Weryfikacja zamowienia i pobranie faktury
     # =========================================================================
