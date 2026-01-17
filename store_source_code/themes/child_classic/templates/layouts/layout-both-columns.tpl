@@ -152,26 +152,26 @@
         <div class="footer-boxes">
             <h6>Informacje</h6>
             <ul>
-                <li><a href="http://localhost:8080/content/4-dlaczego-mop-serwis">Dlaczego Mop Serwis</a></li>
-                <li><a href="http://localhost:8080/content/3-regulamin-zakupow">Regulamin zakupów</a></li>
-                <li><a href="http://localhost:8080/content/2-polityka-prywatnosci">Polityka prywatności</a></li>
-                <li><a href="http://localhost:8080/contact-us">Kontakt</a></li>
+                <li><a href="https://localhost:19662/content/4-dlaczego-mop-serwis">Dlaczego Mop Serwis</a></li>
+                <li><a href="https://localhost:19662/content/3-regulamin-zakupow">Regulamin zakupów</a></li>
+                <li><a href="https://localhost:19662/content/2-polityka-prywatnosci">Polityka prywatności</a></li>
+                <li><a href="https://localhost:19662/contact-us">Kontakt</a></li>
             </ul>
         </div>
 
         <div class="footer-boxes">
             <h6>Twoje zamówienie</h6>
             <ul>
-                <li><a href="http://localhost:8080/content/6-zwroty-towarow">Zwroty towarów</a></li>
-                <li><a href="http://localhost:8080/content/7-reklamacje">Reklamacje</a></li>
+                <li><a href="https://localhost:19662/content/6-zwroty-towarow">Zwroty towarów</a></li>
+                <li><a href="https://localhost:19662/content/7-reklamacje">Reklamacje</a></li>
             </ul>
         </div>
 
         <div class="footer-boxes">
             <h6>Zamówienia</h6>
             <ul>
-                <li><a href="http://localhost:8080/content/5-platnosci">Płatności</a></li>
-                <li><a href="http://localhost:8080/content/1-koszty-dostawy">Koszty dostawy</a></li>
+                <li><a href="https://localhost:19662/content/5-platnosci">Płatności</a></li>
+                <li><a href="https://localhost:19662/content/1-koszty-dostawy">Koszty dostawy</a></li>
             </ul>
         </div>
     </div>

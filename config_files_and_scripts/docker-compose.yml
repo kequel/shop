@@ -1,51 +1,55 @@
 version: '3.8'
 
 services:
-  db:
-    image: mariadb:10.6
-    command: --default-authentication-plugin=mysql_native_password
-    volumes:
-      - ./db_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: prestashop_db
-      MYSQL_USER: prestashop_user
-      MYSQL_PASSWORD: admin
-    restart: always
-
   prestashop:
-    image: prestashop/prestashop:1.7-apache
+    image: kequel/be-prestashop-196615:latest
     ports:
-      - "8080:80"
-      - "8443:443"
-    depends_on:
-      - db
-    volumes:
-      - ../store_source_code:/var/www/html
-      - ../docker/certs/prestashop.crt:/etc/ssl/certs/prestashop.crt
-      - ../docker/certs/prestashop.key:/etc/ssl/private/prestashop.key
-      - ./prestashop-ssl.conf:/etc/apache2/sites-available/default-ssl.conf
-      - ./prestashop-http.conf:/etc/apache2/sites-available/000-default.conf
-      - ./ports.conf:/etc/apache2/ports.conf
+      - target: 443
+        published: 19665
+        protocol: tcp
+        mode: host
     environment:
-      DB_SERVER: db
-      DB_USER: admin
-      DB_PASSWORD: admin
-      DB_NAME: prestashop_db
-      PS_INSTALL_AUTO: '0'
-      PS_DEV_MODE: 'false'
-    restart: always
-    command: >
-      bash -c "
-      a2enmod ssl &&
-      a2enmod rewrite &&
-      a2ensite default-ssl &&
-      apache2-foreground
-      "
-      
+      - PS_DEV_MODE=1
+      - DB_SERVER=admin-mysql_db
+      - DB_NAME=BE_196615_prestashop
+      - DB_USER=root
+      - DB_PASSWORD=student
+    volumes:
+      - /opt/storage/actina15-20/block-storage/students/projects/students-swarm-services/BE_196615/img:/var/www/html/img
+      - /opt/storage/actina15-20/block-storage/students/projects/students-swarm-services/BE_196615/prestashop_dump.sql:/tmp/prestashop_dump.sql
+    networks:
+      - default
+      - admin-mysql_default
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == student-swarm01
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+      restart_policy:
+        condition: on-failure
+
   mailhog:
-    image: mailhog/mailhog
-    restart: unless-stopped
+    image: mailhog/mailhog:latest
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - target: 8025
+        published: 19666
+        protocol: tcp
+        mode: host
+    networks:
+      - default
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == student-swarm01
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+networks:
+  default:
+  admin-mysql_default:
+    external: true
