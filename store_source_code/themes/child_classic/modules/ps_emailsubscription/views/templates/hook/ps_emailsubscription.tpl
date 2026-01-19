@@ -24,7 +24,7 @@
  *}
       {if isset($page.page_name) && ($page.page_name == 'category' || $page.page_name == 'product'|| $page.page_name == 'cart')}
     <div class="aside-box aside-contact-box">
-    <img src="https://localhost:19662/themes/child_classic/assets/aside-contact-img.png" alt="Kontakt z nami">
+    <img src="https://mopserwis.pl/themes/mopserwis/assets/img/aside-contact-img.png" alt="Kontakt z nami">
     <h6>Potrzebujesz pomocy?</h6>
     <p>Skontaktuj się z nami!</p>
     <a href="https://mopserwis.pl/kontakt" class="button btn">Kontakt</a>

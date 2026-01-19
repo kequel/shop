@@ -149,7 +149,7 @@
     <div class="contact-details">
         
         <div class="contact-details-left">
-            <img src="{$urls.theme_assets}logo-biale.png" alt="MOP SERWIS">
+            <img src="https://mopserwis.pl/themes/mopserwis/assets/img/logo-biale.png" alt="MOP SERWIS">
             
             <h5>    MOP SERWIS</h5>
             
