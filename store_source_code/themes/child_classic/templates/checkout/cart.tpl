@@ -71,7 +71,7 @@
 			  </ul>
 		  </div>
 		  <div class="zarejestruj_sie">
-			  <a href="https://localhost:19662/login?create_account=1" data-link-action="display-register-form" class="button">Zarejestruj się</a>
+			  <a href="https://10.40.71.115:19665/login?create_account=1" data-link-action="display-register-form" class="button">Zarejestruj się</a>
 		  </div>
 	  </div>
    {/if}

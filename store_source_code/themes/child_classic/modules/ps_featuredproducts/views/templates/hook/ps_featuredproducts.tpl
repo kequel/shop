@@ -23,7 +23,7 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 <section class="featured-products clearfix">
-  <a id="h2_produkty_link" class="h2 products-section-title text-uppercase" href="https://localhost:19662/3-promocje">
+  <a id="h2_produkty_link" class="h2 products-section-title text-uppercase" href="https://10.40.71.115:19665/3-promocje">
     Produkty promocyjne
   </a>
  <div class="products row">
