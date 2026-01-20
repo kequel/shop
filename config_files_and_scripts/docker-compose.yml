@@ -6,7 +6,7 @@ services:
     ports:
       - "19665:443"
     environment:
-      - PS_DEV_MODE=1
+      - PS_DEV_MODE=0
       - DB_SERVER=admin-mysql_db
       - DB_NAME=BE_196615_prestashop
       - DB_USER=root
@@ -28,6 +28,18 @@ services:
       placement:
         constraints:
           - node.hostname == student-swarm01
+      restart_policy:
+        condition: on-failure
+
+  memcached:
+    image: memcached:latest
+    networks:
+      - be_196615_net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 256M
       restart_policy:
         condition: on-failure
 

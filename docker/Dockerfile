@@ -1,6 +1,13 @@
 FROM prestashop/prestashop:1.7-apache
 
-RUN apt-get update && apt-get install -y default-mysql-client ssl-cert && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    default-mysql-client \
+    ssl-cert \
+    libmemcached-dev \
+    zlib1g-dev \
+    && printf "\n" | pecl install memcached \
+    && docker-php-ext-enable memcached \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/ssl/private/ssl-cert-snakeoil.key \
