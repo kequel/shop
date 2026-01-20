@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# 1. CZEKANIE NA BAZĘ
+# 1. CZEKANIE NA BAZE
 until mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" -e "SELECT 1" &>/dev/null; do
   sleep 3
 done
@@ -17,7 +17,7 @@ if [ "$HAS_TABLES" -eq "0" ]; then
 fi
 
 # 3. LINK, SSL
-TARGET_DOMAIN="10.40.71.115"
+TARGET_DOMAIN="10.40.71.115:19665"
 OLD_URL="localhost:19662"
 
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_shop_url SET domain='$TARGET_DOMAIN', domain_ssl='$TARGET_DOMAIN', physical_uri='/' WHERE id_shop_url=1;"
@@ -65,6 +65,11 @@ return [
         'locale' => 'pl-PL',
         'cookie_key' => 'a8b7c6d5e4f3g2h1i0j9k8l7m6n5o4p3',
         'cookie_iv' => '12345678',
+        'mailer_transport' => 'smtp',
+        'mailer_host' => '127.0.0.1',
+        'mailer_user' => null,
+        'mailer_password' => null,
+        'mailer_port' => 25,
     ],
 ];
 EOF
@@ -73,7 +78,7 @@ chown www-data:www-data $PARAM_FILE
 # 6. GENEROWANIE .HTACCESS
 php -d display_errors=Off -r "require_once('/var/www/html/config/config.inc.php'); Tools::generateHtaccess();"
 
-# 7. PORZĄDKI
+# 7. PORZADKI
 rm -rf /var/www/html/install /var/www/html/install-dev
 rm -rf /var/www/html/var/cache/*
 
