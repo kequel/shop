@@ -5,8 +5,10 @@ RUN apt-get update && apt-get install -y \
     ssl-cert \
     libmemcached-dev \
     zlib1g-dev \
+    libssl-dev \
     && printf "\n" | pecl install memcached \
-    && docker-php-ext-enable memcached \
+    && printf "\n" | pecl install memcache-4.0.5.2 \
+    && docker-php-ext-enable memcached memcache \
     && rm -rf /var/lib/apt/lists/*
 
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
