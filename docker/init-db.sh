@@ -75,11 +75,15 @@ else
     sed -i "s/'database_password' => .*/'database_password' => '$DB_PASSWORD',/" $PARAM_FILE
 fi
 
-# 7. PORZĄDKI (Przeniesione przed krok 6)
-echo "start - preparing cache and permissions"
+# 7. PORZĄDKI
+echo "start - preparing cache, overrides and permissions"
 rm -rf /var/www/html/var/cache/*
 mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod
+mkdir -p /var/www/html/override/classes /var/www/html/override/controllers
 chown -R www-data:www-data /var/www/html/var
+chown -R www-data:www-data /var/www/html/override
+chown -R www-data:www-data /var/www/html/modules
+php -r "require_once('/var/www/html/config/config.inc.php'); Tools::generateIndex();"
 
 # 6. GENEROWANIE .HTACCESS
 echo "Generowanie pliku .htaccess..."
