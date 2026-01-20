@@ -16,32 +16,23 @@ if [ "$HAS_TABLES" -eq "0" ]; then
   fi
 fi
 
-# 3. LINK, SSL
+# 3. LINK, SSL I WYŁĄCZENIE REDIRECTÓW (Kluczowe dla klastra!)
 TARGET_DOMAIN="10.40.71.115:19665"
 OLD_URL="localhost:19662"
 
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_shop_url SET domain='$TARGET_DOMAIN', domain_ssl='$TARGET_DOMAIN', physical_uri='/' WHERE id_shop_url=1;"
 
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value = REPLACE(value, '$OLD_URL', '$TARGET_DOMAIN') WHERE value LIKE '%$OLD_URL%';"
-mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_cms_lang SET content = REPLACE(content, '$OLD_URL', '$TARGET_DOMAIN') WHERE content LIKE '%$OLD_URL%';"
-mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_product_lang SET description = REPLACE(description, '$OLD_URL', '$TARGET_DOMAIN') WHERE description LIKE '%$OLD_URL%';"
-
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='1' WHERE name='PS_SSL_ENABLED';"
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='1' WHERE name='PS_SSL_ENABLED_EVERYWHERE';"
+mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='0' WHERE name='PS_CANONICAL_REDIRECT';"
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='1' WHERE name='PS_REWRITING_SETTINGS';"
-
-mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='1' WHERE name='PS_SMARTY_CACHE';"
-mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='0' WHERE name='PS_SMARTY_FORCE_COMPILE';"
-mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='V2' WHERE name='PS_SMARTY_CACHING_TYPE';"
 
 # 4. KONFIGURACJA APACHE
 a2enmod rewrite
 sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 sed -i '/DocumentRoot \/var\/www\/html/a \        SetEnvIf X-Forwarded-Proto https HTTPS=on' /etc/apache2/sites-enabled/000-default.conf
-if [ -f /etc/apache2/sites-enabled/default-ssl.conf ]; then
-    sed -i '/DocumentRoot \/var\/www\/html/a \        SetEnvIf X-Forwarded-Proto https HTTPS=on' /etc/apache2/sites-enabled/default-ssl.conf
-fi
 
 # 5. PARAMETERS.PHP
 PARAM_FILE="/var/www/html/app/config/parameters.php"
@@ -73,16 +64,16 @@ return [
     ],
 ];
 EOF
-chown www-data:www-data $PARAM_FILE
 
 # 6. GENEROWANIE .HTACCESS
 php -d display_errors=Off -r "require_once('/var/www/html/config/config.inc.php'); Tools::generateHtaccess();"
 
-# 7. PORZADKI
+# 7. PORZĄDKI I KRYTYCZNE CZYSZCZENIE CACHE
 rm -rf /var/www/html/install /var/www/html/install-dev
 rm -rf /var/www/html/var/cache/*
+mkdir -p /var/www/html/var/cache/prod /var/www/html/var/cache/dev
 
-chown -R www-data:www-data /var/www/html/var/cache
+chown -R www-data:www-data /var/www/html/
 [ -f /var/www/html/.htaccess ] && chown www-data:www-data /var/www/html/.htaccess
 
 exec apache2-foreground
