@@ -35,6 +35,7 @@ mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_conf
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='1' WHERE name='PS_REWRITING_SETTINGS';"
 
 # CACHE CONFIG
+echo "Connfigurating cache"
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='1' WHERE name='PS_SMARTY_CACHE';"
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='0' WHERE name='PS_SMARTY_FORCE_COMPILE';"
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='V2' WHERE name='PS_SMARTY_CACHING_TYPE';"
@@ -76,7 +77,7 @@ fi
 
 # 6. GENEROWANIE .HTACCESS
 echo "Generowanie pliku .htaccess..."
-php -d display_errors=Off -r "require_once('/var/www/html/config/config.inc.php'); Tools::generateHtaccess();"
+php -r "require_once('/var/www/html/config/config.inc.php'); Tools::generateHtaccess();"
 
 # 7. PORZĄDKI
 rm -rf /var/www/html/install /var/www/html/install-dev

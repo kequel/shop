@@ -2,7 +2,7 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "quickfix-pipeline-order" ]
 
 jobs:
   build-and-push:

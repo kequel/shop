@@ -17,6 +17,8 @@ COPY docker/init-db.sh /init-db.sh
 COPY docker/prestashop_dump.sql /tmp/prestashop_dump.sql
 COPY store_source_code /var/www/html
 
+
+RUN rm -rf /var/www/html/install /var/www/html/install-dev
 RUN chmod +x /init-db.sh && \
     chown -R www-data:www-data /var/www/html
 
