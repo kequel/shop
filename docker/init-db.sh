@@ -75,15 +75,17 @@ else
     sed -i "s/'database_password' => .*/'database_password' => '$DB_PASSWORD',/" $PARAM_FILE
 fi
 
+# 7. PORZĄDKI (Przeniesione przed krok 6)
+echo "start - preparing cache and permissions"
+rm -rf /var/www/html/var/cache/*
+mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod
+chown -R www-data:www-data /var/www/html/var
+
 # 6. GENEROWANIE .HTACCESS
 echo "Generowanie pliku .htaccess..."
 php -r "require_once('/var/www/html/config/config.inc.php'); Tools::generateHtaccess();"
 
-# 7. PORZĄDKI
-rm -rf /var/www/html/install /var/www/html/install-dev
-rm -rf /var/www/html/var/cache/*
-
-chown -R www-data:www-data /var/www/html/var/cache
+# FINALIZACJA UPRAWNIEŃ
 [ -f /var/www/html/.htaccess ] && chown www-data:www-data /var/www/html/.htaccess
-
+echo "end -> apache start"
 exec apache2-foreground
