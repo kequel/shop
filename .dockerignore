@@ -2,7 +2,6 @@
 store_source_code/.git
 store_source_code/img/c/
 store_source_code/img/p/
-store_source_code/img/tmp/
 store_source_code/var/cache/
 store_source_code/var/logs/
 docker/*.sql

@@ -4,10 +4,7 @@ services:
   prestashop:
     image: kequel/be-prestashop-196615:latest
     ports:
-      - target: 443
-        published: 19665
-        protocol: tcp
-        mode: host
+      - "19665:443"
     environment:
       - PS_DEV_MODE=1
       - DB_SERVER=admin-mysql_db
@@ -18,38 +15,37 @@ services:
       - /opt/storage/actina15-20/block-storage/students/projects/students-swarm-services/BE_196615/img:/var/www/html/img
       - /opt/storage/actina15-20/block-storage/students/projects/students-swarm-services/BE_196615/prestashop_dump.sql:/tmp/prestashop_dump.sql
     networks:
-      - default
+      - be_196615_net
       - admin-mysql_default
     deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
       placement:
         constraints:
           - node.hostname == student-swarm01
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 1G
       restart_policy:
         condition: on-failure
 
   mailhog:
     image: mailhog/mailhog:latest
     ports:
-      - target: 8025
-        published: 19666
-        protocol: tcp
-        mode: host
+      - "19666:8025"
     networks:
-      - default
+      - be_196615_net
     deploy:
-      placement:
-        constraints:
-          - node.hostname == student-swarm01
       resources:
         limits:
-          cpus: '0.5'
-          memory: 512M
+          cpus: '0.2'
+          memory: 128M
 
 networks:
-  default:
+  be_196615_net:
+    driver: overlay
+    attachable: true
   admin-mysql_default:
     external: true

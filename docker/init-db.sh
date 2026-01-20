@@ -35,6 +35,7 @@ mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_conf
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='1' WHERE name='PS_REWRITING_SETTINGS';"
 
 # CACHE CONFIG
+echo "Connfigurating cache"
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='1' WHERE name='PS_SMARTY_CACHE';"
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='0' WHERE name='PS_SMARTY_FORCE_COMPILE';"
 mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "UPDATE ps_configuration SET value='V2' WHERE name='PS_SMARTY_CACHING_TYPE';"
@@ -74,15 +75,21 @@ else
     sed -i "s/'database_password' => .*/'database_password' => '$DB_PASSWORD',/" $PARAM_FILE
 fi
 
+# 7. PORZĄDKI
+echo "start - preparing cache, overrides and permissions"
+rm -rf /var/www/html/var/cache/*
+mkdir -p /var/www/html/var/cache/dev /var/www/html/var/cache/prod
+mkdir -p /var/www/html/override/classes /var/www/html/override/controllers
+chown -R www-data:www-data /var/www/html/var
+chown -R www-data:www-data /var/www/html/override
+chown -R www-data:www-data /var/www/html/modules
+php -r "require_once('/var/www/html/config/config.inc.php'); Tools::generateIndex();"
+
 # 6. GENEROWANIE .HTACCESS
 echo "Generowanie pliku .htaccess..."
-php -d display_errors=Off -r "require_once('/var/www/html/config/config.inc.php'); Tools::generateHtaccess();"
+php -r "require_once('/var/www/html/config/config.inc.php'); Tools::generateHtaccess();"
 
-# 7. PORZĄDKI
-rm -rf /var/www/html/install /var/www/html/install-dev
-rm -rf /var/www/html/var/cache/*
-
-chown -R www-data:www-data /var/www/html/var/cache
+# FINALIZACJA UPRAWNIEŃ
 [ -f /var/www/html/.htaccess ] && chown www-data:www-data /var/www/html/.htaccess
-
+echo "end -> apache start"
 exec apache2-foreground
