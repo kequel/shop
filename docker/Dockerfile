@@ -3,9 +3,6 @@ FROM prestashop/prestashop:1.7-apache
 RUN apt-get update && apt-get install -y \
     default-mysql-client \
     ssl-cert \
-    unzip \
-    git \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && rm -rf /var/lib/apt/lists/*
 
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
@@ -16,20 +13,12 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 RUN a2enmod ssl rewrite headers && \
     a2ensite default-ssl
 
-# 1. Kopiujemy kod sklepu
-COPY store_source_code /var/www/html
-
-# 2. Czyścimy cache, który mógł się skopiować z laptopa
-RUN rm -rf /var/www/html/var/cache/*
-
-WORKDIR /var/www/html
-# 3. Instalujemy zależności (Symfony zbuduje tu wstępny kontener)
-RUN composer install --no-dev --optimize-autoloader
-
-# 4. Kopiujemy skrypty sterujące (zostaną nadpisane na samym końcu)
 COPY docker/init-db.sh /init-db.sh
 COPY docker/prestashop_dump.sql /tmp/prestashop_dump.sql
+COPY store_source_code /var/www/html
 
+
+RUN rm -rf /var/www/html/install /var/www/html/install-dev
 RUN chmod +x /init-db.sh && \
     chown -R www-data:www-data /var/www/html
 

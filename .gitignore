@@ -42,7 +42,7 @@ config_files_and_scripts/backup/*.sql
 /store_source_code/bower_components/
 /store_source_code/node_modules/
 /store_source_code/composer.phar
-/store_source_code/composer.lock
+!/store_source_code/composer.lock
 
 # CONFIG FILES - KLUCZOWE ZMIANY TUTAJ:
 !/store_source_code/config/settings.inc.php
