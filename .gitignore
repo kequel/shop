@@ -33,7 +33,6 @@ config_files_and_scripts/backup/*.sql
 
 # IMAGES
 /store_source_code/img/c/*
-/store_source_code/img/tmp/*
 !/store_source_code/img/p/index.php
 !/store_source_code/img/c/index.php
 
@@ -47,7 +46,6 @@ config_files_and_scripts/backup/*.sql
 !/store_source_code/config/settings.inc.php
 !/store_source_code/app/config/parameters.php
 /store_source_code/config/xml/*
-/store_source_code/config/themes/*
 !/store_source_code/config/xml/themes/default.xml
 
 # SYMFONY & VAR
